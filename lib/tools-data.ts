@@ -72,6 +72,22 @@ export const tools: Tool[] = [
     category: "Productivity"
   },
   {
+  name: "Color Palette Generator",
+  description: "Generate beautiful color palettes and gradients for design projects. Quickly explore harmonious color combinations for UI, branding, and creative work.",
+  url: "https://color.belal.work/",
+  icon: "SwatchBook",
+  color: "from-rose-500 to-fuchsia-500",
+  category: "Design"
+  },
+  {
+  name: "Break Timer",
+  description: "A simple and elegant break timer to help you manage work and rest intervals. Displays a beautiful countdown clock with customizable colors.",
+  url: "https://break.belal.work/",
+  icon: "Timer",
+  color: "from-emerald-500 to-green-500",
+  category: "Productivity"
+  },
+  {
     name: "Tools Plus",
     description: "A free online utility suite with tools for text, PDFs, images, and development workflows, including formatters, generators, and productivity helpers.",
     url: "https://tools.belal.work/",
