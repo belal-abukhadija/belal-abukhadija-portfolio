@@ -176,11 +176,9 @@ export default function Hero() {
               <span className="block text-[clamp(2.7rem,8vw,7.2rem)] text-white">
                 <RevealText delay={0.2}>{personalInfo.name}</RevealText>
               </span>
-              <span className="block text-[clamp(2rem,5.2vw,4.3rem)] text-white/45 mt-2">
-                <RevealText delay={0.55}>builds tools that earn trust</RevealText>
-              </span>
+
               <span className="block text-[clamp(2rem,5.2vw,4.3rem)] mt-1 gradient-text">
-                <RevealText delay={0.8}>and feel unmistakably different</RevealText>
+                <RevealText delay={0.8}>builds tools that earn trust</RevealText>
               </span>
             </h1>
 
