@@ -48,6 +48,14 @@ export const tools: Tool[] = [
     category: "Productivity"
   },
   {
+    name: "Media Downloader",
+    description: "Download videos and audio from popular online platforms instantly. Choose different formats and save media files directly from your browser.",
+    url: "https://download.belal.work/",
+    icon: "Download",
+    color: "from-blue-500 to-indigo-500",
+    category: "Media"
+  },
+  {
     name: "Arabic Lorem Ipsum",
     description: "Generate professional Arabic placeholder text for mockups and templates. Designed specifically for Arabic-language projects.",
     url: "https://text.belal.work/",
@@ -72,20 +80,20 @@ export const tools: Tool[] = [
     category: "Productivity"
   },
   {
-  name: "Color Palette Generator",
-  description: "Generate beautiful color palettes and gradients for design projects. Quickly explore harmonious color combinations for UI, branding, and creative work.",
-  url: "https://color.belal.work/",
-  icon: "SwatchBook",
-  color: "from-rose-500 to-fuchsia-500",
-  category: "Design"
+    name: "Color Palette Generator",
+    description: "Generate beautiful color palettes and gradients for design projects. Quickly explore harmonious color combinations for UI, branding, and creative work.",
+    url: "https://color.belal.work/",
+    icon: "SwatchBook",
+    color: "from-rose-500 to-fuchsia-500",
+    category: "Design"
   },
   {
-  name: "Break Timer",
-  description: "A simple and elegant break timer to help you manage work and rest intervals. Displays a beautiful countdown clock with customizable colors.",
-  url: "https://break.belal.work/",
-  icon: "Timer",
-  color: "from-emerald-500 to-green-500",
-  category: "Productivity"
+    name: "Break Timer",
+    description: "A simple and elegant break timer to help you manage work and rest intervals. Displays a beautiful countdown clock with customizable colors.",
+    url: "https://break.belal.work/",
+    icon: "Timer",
+    color: "from-emerald-500 to-green-500",
+    category: "Productivity"
   },
   {
     name: "Tools Plus",
