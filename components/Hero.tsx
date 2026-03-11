@@ -1,248 +1,114 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import type { MouseEvent } from "react";
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowDownRight, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowDownRight, LayoutTemplate, Zap, ShieldCheck } from "lucide-react";
 import { personalInfo } from "@/lib/tools-data";
-import dynamic from "next/dynamic";
-
-const HeroScene = dynamic(() => import("./HeroScene"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-16 h-16 rounded-full border border-primary-400/30 animate-pulse" />
-    </div>
-  ),
-});
-
-function RevealText({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: string;
-  delay?: number;
-  className?: string;
-}) {
-  return (
-    <span className={`inline-flex flex-wrap ${className}`}>
-      {children.split(" ").map((word, i) => (
-        <span key={i} className="overflow-hidden mr-[0.24em]">
-          <motion.span
-            className="inline-block"
-            initial={{ y: "110%" }}
-            animate={{ y: 0 }}
-            transition={{
-              duration: 0.95,
-              ease: [0.22, 1, 0.36, 1],
-              delay: delay + i * 0.06,
-            }}
-          >
-            {word}
-          </motion.span>
-        </span>
-      ))}
-    </span>
-  );
-}
-
-function ParticleCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animId: number;
-
-    const COUNT = 280;
-    const particles = Array.from({ length: COUNT }, () => ({
-      x: Math.random(),
-      y: Math.random(),
-      r: 0.5 + Math.random() * 1.2,
-      opacity: 0.15 + Math.random() * 0.45,
-      speed: 0.00004 + Math.random() * 0.00008,
-      drift: (Math.random() - 0.5) * 0.00003,
-    }));
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-
-    const draw = () => {
-      const { width: w, height: h } = canvas;
-      ctx.clearRect(0, 0, w, h);
-      for (const p of particles) {
-        p.y -= p.speed;
-        p.x += p.drift;
-        if (p.y < 0) { p.y = 1; p.x = Math.random(); }
-        if (p.x < 0 || p.x > 1) { p.drift *= -1; }
-        ctx.beginPath();
-        ctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(182,255,0,${p.opacity})`;
-        ctx.fill();
-      }
-      animId = requestAnimationFrame(draw);
-    };
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animId);
-      ro.disconnect();
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0 }}
-    />
-  );
-}
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 120, damping: 22, mass: 0.4 });
-  const smoothY = useSpring(mouseY, { stiffness: 120, damping: 22, mass: 0.4 });
-
-  const layerY = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.55], [0, -90]);
-  const visualRotateY = useTransform(smoothX, [-0.5, 0.5], [-15, 15]);
-  const visualRotateX = useTransform(smoothY, [-0.5, 0.5], [13, -13]);
   const scrollToTools = () => {
     document.getElementById("tools")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   return (
     <section
-      ref={sectionRef}
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-surface-950 scan-grid"
+      className="relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden bg-cream bg-grid-pattern"
     >
-      <ParticleCanvas />
-      <motion.div className="absolute inset-0" style={{ y: layerY }}>
-        <div className="absolute -top-28 right-[8%] w-[520px] h-[520px] rounded-full bg-primary-300/15 blur-[130px] float-drift" />
-        <div className="absolute bottom-[8%] left-[4%] w-[460px] h-[460px] rounded-full bg-accent-400/15 blur-[140px]" />
-        <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/35 to-transparent" />
-      </motion.div>
-
-      <motion.div
-        style={{ opacity: contentOpacity, y: contentY }}
-        className="container mx-auto px-6 relative z-10"
-      >
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.08fr_0.92fr] gap-10 items-end">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="inline-flex items-center gap-3 rounded-full border border-white/[0.16] bg-white/[0.04] px-4 py-2 mb-8"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-primary-300" />
-              <span className="text-[10px] uppercase tracking-[0.2em] text-white/75">
-                Crafted for utility, not noise
-              </span>
-            </motion.div>
-
-            <h1 className="font-hero font-bold leading-[0.88] tracking-tight mb-8 text-balance">
-              <span className="block text-[clamp(2.7rem,8vw,7.2rem)] text-white">
-                <RevealText delay={0.2}>{personalInfo.name}</RevealText>
-              </span>
-
-              <span className="block text-[clamp(2rem,5.2vw,4.3rem)] mt-1 gradient-text">
-                <RevealText delay={0.8}>builds tools that earn trust</RevealText>
-              </span>
-            </h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 1.1 }}
-              className="max-w-2xl text-base md:text-lg text-white/60 leading-relaxed mb-12"
-            >
-              A growing ecosystem of practical web tools for developers and creators.
-              Fast, private, and designed with a bold visual identity.
-            </motion.p>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-7xl mx-auto grid xl:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-8 items-center">
+          {/* Left Text Column */}
+          <div className="relative">
+            {/* Background Outline Text */}
+            <div className="absolute -top-16 -left-8 md:-left-16 text-[8rem] md:text-[12rem] font-black uppercase text-stroke-sm md:text-stroke opacity-10 select-none pointer-events-none whitespace-nowrap -rotate-3">
+              CREATOR
+            </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 1.25 }}
-              className="flex flex-wrap items-center gap-4"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative z-10"
             >
-              <button
-                onClick={scrollToTools}
-                className="panel-cut group px-8 py-4 bg-primary-300 text-surface-950 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-primary-200 transition-colors"
-              >
-                <span className="inline-flex items-center gap-2">
-                  Explore tools
-                  <ArrowDownRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              <div className="inline-flex py-3 px-5 border-4 border-black bg-vivid-yellow font-black uppercase tracking-widest text-sm mb-12 shadow-[4px_4px_0px_0px_#000] -rotate-2">
+                Utility over noise
+              </div>
+
+              <h1 className="font-black uppercase tracking-tighter leading-[0.85] mb-12 text-black">
+                <span className="block text-[clamp(4.5rem,11.5vw,9rem)]">
+                  {personalInfo.name.split(" ")[0]}
                 </span>
-              </button>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="panel-cut px-8 py-4 border border-white/[0.2] text-white/80 text-xs font-semibold uppercase tracking-[0.2em] hover:border-accent-300/80 hover:text-accent-200 transition-colors"
-              >
-                Start a project
-              </a>
+                <span className="block text-[clamp(3.5rem,9.5vw,7.5rem)] text-hot-red mt-2">
+                  {personalInfo.name.split(" ")[1]}
+                </span>
+              </h1>
+
+              <p className="max-w-xl text-xl md:text-2xl font-bold bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_#000] mb-14 transform rotate-1">
+                {personalInfo.description}
+              </p>
+
+              <div className="flex flex-wrap items-center gap-6">
+                <button
+                  onClick={scrollToTools}
+                  className="px-8 py-5 border-4 border-black bg-slate-blue text-white group font-black text-xl uppercase tracking-widest shadow-[8px_8px_0px_0px_#000] active:shadow-none active:translate-x-[8px] active:translate-y-[8px] hover:-translate-y-1 transition-all flex items-center gap-4"
+                >
+                  Explore Work
+                  <ArrowDownRight className="w-8 h-8 group-hover:rotate-[-45deg] transition-transform" strokeWidth={3} />
+                </button>
+              </div>
             </motion.div>
           </div>
 
+          {/* Right Visual Column */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, x: 28 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.45 }}
-            className="hidden lg:flex items-center justify-center"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ rotateX: visualRotateX, rotateY: visualRotateY, transformStyle: "preserve-3d" }}
+            initial={{ scale: 0.9, opacity: 0, rotate: 5 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="hidden xl:block relative"
           >
-            <div className="relative w-[560px] h-[560px] overflow-visible">
-              <div className="absolute inset-0">
-                <HeroScene />
+            <div className="relative w-full aspect-square max-w-[550px] mx-auto">
+              {/* Back card */}
+              <div className="absolute inset-0 border-4 border-black bg-hot-red translate-x-12 translate-y-12 shadow-[8px_8px_0px_0px_#000]" />
+              {/* Middle card */}
+              <div className="absolute inset-0 border-4 border-black bg-vivid-yellow rotate-6 shadow-[8px_8px_0px_0px_#000]" />
+              {/* Front content card */}
+              <div className="absolute inset-0 border-4 border-black bg-white -rotate-3 shadow-[12px_12px_0px_0px_#000] flex flex-col p-10 overflow-hidden bg-halftone">
+                <div className="flex-1 flex flex-col justify-between relative z-10">
+                  <div>
+                    <div className="w-20 h-20 border-4 border-black bg-slate-blue mb-8 flex items-center justify-center rotate-12 shadow-[4px_4px_0px_0px_#000]">
+                      <LayoutTemplate className="w-10 h-10 text-white" strokeWidth={3} />
+                    </div>
+                    <h3 className="text-5xl font-black uppercase leading-none">Strict<br />Design<br />Systems</h3>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 border-4 border-black p-4 bg-cream shadow-[4px_4px_0px_0px_#000] transform -rotate-1">
+                      <Zap className="w-8 h-8 text-hot-red" strokeWidth={3} />
+                      <span className="font-bold uppercase tracking-wider text-lg">High Performance</span>
+                    </div>
+                    <div className="flex items-center gap-4 border-4 border-black p-4 bg-cream shadow-[4px_4px_0px_0px_#000] transform rotate-1">
+                      <ShieldCheck className="w-8 h-8 text-slate-blue" strokeWidth={3} />
+                      <span className="font-bold uppercase tracking-wider text-lg">Privacy First</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute -right-16 -top-16 opacity-10 pointer-events-none">
+                  <LayoutTemplate className="w-80 h-80 text-black" strokeWidth={1} />
+                </div>
               </div>
             </div>
+
+            {/* Floating Sticker */}
+            <motion.div
+              animate={{ rotate: [12, -12, 12] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full border-4 border-black bg-slate-blue flex items-center justify-center text-white font-black uppercase text-center shadow-[6px_6px_0px_0px_#000] leading-tight text-xl z-20"
+            >
+              100%<br />Local<br />Storage
+            </motion.div>
           </motion.div>
         </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-[10px] uppercase tracking-[0.2em] text-white/30">Scroll</span>
-        <div className="w-16 h-px bg-gradient-to-r from-transparent via-primary-300 to-transparent" />
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -114,7 +114,7 @@ export const personalInfo = {
   title: "Web Developer & Tool Creator",
   description: "I build practical web tools that solve real-world problems. From logo converters to PDF editors, each tool is crafted with care for developers and creators.",
   email: "belalabukhadija97@gmail.com",
-  github: "https://github.com/belalslah",
+  github: "https://github.com/belal-abukhadija",
   linkedin: "https://www.linkedin.com/in/belal-abu-khadija-9a591730b",
   domain: "belal.work"
 };

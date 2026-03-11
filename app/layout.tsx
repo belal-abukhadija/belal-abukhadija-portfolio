@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { personalInfo } from "@/lib/tools-data";
 import {
@@ -10,10 +10,11 @@ import {
   softwareApplicationStructuredData,
 } from "@/lib/structured-data";
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-space-grotesk",
+  weight: ["400", "500", "600", "700"],
 });
 
 /**
@@ -138,7 +139,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${spaceGrotesk.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
       </body>
     </html>

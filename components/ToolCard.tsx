@@ -9,14 +9,18 @@ import { Tool } from "@/lib/tools-data";
 interface ToolCardProps {
   tool: Tool;
   index: number;
+  bgColor: string;
 }
 
-export default function ToolCard({ tool, index }: ToolCardProps) {
+export default function ToolCard({ tool, index, bgColor }: ToolCardProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const IconComponent =
-    (Icons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[tool.icon] ||
+    (Icons as unknown as Record<string, React.ComponentType<{ className?: string, strokeWidth?: number }>>)[tool.icon] ||
     Icons.Box;
+
+  // Alternate small rotations for a chaotic collage feel
+  const rotation = index % 2 === 0 ? "rotate-1" : "-rotate-1";
 
   return (
     <motion.a
@@ -26,38 +30,43 @@ export default function ToolCard({ tool, index }: ToolCardProps) {
       rel="noopener noreferrer"
       initial={{ opacity: 0, y: 34 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      className="group block h-full"
+      transition={{ duration: 0.65, delay: (index % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className={`group block h-full transform ${rotation}`}
     >
-      <div className="panel-cut section-frame h-full p-6 transition-all duration-400 hover:-translate-y-1 hover:border-primary-300/55">
-        <div className="mb-5 flex items-start justify-between gap-3">
-          <div className="panel-cut border border-white/[0.12] bg-white/[0.03] px-3 py-2">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-white/55">
-              {String(index + 1).padStart(2, "0")}
+      <div className={`h-full border-4 border-black ${bgColor} p-6 transition-all duration-300 shadow-[8px_8px_0px_0px_#000] hover:-translate-y-2 hover:translate-x-1 hover:shadow-[12px_12px_0px_0px_#000] relative flex flex-col`}>
+        
+        {/* Category Sticker */}
+        {tool.category && (
+          <div className="absolute -top-4 -right-4 border-4 border-black bg-white px-3 py-1 font-black text-xs uppercase tracking-widest shadow-[4px_4px_0px_0px_#000] rotate-6 z-10 group-hover:rotate-12 transition-transform">
+            {tool.category}
+          </div>
+        )}
+
+        <div className="mb-8 flex items-start justify-between gap-3">
+          <div className="border-4 border-black bg-black text-white px-3 py-1 shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
+            <span className="text-sm font-black uppercase tracking-widest">
+              No.0{index + 1}
             </span>
           </div>
-          <div className="w-9 h-9 rounded-md border border-white/[0.12] bg-white/[0.03] flex items-center justify-center group-hover:border-primary-300/70 group-hover:bg-primary-300/15 transition-colors duration-300">
-            <ArrowUpRight className="w-4 h-4 text-white/45 group-hover:text-primary-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-300" />
+          <div className="w-12 h-12 border-4 border-black bg-white flex items-center justify-center group-hover:bg-hot-red transition-colors duration-300 shadow-[4px_4px_0px_0px_#000]">
+            <ArrowUpRight className="w-6 h-6 text-black group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" strokeWidth={3} />
           </div>
         </div>
 
-        <div className="mb-5 flex items-center gap-4">
-          <div className={`panel-cut w-14 h-14 bg-gradient-to-br ${tool.color} flex items-center justify-center shadow-soft`}>
-            <IconComponent className="w-6 h-6 text-surface-950" />
+        <div className="mb-6 flex items-center gap-5">
+          <div className="w-16 h-16 border-4 border-black bg-white flex items-center justify-center shadow-[4px_4px_0px_0px_#000] -rotate-3 group-hover:rotate-6 transition-transform duration-300">
+            <IconComponent className="w-8 h-8 text-black" strokeWidth={3} />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white group-hover:text-primary-200 transition-colors duration-300">
+            <h3 className="text-2xl font-black uppercase text-black leading-tight group-hover:underline underline-offset-4 decoration-4">
               {tool.name}
             </h3>
-            {tool.category && (
-              <span className="text-[10px] uppercase tracking-[0.18em] text-accent-200/85">
-                {tool.category}
-              </span>
-            )}
           </div>
         </div>
 
-        <p className="text-sm leading-relaxed text-white/58">{tool.description}</p>
+        <p className="text-lg font-bold text-black border-t-4 border-black pt-4 mt-auto">
+          {tool.description}
+        </p>
       </div>
     </motion.a>
   );

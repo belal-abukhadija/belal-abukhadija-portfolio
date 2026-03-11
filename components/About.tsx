@@ -33,21 +33,25 @@ const principles = [
     icon: ShieldCheck,
     title: "Privacy by design",
     description: "Most tools process data directly in the browser whenever possible.",
+    bgColor: "bg-vivid-yellow"
   },
   {
     icon: Gauge,
     title: "Speed first",
     description: "Lightweight interfaces and direct workflows with no unnecessary steps.",
+    bgColor: "bg-hot-red"
   },
   {
     icon: Cpu,
     title: "Practical engineering",
     description: "Built around useful outcomes instead of flashy features.",
+    bgColor: "bg-slate-blue"
   },
   {
     icon: Users,
     title: "Accessible to everyone",
     description: "Free tools with clean UX for developers, creators, and teams.",
+    bgColor: "bg-white"
   },
 ];
 
@@ -56,39 +60,40 @@ export default function About() {
   const isInView = useInView(ref, { once: true, margin: "-120px" });
 
   return (
-    <section id="about" className="relative py-28 bg-surface-900/70 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.1] to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_15%_55%,rgba(182,255,0,0.09),transparent)]" />
-
+    <section id="about" className="relative py-28 bg-slate-blue border-y-4 border-black overflow-hidden bg-halftone">
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -16 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.55 }}
-            className="flex items-center gap-4 mb-6"
+            className="flex items-center gap-4 mb-10"
           >
-            <div className="w-14 h-px bg-gradient-to-r from-primary-300 to-transparent" />
-            <span className="text-xs uppercase tracking-[0.2em] text-primary-200">About</span>
+            <div className="w-14 h-2 bg-black" />
+            <span className="text-xl font-black uppercase tracking-widest text-black">About</span>
           </motion.div>
 
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 mb-12">
+          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 mb-20 items-end">
             <motion.h2
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className="text-4xl md:text-6xl leading-[0.94] font-display text-white"
+              className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.85] font-black uppercase text-black"
             >
-              I build useful software
+              I build useful
               <br />
-              <span className="gradient-text">for real daily work</span>
+              <span className="text-white text-stroke-sm shadow-[4px_4px_0px_0px_#000] inline-block mt-3 bg-hot-red px-2 border-4 border-black -rotate-1">
+                software
+              </span>
+              <br />
+              for real work
             </motion.h2>
 
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="text-white/62 leading-relaxed space-y-4"
+              className="text-black leading-relaxed space-y-6 text-xl md:text-2xl font-bold bg-cream border-4 border-black p-8 shadow-[8px_8px_0px_0px_#000] rotate-1"
             >
               <p>
                 I&apos;m {personalInfo.name}, a developer focused on practical web tools.
@@ -105,37 +110,40 @@ export default function About() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
           >
             {[
               { value: 7, suffix: "+", label: "Tools released" },
               { value: 100, suffix: "%", label: "Free access" },
               { value: 24, suffix: "/7", label: "Availability" },
               { value: 0, suffix: "", label: "Tracking required", custom: "Zero" },
-            ].map((item) => (
-              <div key={item.label} className="panel-cut section-frame p-5">
-                <p className="text-2xl md:text-3xl font-semibold text-white mb-1">
+            ].map((item, index) => (
+              <div 
+                key={item.label} 
+                className={`border-4 border-black p-6 shadow-[6px_6px_0px_0px_#000] flex flex-col items-center justify-center text-center ${index % 2 === 0 ? 'bg-cream rotate-1' : 'bg-vivid-yellow -rotate-1'}`}
+              >
+                <p className="text-4xl md:text-5xl font-black text-black mb-2">
                   {item.custom ?? <AnimatedCounter target={item.value} suffix={item.suffix} />}
                 </p>
-                <p className="text-[10px] uppercase tracking-[0.18em] text-white/45">{item.label}</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-black">{item.label}</p>
               </div>
             ))}
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {principles.map((item, i) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: 0.28 + i * 0.08 }}
-                className="panel-cut section-frame p-5"
+                className={`border-4 border-black p-8 shadow-[8px_8px_0px_0px_#000] ${item.bgColor} hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#000] transition-all`}
               >
-                <div className="w-10 h-10 rounded-lg border border-primary-300/40 bg-primary-300/15 flex items-center justify-center mb-4">
-                  <item.icon className="w-5 h-5 text-primary-200" />
+                <div className="w-16 h-16 border-4 border-black bg-white flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_#000] -rotate-3">
+                  <item.icon className="w-8 h-8 text-black" strokeWidth={3} />
                 </div>
-                <h3 className="text-white font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-white/55 leading-relaxed">{item.description}</p>
+                <h3 className="text-black font-black text-2xl uppercase mb-4 leading-tight">{item.title}</h3>
+                <p className="text-black font-semibold text-lg hover:underline underline-offset-4 decoration-4">{item.description}</p>
               </motion.div>
             ))}
           </div>

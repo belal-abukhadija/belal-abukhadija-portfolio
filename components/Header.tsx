@@ -28,108 +28,110 @@ export default function Header() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-300 via-accent-300 to-primary-300 z-[60] origin-left"
+        className="fixed top-0 left-0 right-0 h-2 bg-hot-red z-[60] origin-left border-b-4 border-black"
         style={{ scaleX: scrollYProgress }}
       />
 
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "py-3 bg-surface-950/78 backdrop-blur-2xl border-b border-white/[0.08]"
-            : "py-5 bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-200 ${scrolled ? "bg-cream border-b-4 border-black translate-y-0" : "bg-cream border-b-4 border-black -translate-y-2 md:translate-y-0"
+          }`}
       >
-        <nav className="container mx-auto px-6">
-          <div className="flex items-center justify-end gap-4">
-            <div className="hidden md:flex items-center gap-1 rounded-full border border-white/[0.1] bg-white/[0.03] px-2 py-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="rounded-full px-4 py-2 text-xs uppercase tracking-[0.16em] text-white/65 hover:text-surface-950 hover:bg-primary-300 transition-colors duration-300"
-                >
-                  {item.label}
-                </button>
-              ))}
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo/Name */}
+            <div className="font-black text-2xl uppercase tracking-tighter cursor-pointer select-none" onClick={() => scrollToSection("hero")}>
+              {personalInfo.name.split(" ")[0]}<span className="text-hot-red"></span>
             </div>
 
-            <div className="hidden md:flex items-center gap-2">
-              {[
-                { href: personalInfo.github, icon: Github, label: "GitHub" },
-                { href: personalInfo.linkedin, icon: Linkedin, label: "LinkedIn" },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg border border-white/[0.1] bg-white/[0.03] flex items-center justify-center text-white/50 hover:text-primary-300 hover:border-primary-300/60 transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-4 h-4" />
-                </a>
-              ))}
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="panel-cut inline-flex items-center gap-2 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-surface-950 bg-primary-300 hover:bg-primary-200 transition-colors duration-300"
-              >
-                <Mail className="w-3.5 h-3.5" />
-                Hire Me
-              </a>
-            </div>
-
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden w-10 h-10 rounded-lg border border-white/[0.12] bg-white/[0.04] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all"
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-
-          <motion.div
-            initial={false}
-            animate={mobileOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden overflow-hidden"
-          >
-            <div className="mt-4 rounded-2xl border border-white/[0.1] bg-surface-900/90 p-3">
-              <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-8 mr-4">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="px-3 py-3 text-left text-sm font-medium text-white/70 hover:text-surface-950 hover:bg-primary-300 rounded-lg transition-all"
+                    className="text-black font-bold uppercase tracking-widest hover:text-hot-red hover:-translate-y-1 transition-transform relative before:absolute before:inset-x-0 before:-bottom-1 before:h-1 before:bg-black before:scale-x-0 overflow-hidden hover:before:scale-x-100 before:transition-transform before:origin-left"
                   >
                     {item.label}
                   </button>
                 ))}
               </div>
-              <div className="mt-3 flex items-center gap-3 border-t border-white/[0.08] pt-3 px-2">
+
+              <div className="hidden md:flex items-center gap-4">
+                {[
+                  { href: personalInfo.github, icon: Github, label: "GitHub", color: "bg-slate-blue" },
+                  { href: personalInfo.linkedin, icon: Linkedin, label: "LinkedIn", color: "bg-vivid-yellow" },
+                ].map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-12 h-12 border-4 border-black ${social.color} flex items-center justify-center text-black shadow-[4px_4px_0px_0px_#000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] hover:-translate-y-1 transition-all`}
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-6 h-6" strokeWidth={3} />
+                  </a>
+                ))}
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="px-6 py-3 border-4 border-black bg-hot-red text-black font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_#000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] hover:-translate-y-1 transition-all flex items-center gap-2"
+                >
+                  <Mail className="w-5 h-5" strokeWidth={3} />
+                  Hire Me
+                </a>
+              </div>
+
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="md:hidden w-12 h-12 border-4 border-black bg-vivid-yellow flex items-center justify-center text-black shadow-[4px_4px_0px_0px_#000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all"
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <X className="w-6 h-6" strokeWidth={3} /> : <Menu className="w-6 h-6" strokeWidth={3} />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu */}
+          <motion.div
+            initial={false}
+            animate={mobileOpen ? { height: "auto", opacity: 1, marginTop: "1rem" } : { height: 0, opacity: 0, marginTop: 0 }}
+            className="md:hidden overflow-hidden"
+          >
+            <div className="border-4 border-black bg-white p-4 shadow-[8px_8px_0px_0px_#000]">
+              <div className="flex flex-col gap-4">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="text-left font-black text-xl uppercase tracking-wider border-b-4 border-transparent hover:border-black w-fit transition-colors"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-4 border-t-4 border-black pt-6">
                 <a
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/50 hover:text-primary-300 transition-colors"
-                  aria-label="GitHub"
+                  className="w-12 h-12 border-4 border-black bg-slate-blue flex items-center justify-center shadow-[4px_4px_0px_0px_#000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px]"
                 >
-                  <Github className="w-5 h-5" />
+                  <Github className="w-6 h-6" strokeWidth={3} />
                 </a>
                 <a
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/50 hover:text-primary-300 transition-colors"
-                  aria-label="LinkedIn"
+                  className="w-12 h-12 border-4 border-black bg-vivid-yellow flex items-center justify-center shadow-[4px_4px_0px_0px_#000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px]"
                 >
-                  <Linkedin className="w-5 h-5" />
+                  <Linkedin className="w-6 h-6" strokeWidth={3} />
                 </a>
                 <a
                   href={`mailto:${personalInfo.email}`}
-                  className="text-white/50 hover:text-primary-300 transition-colors"
-                  aria-label="Email"
+                  className="flex-1 flex items-center justify-center gap-2 border-4 border-black bg-hot-red font-black uppercase tracking-widest p-2 shadow-[4px_4px_0px_0px_#000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px]"
                 >
-                  <Mail className="w-5 h-5" />
+                  <Mail className="w-5 h-5" strokeWidth={3} />
+                  Hire Me
                 </a>
               </div>
             </div>

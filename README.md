@@ -203,8 +203,8 @@ ISC License - Feel free to use this project for your own portfolio!
 ## 👤 Author
 
 **Belal Abukhadija**
-- Email: belalabukhadija97@gmail.com
-- GitHub: [@belalslah](https://github.com/belalslah)
+- Email: [EMAIL_ADDRESS]
+- GitHub: [@belal-abukhadija](https://github.com/belal-abukhadija)
 - LinkedIn: [Belal Abu Khadija](https://www.linkedin.com/in/belal-abu-khadija-9a591730b)
 - Website: [belal.work](https://belal.work)
 

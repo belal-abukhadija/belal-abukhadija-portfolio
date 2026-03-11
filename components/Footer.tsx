@@ -15,48 +15,45 @@ export default function Footer() {
   };
 
   return (
-    <footer id="contact" className="relative bg-surface-950 text-white overflow-hidden">
-      <div className="h-px bg-gradient-to-r from-transparent via-white/[0.12] to-transparent" />
-
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-accent-400/[0.08] rounded-full blur-[230px]" />
+    <footer id="footer" className="relative bg-black text-white overflow-hidden">
 
       <div className="container mx-auto px-6 relative z-10">
-        <div ref={ctaRef} className="py-24 md:py-32 text-center">
+        <div ref={ctaRef} className="py-24 md:py-32 text-center border-b-4 border-white">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75 }}
-            className="section-frame panel-cut max-w-4xl mx-auto p-10 md:p-14"
+            className="max-w-4xl mx-auto p-10 md:p-14 bg-white text-black border-4 border-white transform rotate-1 transition-all hover:rotate-0"
           >
-            <p className="text-[10px] uppercase tracking-[0.2em] text-white/45 mb-5">Build Something Distinct</p>
-            <h2 className="text-4xl md:text-6xl leading-[0.95] font-display mb-8">
+            <p className="text-lg font-black uppercase tracking-widest text-black mb-8">Build Something Distinct</p>
+            <h2 className="text-5xl md:text-7xl leading-[0.85] font-black uppercase text-black mb-12">
               Let&apos;s craft a product
               <br />
-              <span className="gradient-text">people remember</span>
+              <span className="bg-hot-red text-white px-2 mt-4 inline-block -rotate-2 border-4 border-black shadow-[6px_6px_0px_0px_#000]">
+                people remember
+              </span>
             </h2>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="panel-cut group inline-flex items-center gap-2 px-8 py-4 bg-primary-300 text-surface-950 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-primary-200 transition-colors"
+              className="inline-flex items-center gap-4 px-10 py-6 bg-vivid-yellow text-black border-4 border-black font-black uppercase tracking-widest text-2xl shadow-[8px_8px_0px_0px_#000] active:shadow-none active:translate-x-2 active:translate-y-2 hover:-translate-y-1 transition-all group"
             >
               Start Conversation
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="w-8 h-8 transition-transform group-hover:rotate-45" strokeWidth={4} />
             </a>
           </motion.div>
         </div>
 
-        <div className="h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
-
-        <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="py-16 grid grid-cols-1 md:grid-cols-3 gap-16">
           <div>
-            <h3 className="text-xl font-display mb-3">{personalInfo.name.split(" ")[0]}_LAB</h3>
-            <p className="text-white/40 text-sm leading-relaxed max-w-xs">
+            <h3 className="text-3xl font-black uppercase mb-6 inline-block border-b-4 border-white pb-2">{personalInfo.name.split(" ")[0]}_LAB</h3>
+            <p className="text-white font-bold text-lg leading-relaxed max-w-xs uppercase">
               Utility-first products with bold visual systems and no bloat.
             </p>
           </div>
 
           <div>
-            <h4 className="text-[10px] uppercase tracking-[0.2em] text-white/45 mb-4">Navigate</h4>
-            <ul className="space-y-2">
+            <h4 className="text-sm font-black uppercase tracking-widest text-vivid-yellow mb-6">Navigate</h4>
+            <ul className="space-y-4">
               {[
                 { label: "Home", id: "hero" },
                 { label: "Tools", id: "tools" },
@@ -65,7 +62,7 @@ export default function Footer() {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-sm text-white/55 hover:text-primary-200 transition-colors"
+                    className="text-xl font-bold uppercase text-white hover:text-hot-red hover:translate-x-2 transition-all"
                   >
                     {link.label}
                   </button>
@@ -75,38 +72,38 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[10px] uppercase tracking-[0.2em] text-white/45 mb-4">Connect</h4>
+            <h4 className="text-sm font-black uppercase tracking-widest text-vivid-yellow mb-6">Connect</h4>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-primary-200 transition-colors mb-5"
+              className="inline-flex items-center gap-3 text-xl font-bold uppercase text-white hover:text-hot-red hover:translate-x-2 transition-all mb-8 block"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-6 h-6" strokeWidth={3} />
               {personalInfo.email}
             </a>
-            <div className="flex gap-2 mt-2">
+            <div className="flex gap-4">
               {[
-                { href: personalInfo.github, icon: Github, label: "GitHub" },
-                { href: personalInfo.linkedin, icon: Linkedin, label: "LinkedIn" },
+                { href: personalInfo.github, icon: Github, label: "GitHub", color: "hover:bg-slate-blue" },
+                { href: personalInfo.linkedin, icon: Linkedin, label: "LinkedIn", color: "hover:bg-hot-red" },
               ].map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="panel-cut w-10 h-10 border border-white/[0.12] bg-white/[0.03] flex items-center justify-center text-white/50 hover:text-primary-200 hover:border-primary-300/55 transition-all"
+                  className={`w-14 h-14 border-4 border-white bg-black flex items-center justify-center text-white ${social.color} hover:text-white transition-all`}
                   aria-label={social.label}
                 >
-                  <social.icon className="w-4 h-4" />
+                  <social.icon className="w-6 h-6" strokeWidth={3} />
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/[0.08] py-5 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-white/33 text-xs">&copy; {currentYear} {personalInfo.name}</p>
-          <p className="flex items-center gap-1.5 text-white/33 text-xs">
-            Built with <Heart className="w-3 h-3 text-primary-300/80" /> for builders
+        <div className="border-t-4 border-white py-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-white font-bold uppercase text-sm tracking-widest">&copy; {currentYear} {personalInfo.name}</p>
+          <p className="flex items-center gap-2 text-black font-bold uppercase text-sm tracking-widest bg-white text-black px-4 py-2 border-4 border-black">
+            Built with <Heart className="w-4 h-4 text-hot-red fill-hot-red" /> for builders
           </p>
         </div>
       </div>
