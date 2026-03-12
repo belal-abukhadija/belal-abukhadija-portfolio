@@ -80,6 +80,14 @@ export const tools: Tool[] = [
     category: "Productivity"
   },
   {
+  name: "Markdown Editor",
+  description: "Write and preview Markdown with a clean split-view editor and real-time rendering. Perfect for creating README files, documentation, and formatted content directly in your browser.",
+  url: "https://md.belal.work/",
+  icon: "FileCode",
+  color: "from-gray-600 to-gray-900",
+  category: "Developer"
+  },
+  {
     name: "Color Palette Generator",
     description: "Generate beautiful color palettes and gradients for design projects. Quickly explore harmonious color combinations for UI, branding, and creative work.",
     url: "https://color.belal.work/",
