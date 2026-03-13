@@ -34,8 +34,8 @@ export default function Tools() {
                 transition={{ duration: 0.7, delay: 0.08 }}
                 className="text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.85] font-black uppercase text-black"
               >
-                One place 🎯<br />
-                <span className="text-white bg-black px-2 mt-2 -rotate-1 inline-block border-4 border-black shadow-[6px_6px_0px_0px_#FF6B6B]">
+                One place ^_^<br/>
+                <span className="text-white bg-black px-2 mt-6 -rotate-1 inline-block border-4 border-black shadow-[6px_6px_0px_0px_#FF6B6B]">
                   Every tool I ship.
                 </span>
               </motion.h2>

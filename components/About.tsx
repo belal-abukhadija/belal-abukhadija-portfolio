@@ -113,7 +113,7 @@ export default function About() {
             className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
           >
             {[
-              { value: 7, suffix: "+", label: "Tools released" },
+              { value: 10, suffix: "+", label: "Tools released" },
               { value: 100, suffix: "%", label: "Free access" },
               { value: 24, suffix: "/7", label: "Availability" },
               { value: 0, suffix: "", label: "Tracking required", custom: "Zero" },

@@ -53,7 +53,7 @@ export default function Contact() {
               {[
                 { icon: Mail, label: "Email", value: personalInfo.email, color: "bg-hot-red" },
                 { icon: Globe2, label: "Collaboration", value: "Remote worldwide", color: "bg-slate-blue" },
-                { icon: Clock3, label: "Typical response", value: "Within 24 hours", color: "bg-cream" },
+                { icon: Clock3, label: "Typical response", value: "Within 1 hour", color: "bg-cream" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}

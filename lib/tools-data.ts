@@ -23,6 +23,15 @@ export interface Tool {
 }
 
 export const tools: Tool[] = [
+  
+  {
+    name: "PDF Signature Tool",
+    description: "Add signatures and text annotations to PDF documents directly in your browser. Perfect for document signing and approval workflows.",
+    url: "https://sign.belal.work/",
+    icon: "FileSignature",
+    color: "from-red-500 to-orange-500",
+    category: "Productivity"
+  },
   {
     name: "Theme Converter",
     description: "Transform white logos into black versions for better contrast on light-themed websites. Supports PNG, JPG, WebP with batch processing.",
@@ -38,14 +47,6 @@ export const tools: Tool[] = [
     icon: "Binary",
     color: "from-blue-500 to-cyan-500",
     category: "Developer"
-  },
-  {
-    name: "PDF Signature Tool",
-    description: "Add signatures and text annotations to PDF documents directly in your browser. Perfect for document signing and approval workflows.",
-    url: "https://sign.belal.work/",
-    icon: "FileSignature",
-    color: "from-red-500 to-orange-500",
-    category: "Productivity"
   },
   {
     name: "Media Downloader",
