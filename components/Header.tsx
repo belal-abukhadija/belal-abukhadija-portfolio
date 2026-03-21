@@ -20,8 +20,8 @@ export default function Header() {
   };
 
   const navItems = [
-    { label: "Tools", id: "tools" },
     { label: "About", id: "about" },
+    { label: "Tools", id: "tools" },
     { label: "Contact", id: "contact" },
   ];
 

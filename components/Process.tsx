@@ -2,28 +2,28 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Search, PencilRuler, Code2 } from "lucide-react";
+import { Lightbulb, TrendingUp, Globe } from "lucide-react";
 
-const steps = [
+const milestones = [
   {
-    number: "01",
-    title: "Discover",
-    description: "Find repetitive tasks and friction points worth solving.",
-    icon: Search,
+    number: "2021",
+    title: "The Beginning",
+    description: "Wrote my first lines of code, fell in love with the craft, and started building small tools to solve everyday problems.",
+    icon: Lightbulb,
     color: "bg-vivid-yellow"
   },
   {
-    number: "02",
-    title: "Design",
-    description: "Shape a focused interface that keeps the workflow obvious.",
-    icon: PencilRuler,
+    number: "2022–23",
+    title: "Leveling Up",
+    description: "Went deep on React, TypeScript, and full-stack patterns. Shipped multiple live projects and started freelancing.",
+    icon: TrendingUp,
     color: "bg-hot-red"
   },
   {
-    number: "03",
-    title: "Ship",
-    description: "Build, test, and release fast with performance in mind.",
-    icon: Code2,
+    number: "2024+",
+    title: "Building in Public",
+    description: "Launched belal.work - a growing suite of free, independent web tools used by developers and creators worldwide.",
+    icon: Globe,
     color: "bg-slate-blue"
   },
 ];
@@ -43,7 +43,7 @@ export default function Process() {
             className="flex items-center gap-4 mb-10"
           >
             <div className="w-16 h-2 bg-black" />
-            <span className="text-xl font-black uppercase tracking-widest text-black">Process</span>
+            <span className="text-xl font-black uppercase tracking-widest text-black">Experience</span>
           </motion.div>
 
           <motion.h2
@@ -52,15 +52,15 @@ export default function Process() {
             transition={{ duration: 0.7, delay: 0.05 }}
             className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.85] font-black uppercase text-black mb-16"
           >
-            A focused workflow
+            My journey
             <br />
             <span className="bg-black text-white px-2 mt-3 inline-block -rotate-1 border-4 border-black shadow-[6px_6px_0px_0px_#FF6B6B]">
-              problem to product
+              so far
             </span>
           </motion.h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {steps.map((step, i) => (
+            {milestones.map((step, i) => (
               <motion.div
                 key={step.number}
                 initial={{ opacity: 0, y: 30 }}
@@ -68,8 +68,8 @@ export default function Process() {
                 transition={{ duration: 0.55, delay: 0.15 + i * 0.1 }}
                 className={`border-4 border-black p-8 shadow-[8px_8px_0px_0px_#000] bg-white relative hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#000] transition-all flex flex-col ${i % 2 === 0 ? "rotate-1" : "-rotate-1"}`}
               >
-                {/* Huge Background Number */}
-                <div className="absolute top-4 right-4 text-7xl font-black text-stroke-sm opacity-20 select-none pointer-events-none">
+                {/* Huge Background Year */}
+                <div className="absolute top-4 right-4 text-5xl font-black text-stroke-sm opacity-10 select-none pointer-events-none leading-none">
                   {step.number}
                 </div>
 
@@ -77,7 +77,7 @@ export default function Process() {
                   <div className={`w-16 h-16 border-4 border-black ${step.color} flex items-center justify-center shadow-[4px_4px_0px_0px_#000]`}>
                     <step.icon className="w-8 h-8 text-black" strokeWidth={3} />
                   </div>
-                  <span className="text-xl font-black px-3 py-1 border-4 border-black bg-white shadow-[2px_2px_0px_0px_#000]">{step.number}</span>
+                  <span className="text-base font-black px-3 py-1 border-4 border-black bg-white shadow-[2px_2px_0px_0px_#000]">{step.number}</span>
                 </div>
 
                 <h3 className="text-3xl font-black uppercase text-black mb-4">{step.title}</h3>

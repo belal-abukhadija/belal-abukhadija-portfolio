@@ -23,7 +23,7 @@ export interface Tool {
 }
 
 export const tools: Tool[] = [
-  
+
   {
     name: "PDF Signature Tool",
     description: "Add signatures and text annotations to PDF documents directly in your browser. Perfect for document signing and approval workflows.",
@@ -81,12 +81,12 @@ export const tools: Tool[] = [
     category: "Productivity"
   },
   {
-  name: "Markdown Editor",
-  description: "Write and preview Markdown with a clean split-view editor and real-time rendering. Perfect for creating README files, documentation, and formatted content directly in your browser.",
-  url: "https://md.belal.work/",
-  icon: "FileCode",
-  color: "from-gray-600 to-gray-900",
-  category: "Developer"
+    name: "Markdown Editor",
+    description: "Write and preview Markdown with a clean split-view editor and real-time rendering. Perfect for creating README files, documentation, and formatted content directly in your browser.",
+    url: "https://md.belal.work/",
+    icon: "FileCode",
+    color: "from-gray-600 to-gray-900",
+    category: "Developer"
   },
   {
     name: "Color Palette Generator",
@@ -120,10 +120,13 @@ export const tools: Tool[] = [
  */
 export const personalInfo = {
   name: "Belal Abukhadija",
-  title: "Web Developer & Tool Creator",
-  description: "I build practical web tools that solve real-world problems. From logo converters to PDF editors, each tool is crafted with care for developers and creators.",
+  title: "Full-Stack Developer",
+  role: "Developer. Designer. Builder.",
+  location: "Palestine 🇵🇸",
+  description: "I'm a full-stack developer who loves turning ideas into fast, clean, and useful products. Whether it's a design system, a browser tool, or a side project - I build things I'd actually use.",
   email: "belalabukhadija97@gmail.com",
   github: "https://github.com/belal-abukhadija",
   linkedin: "https://www.linkedin.com/in/belal-abu-khadija-9a591730b",
-  domain: "belal.work"
+  domain: "belal.work",
+  yearsOfExperience: 3,
 };

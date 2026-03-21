@@ -30,13 +30,13 @@ export default function Contact() {
               transition={{ duration: 0.75, delay: 0.05 }}
               className="text-5xl md:text-7xl leading-[0.85] font-black uppercase text-black mb-10"
             >
-              Let&apos;s build
+              Let&apos;s work
               <br />
               <span className="bg-white text-black px-2 mt-3 inline-block -rotate-1 border-4 border-black shadow-[6px_6px_0px_0px_#000]">
-                practical
+                together
               </span>
               <br />
-              products
+              on something great
             </motion.h2>
 
             <motion.p
@@ -45,8 +45,8 @@ export default function Contact() {
               transition={{ duration: 0.75, delay: 0.15 }}
               className="text-black text-xl font-bold leading-relaxed mb-12 max-w-lg bg-cream border-4 border-black p-6 shadow-[6px_6px_0px_0px_#000] rotate-1"
             >
-              Share your idea, challenge, or backlog. I&apos;ll reply with a clear scope,
-              smart timeline, and direct next steps.
+              Have an idea, a project, or just want to say hi? Drop me a message and I&apos;ll get back to you fast.
+              Always open to interesting work and people.
             </motion.p>
 
             <div className="space-y-4">
@@ -125,11 +125,11 @@ export default function Contact() {
               <p className="text-sm font-black uppercase tracking-widest text-black mb-4">What I can help with</p>
               <div className="flex flex-wrap gap-3">
                 {[
-                  "Tool MVPs",
-                  "Frontend architecture",
-                  "UI redesign",
-                  "Performance tuning",
-                  "Automation utilities",
+                  "Frontend Dev",
+                  "Full-Stack Projects",
+                  "UI Design",
+                  "Tool Building",
+                  "Freelance Work",
                 ].map((item) => (
                   <span key={item} className="border-4 border-black bg-white px-3 py-1 text-sm font-black uppercase tracking-widest text-black shadow-[2px_2px_0px_0px_#000]">
                     {item}

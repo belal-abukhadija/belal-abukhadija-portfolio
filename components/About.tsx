@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, animate } from "framer-motion";
-import { ShieldCheck, Gauge, Cpu, Users } from "lucide-react";
+import { Target, Globe2, Compass, Rocket } from "lucide-react";
 import { personalInfo } from "@/lib/tools-data";
 
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -28,29 +28,29 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
   );
 }
 
-const principles = [
+const traits = [
   {
-    icon: ShieldCheck,
-    title: "Privacy by design",
-    description: "Most tools process data directly in the browser whenever possible.",
+    icon: Target,
+    title: "Problem Solver",
+    description: "Love turning complex, messy problems into clean and simple user experiences.",
     bgColor: "bg-vivid-yellow"
   },
   {
-    icon: Gauge,
-    title: "Speed first",
-    description: "Lightweight interfaces and direct workflows with no unnecessary steps.",
+    icon: Globe2,
+    title: "Remote-Ready",
+    description: "Collaborated with teams and clients across timezones, fully async or sync.",
     bgColor: "bg-hot-red"
   },
   {
-    icon: Cpu,
-    title: "Practical engineering",
-    description: "Built around useful outcomes instead of flashy features.",
+    icon: Compass,
+    title: "Design-Aware",
+    description: "I care about the look just as much as the function - UI is part of the product.",
     bgColor: "bg-slate-blue"
   },
   {
-    icon: Users,
-    title: "Accessible to everyone",
-    description: "Free tools with clean UX for developers, creators, and teams.",
+    icon: Rocket,
+    title: "Shipping Mindset",
+    description: "Done and live beats perfect and stuck. I push code that matters.",
     bgColor: "bg-white"
   },
 ];
@@ -70,7 +70,7 @@ export default function About() {
             className="flex items-center gap-4 mb-10"
           >
             <div className="w-14 h-2 bg-black" />
-            <span className="text-xl font-black uppercase tracking-widest text-black">About</span>
+            <span className="text-xl font-black uppercase tracking-widest text-black">About Me</span>
           </motion.div>
 
           <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 mb-20 items-end">
@@ -80,13 +80,11 @@ export default function About() {
               transition={{ duration: 0.7, delay: 0.05 }}
               className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.85] font-black uppercase text-black"
             >
-              I build useful
+              Who&apos;s behind
               <br />
               <span className="text-white text-stroke-sm shadow-[4px_4px_0px_0px_#000] inline-block mt-3 bg-hot-red px-2 border-4 border-black -rotate-1">
-                software
+                the keyboard
               </span>
-              <br />
-              for real work
             </motion.h2>
 
             <motion.div
@@ -96,12 +94,12 @@ export default function About() {
               className="text-black leading-relaxed space-y-6 text-xl md:text-2xl font-bold bg-cream border-4 border-black p-8 shadow-[8px_8px_0px_0px_#000] rotate-1"
             >
               <p>
-                I&apos;m {personalInfo.name}, a developer focused on practical web tools.
-                I care about clarity, fast performance, and honest UX.
+                Hey! I&apos;m {personalInfo.name}, a full-stack developer from {personalInfo.location}.
+                I started coding out of curiosity and never stopped - there&apos;s always something new to build.
               </p>
               <p>
-                My goal is simple: make tools that are immediately useful, reliable,
-                and easy to return to.
+                I focus on fast, clean, useful software. I ship tools people actually come back to,
+                and I obsess over the small details that make an interface feel right.
               </p>
             </motion.div>
           </div>
@@ -113,13 +111,13 @@ export default function About() {
             className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
           >
             {[
-              { value: 10, suffix: "+", label: "Tools released" },
-              { value: 100, suffix: "%", label: "Free access" },
-              { value: 24, suffix: "/7", label: "Availability" },
-              { value: 0, suffix: "", label: "Tracking required", custom: "Zero" },
+              { value: personalInfo.yearsOfExperience, suffix: "+", label: "Years coding" },
+              { value: 10, suffix: "+", label: "Projects shipped" },
+              { value: 5, suffix: "+", label: "Technologies" },
+              { value: 0, suffix: "", label: "Curiosity limit", custom: "∞" },
             ].map((item, index) => (
-              <div 
-                key={item.label} 
+              <div
+                key={item.label}
                 className={`border-4 border-black p-6 shadow-[6px_6px_0px_0px_#000] flex flex-col items-center justify-center text-center ${index % 2 === 0 ? 'bg-cream rotate-1' : 'bg-vivid-yellow -rotate-1'}`}
               >
                 <p className="text-4xl md:text-5xl font-black text-black mb-2">
@@ -131,7 +129,7 @@ export default function About() {
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {principles.map((item, i) => (
+            {traits.map((item, i) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 24 }}
@@ -143,7 +141,7 @@ export default function About() {
                   <item.icon className="w-8 h-8 text-black" strokeWidth={3} />
                 </div>
                 <h3 className="text-black font-black text-2xl uppercase mb-4 leading-tight">{item.title}</h3>
-                <p className="text-black font-semibold text-lg hover:underline underline-offset-4 decoration-4">{item.description}</p>
+                <p className="text-black font-semibold text-lg leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>

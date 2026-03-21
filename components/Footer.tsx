@@ -25,19 +25,19 @@ export default function Footer() {
             transition={{ duration: 0.75 }}
             className="max-w-4xl mx-auto p-10 md:p-14 bg-white text-black border-4 border-white transform rotate-1 transition-all hover:rotate-0"
           >
-            <p className="text-lg font-black uppercase tracking-widest text-black mb-8">Build Something Distinct</p>
+            <p className="text-lg font-black uppercase tracking-widest text-black mb-8">Got a project or an idea?</p>
             <h2 className="text-5xl md:text-7xl leading-[0.85] font-black uppercase text-black mb-12">
-              Let&apos;s craft a product
+              Let&apos;s make it
               <br />
               <span className="bg-hot-red text-white px-2 mt-4 inline-block -rotate-2 border-4 border-black shadow-[6px_6px_0px_0px_#000]">
-                people remember
+                real together
               </span>
             </h2>
             <a
               href={`mailto:${personalInfo.email}`}
               className="inline-flex items-center gap-4 px-10 py-6 bg-vivid-yellow text-black border-4 border-black font-black uppercase tracking-widest text-2xl shadow-[8px_8px_0px_0px_#000] active:shadow-none active:translate-x-2 active:translate-y-2 hover:-translate-y-1 transition-all group"
             >
-              Start Conversation
+              Say Hello
               <ArrowUpRight className="w-8 h-8 transition-transform group-hover:rotate-45" strokeWidth={4} />
             </a>
           </motion.div>
@@ -45,9 +45,9 @@ export default function Footer() {
 
         <div className="py-16 grid grid-cols-1 md:grid-cols-3 gap-16">
           <div>
-            <h3 className="text-3xl font-black uppercase mb-6 inline-block border-b-4 border-white pb-2">{personalInfo.name.split(" ")[0]}_LAB</h3>
+            <h3 className="text-3xl font-black uppercase mb-6 inline-block border-b-4 border-white pb-2">{personalInfo.name.split(" ")[0]}_DEV</h3>
             <p className="text-white font-bold text-lg leading-relaxed max-w-xs uppercase">
-              Utility-first products with bold visual systems and no bloat.
+              Developer, builder, and creative - based in Palestine 🇵🇸
             </p>
           </div>
 
@@ -56,8 +56,8 @@ export default function Footer() {
             <ul className="space-y-4">
               {[
                 { label: "Home", id: "hero" },
-                { label: "Tools", id: "tools" },
                 { label: "About", id: "about" },
+                { label: "Tools", id: "tools" },
               ].map((link) => (
                 <li key={link.id}>
                   <button

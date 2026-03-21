@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 type MouseRef = React.MutableRefObject<{ x: number; y: number }>;
 
-// --- Crystal Core — all meshBasicMaterial, zero lighting dependency ---
+// --- Crystal Core - all meshBasicMaterial, zero lighting dependency ---
 function CrystalCore({ mouse }: { mouse: MouseRef }) {
   const outerWire = useRef<THREE.Mesh>(null);
   const innerWire = useRef<THREE.Mesh>(null);
