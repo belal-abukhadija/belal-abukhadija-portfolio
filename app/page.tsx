@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Coverage from "@/components/Coverage";
 import Marquee from "@/components/Marquee";
 import Tools from "@/components/Tools";
 import Showcase from "@/components/Showcase";
@@ -14,6 +15,7 @@ export default function Home() {
       <Header />
       <main className="grain">
         <Hero />
+        <Coverage />
         <Marquee />
         <Tools />
         <Showcase />
