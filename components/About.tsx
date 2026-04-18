@@ -32,26 +32,26 @@ const traits = [
   {
     icon: Target,
     title: "Problem Solver",
-    description: "Love turning complex, messy problems into clean and simple user experiences.",
-    bgColor: "bg-vivid-yellow"
+    description:
+      "Love turning complex, messy problems into clean and simple user experiences.",
   },
   {
     icon: Globe2,
     title: "Remote-Ready",
-    description: "Collaborated with teams and clients across timezones, fully async or sync.",
-    bgColor: "bg-hot-red"
+    description:
+      "Collaborated with teams and clients across timezones, fully async or sync.",
   },
   {
     icon: Compass,
     title: "Design-Aware",
-    description: "I care about the look just as much as the function - UI is part of the product.",
-    bgColor: "bg-slate-blue"
+    description:
+      "I care about the look just as much as the function - UI is part of the product.",
   },
   {
     icon: Rocket,
     title: "Shipping Mindset",
-    description: "Done and live beats perfect and stuck. I push code that matters.",
-    bgColor: "bg-white"
+    description:
+      "Done and live beats perfect and stuck. I push code that matters.",
   },
 ];
 
@@ -60,7 +60,10 @@ export default function About() {
   const isInView = useInView(ref, { once: true, margin: "-120px" });
 
   return (
-    <section id="about" className="relative py-28 bg-slate-blue border-y-4 border-black overflow-hidden bg-halftone">
+    <section
+      id="about"
+      className="relative py-28 bg-surface overflow-hidden"
+    >
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -69,8 +72,10 @@ export default function About() {
             transition={{ duration: 0.55 }}
             className="flex items-center gap-4 mb-10"
           >
-            <div className="w-14 h-2 bg-black" />
-            <span className="text-xl font-black uppercase tracking-widest text-black">About Me</span>
+            <div className="neu-divider w-14" />
+            <span className="text-sm font-medium tracking-wide text-ink-soft">
+              About Me
+            </span>
           </motion.div>
 
           <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 mb-20 items-end">
@@ -78,28 +83,28 @@ export default function About() {
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.85] font-black uppercase text-black"
+              className="text-4xl md:text-5xl lg:text-[4.25rem] leading-[0.95] font-semibold tracking-tight text-ink"
             >
               Who&apos;s behind
               <br />
-              <span className="text-white text-stroke-sm shadow-[4px_4px_0px_0px_#000] inline-block mt-3 bg-hot-red px-2 border-4 border-black -rotate-1">
-                the keyboard
-              </span>
+              <span className="text-accent">the keyboard</span>
             </motion.h2>
 
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="text-black leading-relaxed space-y-6 text-xl md:text-2xl font-bold bg-cream border-4 border-black p-8 shadow-[8px_8px_0px_0px_#000] rotate-1"
+              className="text-ink-soft leading-relaxed space-y-4 text-lg neu-inset p-7"
             >
               <p>
-                Hey! I&apos;m {personalInfo.name}, a full-stack developer from {personalInfo.location}.
-                I started coding out of curiosity and never stopped - there&apos;s always something new to build.
+                Hey! I&apos;m {personalInfo.name}, a full-stack developer from{" "}
+                {personalInfo.location}. I started coding out of curiosity and
+                never stopped - there&apos;s always something new to build.
               </p>
               <p>
-                I focus on fast, clean, useful software. I ship tools people actually come back to,
-                and I obsess over the small details that make an interface feel right.
+                I focus on fast, clean, useful software. I ship tools people
+                actually come back to, and I obsess over the small details that
+                make an interface feel right.
               </p>
             </motion.div>
           </div>
@@ -115,15 +120,19 @@ export default function About() {
               { value: 10, suffix: "+", label: "Projects shipped" },
               { value: 5, suffix: "+", label: "Technologies" },
               { value: 0, suffix: "", label: "Curiosity limit", custom: "∞" },
-            ].map((item, index) => (
+            ].map((item) => (
               <div
                 key={item.label}
-                className={`border-4 border-black p-6 shadow-[6px_6px_0px_0px_#000] flex flex-col items-center justify-center text-center ${index % 2 === 0 ? 'bg-cream rotate-1' : 'bg-vivid-yellow -rotate-1'}`}
+                className="neu-surface p-6 flex flex-col items-center justify-center text-center"
               >
-                <p className="text-4xl md:text-5xl font-black text-black mb-2">
-                  {item.custom ?? <AnimatedCounter target={item.value} suffix={item.suffix} />}
+                <p className="text-4xl md:text-5xl font-semibold text-accent mb-2">
+                  {item.custom ?? (
+                    <AnimatedCounter target={item.value} suffix={item.suffix} />
+                  )}
                 </p>
-                <p className="text-sm font-bold uppercase tracking-wider text-black">{item.label}</p>
+                <p className="text-xs font-medium tracking-wide text-ink-soft">
+                  {item.label}
+                </p>
               </div>
             ))}
           </motion.div>
@@ -135,13 +144,17 @@ export default function About() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: 0.28 + i * 0.08 }}
-                className={`border-4 border-black p-8 shadow-[8px_8px_0px_0px_#000] ${item.bgColor} hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#000] transition-all`}
+                className="neu-surface p-7 hover:shadow-[var(--shadow-neu-lg)] hover:-translate-y-1 transition-all"
               >
-                <div className="w-16 h-16 border-4 border-black bg-white flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_#000] -rotate-3">
-                  <item.icon className="w-8 h-8 text-black" strokeWidth={3} />
-                </div>
-                <h3 className="text-black font-black text-2xl uppercase mb-4 leading-tight">{item.title}</h3>
-                <p className="text-black font-semibold text-lg leading-relaxed">{item.description}</p>
+                <span className="neu-icon w-14 h-14 mb-6 text-accent">
+                  <item.icon className="w-7 h-7" strokeWidth={2} />
+                </span>
+                <h3 className="text-lg font-semibold text-ink mb-3 leading-tight">
+                  {item.title}
+                </h3>
+                <p className="text-ink-soft text-sm leading-relaxed">
+                  {item.description}
+                </p>
               </motion.div>
             ))}
           </div>

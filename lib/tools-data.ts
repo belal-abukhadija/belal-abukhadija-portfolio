@@ -127,6 +127,9 @@ export const personalInfo = {
   email: "belalabukhadija97@gmail.com",
   github: "https://github.com/belal-abukhadija",
   linkedin: "https://www.linkedin.com/in/belal-abu-khadija-9a591730b",
+  whatsapp: "962789752515",
+  whatsappDisplay: "+962 78 975 2515",
+  instagram: "belal_abukhadija",
   domain: "belal.work",
   yearsOfExperience: 3,
 };

@@ -22,9 +22,9 @@ const markers: Array<{
 ];
 
 const toneClasses: Record<PinTone, string> = {
-  cyan: "bg-slate-blue",
-  pink: "bg-hot-red",
-  amber: "bg-vivid-yellow",
+  cyan: "text-[#5B6B85]",
+  pink: "text-accent",
+  amber: "text-[#C9A227]",
 };
 
 export default function Availability() {
@@ -32,7 +32,10 @@ export default function Availability() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="availability" className="relative py-28 bg-slate-blue border-b-4 border-black overflow-hidden bg-grid-pattern">
+    <section
+      id="availability"
+      className="relative py-28 bg-surface overflow-hidden"
+    >
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -41,8 +44,10 @@ export default function Availability() {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4 mb-10"
           >
-            <div className="w-16 h-2 bg-black" />
-            <span className="text-xl font-black uppercase tracking-widest text-black">Availability</span>
+            <div className="neu-divider w-16" />
+            <span className="text-sm font-medium tracking-wide text-ink-soft">
+              Availability
+            </span>
           </motion.div>
 
           <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-12 items-center">
@@ -51,40 +56,36 @@ export default function Availability() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-4xl md:text-6xl lg:text-[5rem] leading-[0.85] font-black uppercase text-black mb-8"
+                className="text-4xl md:text-5xl lg:text-[4rem] leading-[0.95] font-semibold tracking-tight text-ink mb-8"
               >
                 Available
                 <br />
-                <span className="bg-white px-2 mt-3 inline-block -rotate-2 border-4 border-black shadow-[6px_6px_0px_0px_#000]">
-                  Worldwide
-                </span>
+                <span className="text-accent">Worldwide</span>
               </motion.h2>
 
               <motion.p
                 initial={{ opacity: 0, y: 18 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-black font-bold text-xl leading-relaxed mb-12 bg-cream border-4 border-black p-6 shadow-[6px_6px_0px_0px_#000] rotate-1"
+                className="text-ink-soft text-lg leading-relaxed mb-10 neu-inset p-6"
               >
                 For remote work, I collaborate globally. For on-site projects,
                 I&apos;m available in key Arab region hubs shown on the map.
               </motion.p>
 
-              <div className="space-y-6">
+              <div className="space-y-5">
                 {[
                   {
                     icon: Wifi,
                     title: "Remote collaboration",
                     value: "Worldwide",
                     text: "Planning, design, and development with async + live collaboration.",
-                    color: "bg-hot-red"
                   },
                   {
                     icon: Plane,
                     title: "On-site availability",
                     value: "Arab region",
                     text: "Available for product workshops, launches, and focused sprints.",
-                    color: "bg-vivid-yellow"
                   },
                 ].map((item, i) => (
                   <motion.div
@@ -92,15 +93,21 @@ export default function Availability() {
                     initial={{ opacity: 0, y: 18 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.3 + i * 0.12 }}
-                    className="border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_#000] flex gap-6"
+                    className="neu-surface p-6 flex gap-5"
                   >
-                    <div className={`w-16 h-16 border-4 border-black ${item.color} flex items-center justify-center shrink-0 shadow-[4px_4px_0px_0px_#000] -rotate-3`}>
-                      <item.icon className="w-8 h-8 text-black" strokeWidth={3} />
-                    </div>
+                    <span className="neu-icon w-14 h-14 shrink-0 text-accent">
+                      <item.icon className="w-7 h-7" strokeWidth={2} />
+                    </span>
                     <div>
-                      <p className="text-xs font-black uppercase tracking-widest text-black mb-1 px-2 py-1 bg-cream border-4 border-black inline-block">{item.title}</p>
-                      <p className="text-2xl text-black font-black uppercase">{item.value}</p>
-                      <p className="text-lg font-bold text-black mt-2 leading-snug">{item.text}</p>
+                      <p className="text-xs font-medium tracking-wide text-ink-subtle mb-1 uppercase">
+                        {item.title}
+                      </p>
+                      <p className="text-xl text-ink font-semibold tracking-tight">
+                        {item.value}
+                      </p>
+                      <p className="text-sm text-ink-soft mt-2 leading-relaxed">
+                        {item.text}
+                      </p>
                     </div>
                   </motion.div>
                 ))}
@@ -111,33 +118,39 @@ export default function Availability() {
               initial={{ opacity: 0, scale: 0.97, y: 12 }}
               animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.25 }}
-              className="border-4 border-black bg-cream p-6 md:p-8 shadow-[12px_12px_0px_0px_#000] rotate-1 relative"
+              className="neu-surface-xl p-6 md:p-8 relative"
             >
-              <div className="relative aspect-[16/10] border-4 border-black bg-[#FFD93D] overflow-hidden shadow-[inset_6px_6px_0px_0px_#000]">
-                {/* Abstract brutalist map representation using raw SVGs */}
-                <svg viewBox="0 0 1000 620" className="absolute inset-0 w-full h-full" aria-hidden="true">
+              <div className="relative aspect-[16/10] neu-inset-deep overflow-hidden rounded-[20px]">
+                <svg
+                  viewBox="0 0 1000 620"
+                  className="absolute inset-0 w-full h-full"
+                  aria-hidden="true"
+                >
                   <path
                     d="M86 165 L450 165 L500 150 L642 150 L720 185 L804 188 L878 238 L888 300 L850 352 L780 357 L736 406 L652 406 L592 364 L538 364 L486 319 L430 319 L382 336 L318 336 L278 316 L214 316 L150 326 L86 326 Z"
-                    fill="#FFFFFF"
-                    stroke="#000000"
-                    strokeWidth="6"
+                    fill="#E4EAED"
+                    stroke="#8A94A3"
+                    strokeWidth="3"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M384 316 L438 314 L478 334 L520 365 L558 365 L590 388 L650 407 L724 406 L764 362 L792 362 L827 340"
-                    stroke="#000000"
-                    strokeWidth="6"
+                    stroke="#8A94A3"
+                    strokeWidth="3"
                     fill="none"
+                    strokeLinecap="round"
                   />
                   <path
                     d="M216 318 L240 280 L290 280 L324 315"
-                    stroke="#000000"
-                    strokeWidth="6"
+                    stroke="#8A94A3"
+                    strokeWidth="3"
                     fill="none"
+                    strokeLinecap="round"
                   />
                 </svg>
 
                 {markers.map((marker, i) => {
-                  const bgClass = toneClasses[marker.tone];
+                  const toneText = toneClasses[marker.tone];
                   return (
                     <motion.div
                       key={marker.country}
@@ -147,9 +160,10 @@ export default function Availability() {
                       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                       transition={{ duration: 0.45, delay: 0.55 + i * 0.1 }}
                     >
-                      {/* Hard Shadow / Connection Line removed for a blocky sticker effect */}
                       <div className="relative -translate-x-1/2 -translate-y-1/2 group">
-                        <div className={`w-12 h-12 border-4 border-black ${bgClass} flex items-center justify-center font-black text-sm uppercase cursor-pointer hover:rotate-12 hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_#000] rotate-${i % 2 === 0 ? '-6' : '6'}`}>
+                        <div
+                          className={`w-11 h-11 rounded-full flex items-center justify-center text-[11px] font-semibold tracking-wide cursor-pointer hover:scale-110 transition-transform neu-surface-sm ${toneText}`}
+                        >
                           {marker.flag}
                         </div>
                       </div>
@@ -157,7 +171,10 @@ export default function Availability() {
                   );
                 })}
 
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
+                <svg
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  viewBox="0 0 100 100"
+                >
                   {markers
                     .filter((m) => m.country !== "Saudi Arabia")
                     .map((m, i) => (
@@ -167,11 +184,11 @@ export default function Availability() {
                         y1={m.y}
                         x2={56}
                         y2={60}
-                        stroke="#000000"
-                        strokeWidth="0.8"
-                        strokeDasharray="2 2"
+                        stroke="#8A94A3"
+                        strokeWidth="0.5"
+                        strokeDasharray="1.5 2"
                         initial={{ pathLength: 0, opacity: 0 }}
-                        animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
+                        animate={isInView ? { pathLength: 1, opacity: 0.6 } : {}}
                         transition={{ duration: 1.2, delay: 1 + i * 0.15 }}
                       />
                     ))}
@@ -181,9 +198,9 @@ export default function Availability() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 1.15 }}
-                  className="absolute top-4 right-4 border-4 border-black bg-white px-4 py-2 font-black uppercase text-sm inline-flex items-center gap-2 shadow-[4px_4px_0px_0px_#000]"
+                  className="absolute top-4 right-4 neu-chip text-xs font-medium tracking-wide text-ink-soft inline-flex items-center gap-2"
                 >
-                  <Radar className="w-5 h-5" strokeWidth={3} />
+                  <Radar className="w-4 h-4 text-accent" strokeWidth={2} />
                   Live reach
                 </motion.div>
 
@@ -191,9 +208,9 @@ export default function Availability() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 1.2 }}
-                  className="absolute bottom-4 left-4 border-4 border-black bg-black px-4 py-3 font-black uppercase text-white inline-flex items-center gap-3 text-sm shadow-[4px_4px_0px_0px_#FFD93D]"
+                  className="absolute bottom-4 left-4 neu-chip text-xs font-medium tracking-wide text-ink inline-flex items-center gap-2"
                 >
-                  <Globe2 className="w-5 h-5 text-white" strokeWidth={3} />
+                  <Globe2 className="w-4 h-4 text-accent" strokeWidth={2} />
                   Regional on-site + global remote
                 </motion.div>
               </div>

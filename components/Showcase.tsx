@@ -7,24 +7,24 @@ import { Monitor, Server, Wrench } from "lucide-react";
 const skills = [
   {
     title: "Frontend",
-    description: "Crafting fast, responsive interfaces with modern tools and a strong eye for design.",
+    description:
+      "Crafting fast, responsive interfaces with modern tools and a strong eye for design.",
     tags: ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
     icon: Monitor,
-    color: "bg-vivid-yellow"
   },
   {
     title: "Backend",
-    description: "Building reliable server-side logic, APIs, and databases that scale.",
+    description:
+      "Building reliable server-side logic, APIs, and databases that scale.",
     tags: ["Node.js", "REST APIs", "Supabase", "SQL", "Auth"],
     icon: Server,
-    color: "bg-slate-blue"
   },
   {
     title: "Tools & Workflow",
-    description: "Working efficiently from idea to deployment with the right tooling.",
+    description:
+      "Working efficiently from idea to deployment with the right tooling.",
     tags: ["Git", "Figma", "Docker", "VS Code", "CI/CD"],
     icon: Wrench,
-    color: "bg-cream"
   },
 ];
 
@@ -33,7 +33,7 @@ export default function Showcase() {
   const isInView = useInView(ref, { once: true, margin: "-120px" });
 
   return (
-    <section className="relative py-28 bg-hot-red border-y-4 border-black overflow-hidden bg-grid-pattern">
+    <section className="relative py-28 bg-surface overflow-hidden">
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -42,8 +42,10 @@ export default function Showcase() {
             transition={{ duration: 0.55 }}
             className="flex items-center gap-4 mb-8"
           >
-            <div className="w-14 h-2 bg-black" />
-            <span className="text-xl font-black uppercase tracking-widest text-black">Skills</span>
+            <div className="neu-divider w-14" />
+            <span className="text-sm font-medium tracking-wide text-ink-soft">
+              Skills
+            </span>
           </motion.div>
 
           <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-end mb-16">
@@ -51,23 +53,21 @@ export default function Showcase() {
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.06 }}
-              className="text-4xl md:text-6xl lg:text-[5.5rem] leading-[0.85] font-black uppercase text-black"
+              className="text-4xl md:text-5xl lg:text-[4.25rem] leading-[0.95] font-semibold tracking-tight text-ink"
             >
               What I bring
               <br />
-              <span className="bg-white text-black px-2 mt-3 inline-block border-4 border-black shadow-[4px_4px_0px_0px_#000] rotate-1">
-                to the table
-              </span>
+              <span className="text-accent">to the table</span>
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="text-white text-xl font-bold leading-relaxed bg-black border-4 border-black p-6 shadow-[6px_6px_0px_0px_#FFD93D] -rotate-1"
+              className="text-ink-soft text-lg leading-relaxed neu-inset p-6"
             >
-              Full-stack skills paired with a designer&apos;s eye. I work across the whole product -
-              from database schema to polished UI.
+              Full-stack skills paired with a designer&apos;s eye. I work across
+              the whole product - from database schema to polished UI.
             </motion.p>
           </div>
 
@@ -78,18 +78,25 @@ export default function Showcase() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
-                className={`border-4 border-black p-8 shadow-[8px_8px_0px_0px_#000] ${skill.color} hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#000] transition-all flex flex-col`}
+                className="neu-surface p-8 transition-all duration-300 hover:shadow-[var(--shadow-neu-lg)] hover:-translate-y-1 flex flex-col"
               >
-                <div className="w-16 h-16 border-4 border-black bg-white flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_#000]">
-                  <skill.icon className="w-8 h-8 text-black" strokeWidth={3} />
-                </div>
+                <span className="neu-icon w-14 h-14 mb-6 text-accent">
+                  <skill.icon className="w-7 h-7" strokeWidth={2} />
+                </span>
 
-                <h3 className="text-3xl font-black uppercase text-black mb-4 leading-tight">{skill.title}</h3>
-                <p className="text-black font-bold text-lg leading-relaxed mb-8 flex-grow">{skill.description}</p>
+                <h3 className="text-2xl font-semibold tracking-tight text-ink mb-3 leading-tight">
+                  {skill.title}
+                </h3>
+                <p className="text-ink-soft text-base leading-relaxed mb-7 flex-grow">
+                  {skill.description}
+                </p>
 
-                <div className="flex flex-wrap gap-3 mt-auto">
+                <div className="flex flex-wrap gap-2 mt-auto">
                   {skill.tags.map((tag) => (
-                    <span key={tag} className="border-4 border-black bg-white px-3 py-1 text-sm font-black uppercase tracking-widest text-black shadow-[2px_2px_0px_0px_#000]">
+                    <span
+                      key={tag}
+                      className="neu-chip text-xs font-medium tracking-wide text-ink-soft"
+                    >
                       {tag}
                     </span>
                   ))}

@@ -68,15 +68,15 @@ export default function Globe() {
       height: width * 2,
       phi: 0,
       theta: 0.25,
-      dark: 1,
-      diffuse: 1.0,
+      dark: 0,
+      diffuse: 1.2,
       mapSamples: 22000,
-      mapBaseBrightness: 0.0,
+      mapBaseBrightness: 0.08,
       markerElevation: 0.00,
-      mapBrightness: 5,
-      baseColor: [1, 1, 1],
-      markerColor: [1, 0.42, 0.42],
-      glowColor: [1, 1, 1],
+      mapBrightness: 2.2,
+      baseColor: [0.87, 0.89, 0.91],
+      markerColor: [0.88, 0.42, 0.44],
+      glowColor: [0.87, 0.89, 0.91],
       markers: [],
     });
 
@@ -202,12 +202,16 @@ export default function Globe() {
         >
           <div className="flex items-center gap-1.5">
             <span
-              className="block w-[7px] h-[7px] rounded-full border border-white"
-              style={{ backgroundColor: "#3366FF" }}
+              className="block w-[7px] h-[7px] rounded-full"
+              style={{ backgroundColor: "#E06B70" }}
             />
             <span
-              className="font-black uppercase tracking-wider text-white px-1.5 py-0.5 text-[10px] leading-none"
-              style={{ backgroundColor: "#3366FF" }}
+              className="font-semibold tracking-wide px-2 py-0.5 text-[10px] leading-none rounded-full text-ink"
+              style={{
+                backgroundColor: "#DEE4E7",
+                boxShadow:
+                  "-2px -2px 4px rgba(255,255,255,0.8), 2px 2px 4px rgba(0,0,0,0.1)",
+              }}
             >
               {label.name}
             </span>

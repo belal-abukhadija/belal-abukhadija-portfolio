@@ -1,18 +1,36 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #FFFDF5;
-  --color-slate-blue: #7689a5;
-  --color-hot-red: #FF6B6B;
-  --color-vivid-yellow: #FFD93D;
+  /* Neumorphic surface system */
+  --color-surface: #DEE4E7;
+  --color-surface-raised: #E4EAED;
+  --color-surface-sunken: #D4DADD;
+  --color-ink: #333333;
+  --color-ink-soft: #5A6270;
+  --color-ink-subtle: #8A94A3;
+  --color-accent: #E06B70;
+  --color-accent-soft: #ECA5A8;
+  --color-accent-deep: #C45257;
 
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-brutal-sm: 4px 4px 0px 0px #000;
-  --shadow-brutal-md: 8px 8px 0px 0px #000;
-  --shadow-brutal-lg: 12px 12px 0px 0px #000;
-  --shadow-brutal-xl: 16px 16px 0px 0px #000;
+  /* Neumorphic shadow tokens */
+  --shadow-neu-sm: -3px -3px 6px rgba(255, 255, 255, 0.75),
+                    3px 3px 6px rgba(0, 0, 0, 0.08);
+  --shadow-neu: -6px -6px 12px rgba(255, 255, 255, 0.85),
+                 6px 6px 12px rgba(0, 0, 0, 0.10);
+  --shadow-neu-lg: -9px -9px 18px rgba(255, 255, 255, 0.9),
+                    9px 9px 18px rgba(0, 0, 0, 0.13);
+  --shadow-neu-xl: -14px -14px 28px rgba(255, 255, 255, 0.9),
+                    14px 14px 28px rgba(0, 0, 0, 0.16);
+  --shadow-neu-inset: inset 3px 3px 7px rgba(0, 0, 0, 0.10),
+                      inset -3px -3px 7px rgba(255, 255, 255, 0.55);
+  --shadow-neu-inset-deep: inset 5px 5px 11px rgba(0, 0, 0, 0.13),
+                           inset -5px -5px 11px rgba(255, 255, 255, 0.6);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 38s linear infinite;
 }
 
 @layer base {
@@ -23,43 +41,167 @@
   }
 
   body {
-    background-color: var(--color-cream);
-    color: #000000;
+    background-color: var(--color-surface);
+    color: var(--color-ink);
     overflow-x: hidden;
+    font-feature-settings: "cv11", "ss01";
+    letter-spacing: -0.005em;
   }
 
   ::selection {
-    background-color: var(--color-vivid-yellow);
-    color: #000;
+    background-color: var(--color-accent-soft);
+    color: var(--color-ink);
   }
-  
-  /* Applying a default border style to focus visible */
+
   :focus-visible {
-    outline: 4px solid black;
-    outline-offset: 2px;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 12px;
+  }
+}
+
+@layer components {
+  .neu-surface {
+    background-color: var(--color-surface);
+    border-radius: 20px;
+    box-shadow: var(--shadow-neu);
+  }
+
+  .neu-surface-sm {
+    background-color: var(--color-surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-neu-sm);
+  }
+
+  .neu-surface-lg {
+    background-color: var(--color-surface);
+    border-radius: 24px;
+    box-shadow: var(--shadow-neu-lg);
+  }
+
+  .neu-surface-xl {
+    background-color: var(--color-surface);
+    border-radius: 28px;
+    box-shadow: var(--shadow-neu-xl);
+  }
+
+  .neu-inset {
+    background-color: var(--color-surface);
+    border-radius: 20px;
+    box-shadow: var(--shadow-neu-inset);
+  }
+
+  .neu-inset-deep {
+    background-color: var(--color-surface);
+    border-radius: 20px;
+    box-shadow: var(--shadow-neu-inset-deep);
+  }
+
+  .neu-pressable {
+    background-color: var(--color-surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-neu);
+    color: var(--color-ink);
+    transition: box-shadow 220ms ease, transform 220ms ease, color 220ms ease;
+  }
+  .neu-pressable:hover {
+    box-shadow: var(--shadow-neu-lg);
+  }
+  .neu-pressable:active {
+    box-shadow: var(--shadow-neu-inset);
+  }
+
+  .neu-pressable-accent {
+    background-color: var(--color-surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-neu);
+    color: var(--color-accent-deep);
+    transition: box-shadow 220ms ease, color 220ms ease;
+  }
+  .neu-pressable-accent:hover {
+    box-shadow: var(--shadow-neu-lg);
+    color: var(--color-accent);
+  }
+  .neu-pressable-accent:active {
+    box-shadow: var(--shadow-neu-inset);
+  }
+
+  .neu-chip {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-surface);
+    border-radius: 999px;
+    box-shadow: var(--shadow-neu-sm);
+    padding: 0.4rem 0.9rem;
+    color: var(--color-ink);
+  }
+
+  .neu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-neu-sm);
+    color: var(--color-accent);
+  }
+
+  .neu-icon-round {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+    border-radius: 999px;
+    box-shadow: var(--shadow-neu-sm);
+    color: var(--color-accent);
+  }
+
+  .neu-divider {
+    height: 6px;
+    border-radius: 999px;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-neu-inset);
   }
 }
 
 @layer utilities {
   .text-stroke {
-    -webkit-text-stroke: 2px black;
+    -webkit-text-stroke: 2px var(--color-ink-subtle);
     color: transparent;
   }
 
   .text-stroke-sm {
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1px var(--color-ink-subtle);
     color: transparent;
   }
 
-  .bg-grid-pattern {
-    background-size: 40px 40px;
-    background-image: 
-      linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-  }
+  .text-ink        { color: var(--color-ink); }
+  .text-ink-soft   { color: var(--color-ink-soft); }
+  .text-ink-subtle { color: var(--color-ink-subtle); }
+  .text-accent     { color: var(--color-accent); }
+  .text-accent-deep { color: var(--color-accent-deep); }
+  .bg-surface       { background-color: var(--color-surface); }
+  .bg-surface-raised { background-color: var(--color-surface-raised); }
+  .bg-accent        { background-color: var(--color-accent); }
 
-  .bg-halftone {
-    background-image: radial-gradient(rgba(0, 0, 0, 0.2) 2px, transparent 2px);
-    background-size: 16px 16px;
+  .animate-marquee {
+    animation: marquee 38s linear infinite;
   }
+  .animate-marquee-reverse {
+    animation: marquee-reverse 38s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.3333%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-33.3333%); }
+  to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

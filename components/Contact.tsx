@@ -2,17 +2,21 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, Clock3, Globe2, Mail, Github, Linkedin } from "lucide-react";
+import { ArrowUpRight, Clock3, Globe2, Mail, Github, Linkedin, Instagram } from "lucide-react";
 import { personalInfo } from "@/lib/tools-data";
+import WhatsAppIcon from "./icons/WhatsAppIcon";
 
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="relative py-28 bg-vivid-yellow overflow-hidden border-b-4 border-black bg-grid-pattern">
+    <section
+      id="contact"
+      className="relative py-28 bg-surface overflow-hidden"
+    >
       <div className="container mx-auto px-6 relative z-10" ref={ref}>
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-12 items-start">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-12 items-stretch">
           <div>
             <motion.div
               initial={{ opacity: 0, x: -16 }}
@@ -20,21 +24,21 @@ export default function Contact() {
               transition={{ duration: 0.55 }}
               className="flex items-center gap-4 mb-8"
             >
-              <div className="w-16 h-2 bg-black" />
-              <span className="text-xl font-black uppercase tracking-widest text-black">Contact</span>
+              <div className="neu-divider w-16" />
+              <span className="text-sm font-medium tracking-wide text-ink-soft">
+                Contact
+              </span>
             </motion.div>
 
             <motion.h2
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.05 }}
-              className="text-5xl md:text-7xl leading-[0.85] font-black uppercase text-black mb-10"
+              className="text-4xl md:text-5xl lg:text-[4.25rem] leading-[0.95] font-semibold tracking-tight text-ink mb-8"
             >
               Let&apos;s work
               <br />
-              <span className="bg-white text-black px-2 mt-3 inline-block -rotate-1 border-4 border-black shadow-[6px_6px_0px_0px_#000]">
-                together
-              </span>
+              <span className="text-accent">together</span>
               <br />
               on something great
             </motion.h2>
@@ -43,32 +47,37 @@ export default function Contact() {
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="text-black text-xl font-bold leading-relaxed mb-12 max-w-lg bg-cream border-4 border-black p-6 shadow-[6px_6px_0px_0px_#000] rotate-1"
+              className="text-ink-soft text-lg leading-relaxed mb-10 max-w-lg neu-inset p-6"
             >
-              Have an idea, a project, or just want to say hi? Drop me a message and I&apos;ll get back to you fast.
-              Always open to interesting work and people.
+              Have an idea, a project, or just want to say hi? Drop me a message
+              and I&apos;ll get back to you fast. Always open to interesting
+              work and people.
             </motion.p>
 
             <div className="space-y-4">
               {[
-                { icon: Mail, label: "Email", value: personalInfo.email, color: "bg-hot-red" },
-                { icon: Globe2, label: "Collaboration", value: "Remote worldwide", color: "bg-slate-blue" },
-                { icon: Clock3, label: "Typical response", value: "Within 1 hour", color: "bg-cream" },
+                { icon: Mail, label: "Email", value: personalInfo.email },
+                { icon: Globe2, label: "Collaboration", value: "Remote worldwide" },
+                { icon: Clock3, label: "Typical response", value: "Within 1 hour" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, y: 18 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.55, delay: 0.24 + i * 0.1 }}
-                  className="border-4 border-black bg-white p-4 shadow-[6px_6px_0px_0px_#000]"
+                  className="neu-surface p-5"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className={`w-14 h-14 border-4 border-black ${item.color} flex items-center justify-center shadow-[2px_2px_0px_0px_#000]`}>
-                      <item.icon className="w-6 h-6 text-black" strokeWidth={3} />
-                    </div>
+                  <div className="flex items-center gap-5">
+                    <span className="neu-icon w-12 h-12 text-accent">
+                      <item.icon className="w-5 h-5" strokeWidth={2} />
+                    </span>
                     <div>
-                      <p className="text-sm font-black uppercase tracking-widest text-black mb-1">{item.label}</p>
-                      <p className="text-xl font-bold text-black">{item.value}</p>
+                      <p className="text-xs font-medium tracking-wide text-ink-subtle mb-1">
+                        {item.label}
+                      </p>
+                      <p className="text-base font-semibold text-ink">
+                        {item.value}
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -80,16 +89,23 @@ export default function Contact() {
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75, delay: 0.18 }}
-            className="border-4 border-black bg-white p-8 md:p-10 shadow-[12px_12px_0px_0px_#000] -rotate-1 relative"
+            className="neu-surface-xl p-8 md:p-10 relative h-full flex flex-col"
           >
             <div className="mb-10">
-              <p className="text-lg font-black uppercase tracking-widest text-black mb-4">Start Here</p>
+              <p className="text-xs font-medium tracking-wide text-ink-subtle mb-4 uppercase">
+                Start Here
+              </p>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="w-full flex items-center justify-between gap-4 border-4 border-black bg-hot-red px-6 py-5 hover:-translate-y-1 active:translate-y-1 shadow-[6px_6px_0px_0px_#000] active:shadow-none transition-all group"
+                className="group w-full flex items-center justify-between gap-4 rounded-2xl bg-accent hover:bg-[var(--color-accent-deep)] px-6 py-5 text-white shadow-[var(--shadow-neu)] hover:shadow-[var(--shadow-neu-lg)] active:shadow-[var(--shadow-neu-inset)] transition-all"
               >
-                <span className="text-black font-black uppercase text-xl md:text-2xl">Send project brief</span>
-                <ArrowUpRight className="w-8 h-8 text-black group-hover:rotate-45 transition-transform" strokeWidth={3} />
+                <span className="font-semibold tracking-tight text-lg md:text-xl">
+                  Send project brief
+                </span>
+                <ArrowUpRight
+                  className="w-6 h-6 group-hover:rotate-45 transition-transform"
+                  strokeWidth={2.25}
+                />
               </a>
             </div>
 
@@ -98,32 +114,84 @@ export default function Contact() {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-4 border-black bg-slate-blue p-6 hover:-translate-y-1 active:translate-y-1 shadow-[4px_4px_0px_0px_#000] active:shadow-none transition-all"
+                className="neu-pressable p-6"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <Github className="w-8 h-8 text-white" strokeWidth={3} />
-                  <span className="text-xl font-black uppercase text-white">GitHub</span>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="neu-icon w-10 h-10 text-accent">
+                    <Github className="w-5 h-5" strokeWidth={2} />
+                  </span>
+                  <span className="text-lg font-semibold tracking-tight text-ink">
+                    GitHub
+                  </span>
                 </div>
-                <p className="text-sm font-bold text-white">Code, open-source work, and experiments.</p>
+                <p className="text-sm text-ink-soft leading-relaxed">
+                  Code, open-source work, and experiments.
+                </p>
               </a>
 
               <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-4 border-black bg-cream p-6 hover:-translate-y-1 active:translate-y-1 shadow-[4px_4px_0px_0px_#000] active:shadow-none transition-all"
+                className="neu-pressable p-6"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <Linkedin className="w-8 h-8 text-black" strokeWidth={3} />
-                  <span className="text-xl font-black uppercase text-black">LinkedIn</span>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="neu-icon w-10 h-10 text-accent">
+                    <Linkedin className="w-5 h-5" strokeWidth={2} />
+                  </span>
+                  <span className="text-lg font-semibold tracking-tight text-ink">
+                    LinkedIn
+                  </span>
                 </div>
-                <p className="text-sm font-bold text-black">Professional updates and direct messaging.</p>
+                <p className="text-sm text-ink-soft leading-relaxed">
+                  Professional updates and direct messaging.
+                </p>
+              </a>
+
+              <a
+                href={`https://wa.me/${personalInfo.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neu-pressable p-6"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="neu-icon w-10 h-10 text-accent">
+                    <WhatsAppIcon className="w-5 h-5" strokeWidth={2} />
+                  </span>
+                  <span className="text-lg font-semibold tracking-tight text-ink">
+                    WhatsApp
+                  </span>
+                </div>
+                <p className="text-sm text-ink-soft leading-relaxed">
+                  {personalInfo.whatsappDisplay} - fastest way to reach me.
+                </p>
+              </a>
+
+              <a
+                href={`https://instagram.com/${personalInfo.instagram}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neu-pressable p-6"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="neu-icon w-10 h-10 text-accent">
+                    <Instagram className="w-5 h-5" strokeWidth={2} />
+                  </span>
+                  <span className="text-lg font-semibold tracking-tight text-ink">
+                    Instagram
+                  </span>
+                </div>
+                <p className="text-sm text-ink-soft leading-relaxed">
+                  @{personalInfo.instagram} - behind the scenes.
+                </p>
               </a>
             </div>
 
-            <div className="border-t-4 border-black pt-8">
-              <p className="text-sm font-black uppercase tracking-widest text-black mb-4">What I can help with</p>
-              <div className="flex flex-wrap gap-3">
+            <div className="mt-auto pt-8" style={{ boxShadow: "inset 0 1px 0 rgba(0,0,0,0.06)" }}>
+              <p className="text-xs font-medium tracking-wide text-ink-subtle mb-4 uppercase">
+                What I can help with
+              </p>
+              <div className="flex flex-wrap gap-2">
                 {[
                   "Frontend Dev",
                   "Full-Stack Projects",
@@ -131,18 +199,15 @@ export default function Contact() {
                   "Tool Building",
                   "Freelance Work",
                 ].map((item) => (
-                  <span key={item} className="border-4 border-black bg-white px-3 py-1 text-sm font-black uppercase tracking-widest text-black shadow-[2px_2px_0px_0px_#000]">
+                  <span
+                    key={item}
+                    className="neu-chip text-xs font-medium tracking-wide text-ink-soft"
+                  >
                     {item}
                   </span>
                 ))}
               </div>
             </div>
-            
-            {/* Abstract Sticker */}
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 border-4 border-black bg-black rounded-full flex items-center justify-center -rotate-12 shadow-[4px_4px_0px_0px_#FF6B6B]">
-               <span className="text-white font-black text-2xl">HIRE<br/>ME</span>
-            </div>
-            
           </motion.div>
         </div>
       </div>

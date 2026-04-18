@@ -37,30 +37,45 @@ export default function Coverage() {
   return (
     <section
       id="coverage"
-      className="relative py-24 bg-black text-white overflow-hidden"
+      className="relative py-24 bg-surface text-ink overflow-hidden"
     >
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1.2fr] gap-12 items-center">
-          {/* Left — Text Content */}
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={isInView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.7 }}
+            className="relative flex items-center justify-center order-2 lg:order-1"
+          >
+            <div
+              className="w-full neu-inset-deep p-6 flex items-center justify-center"
+              style={{ height: 620 }}
+            >
+              <Globe />
+            </div>
+          </motion.div>
+
           <motion.div
             ref={ref}
-            initial={{ x: -40, opacity: 0 }}
+            initial={{ x: 40, opacity: 0 }}
             animate={isInView ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="order-1 lg:order-2"
           >
-            <div className="inline-flex py-3 px-5 border-4 border-white bg-hot-red text-black font-black uppercase tracking-widest text-sm mb-8 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] -rotate-1">
+            <div className="neu-chip text-xs font-medium tracking-wide text-ink-soft mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent mr-2" />
               Worldwide Coverage
             </div>
 
-            <h2 className="font-black uppercase tracking-tighter text-5xl md:text-6xl leading-[0.9] mb-6">
+            <h2 className="font-semibold tracking-tight text-4xl md:text-6xl leading-[0.95] mb-6 text-ink">
               Working
               <br />
-              <span className="text-hot-red">Globally,</span>
+              <span className="text-accent">Globally,</span>
               <br />
               From Jordan
             </h2>
 
-            <p className="text-lg text-gray-300 max-w-md mb-10 font-medium leading-relaxed">
+            <p className="text-lg text-ink-soft max-w-md mb-10 leading-relaxed">
               I collaborate with teams and clients worldwide. No matter where
               you are, I&apos;ll adapt to your workflow, timezone, and
               communication style.
@@ -73,28 +88,20 @@ export default function Coverage() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={isInView ? { y: 0, opacity: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
-                  className="border-4 border-white/20 bg-white/5 p-4 hover:border-hot-red hover:bg-white/10 transition-colors"
+                  className="neu-surface p-5 transition-shadow hover:shadow-[var(--shadow-neu-lg)]"
                 >
-                  <item.icon className="w-6 h-6 text-vivid-yellow mb-2" strokeWidth={3} />
-                  <div className="font-black uppercase tracking-wider text-sm">
+                  <span className="neu-icon w-10 h-10 mb-3">
+                    <item.icon className="w-5 h-5 text-accent" strokeWidth={2} />
+                  </span>
+                  <div className="font-semibold tracking-tight text-sm text-ink">
                     {item.title}
                   </div>
-                  <div className="text-xs text-gray-400 mt-1 font-medium">
+                  <div className="text-xs text-ink-soft mt-1">
                     {item.desc}
                   </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
-
-          {/* Right — Globe */}
-          <motion.div
-            initial={{ scale: 0.85, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative flex items-center justify-center"
-          >
-            <Globe />
           </motion.div>
         </div>
       </div>
