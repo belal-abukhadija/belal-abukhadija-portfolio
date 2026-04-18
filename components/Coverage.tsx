@@ -37,20 +37,17 @@ export default function Coverage() {
   return (
     <section
       id="coverage"
-      className="relative py-24 bg-surface text-ink overflow-hidden"
+      className="relative py-16 md:py-20 lg:py-24 bg-surface text-ink overflow-hidden"
     >
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-12 items-center">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={isInView ? { scale: 1, opacity: 1 } : {}}
             transition={{ duration: 0.7 }}
             className="relative flex items-center justify-center order-2 lg:order-1"
           >
-            <div
-              className="w-full neu-inset-deep p-6 flex items-center justify-center"
-              style={{ height: 620 }}
-            >
+            <div className="w-full neu-inset-deep p-4 sm:p-6 flex items-center justify-center aspect-square lg:aspect-auto lg:h-[620px]">
               <Globe />
             </div>
           </motion.div>

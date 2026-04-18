@@ -13,10 +13,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-28 bg-surface overflow-hidden"
+      className="relative py-16 md:py-24 lg:py-28 bg-surface overflow-hidden"
     >
-      <div className="container mx-auto px-6 relative z-10" ref={ref}>
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-12 items-stretch">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-12 items-stretch">
           <div>
             <motion.div
               initial={{ opacity: 0, x: -16 }}
@@ -47,7 +47,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="text-ink-soft text-lg leading-relaxed mb-10 max-w-lg neu-inset p-6"
+              className="text-ink-soft text-base md:text-lg leading-relaxed mb-10 max-w-lg neu-inset p-5 md:p-6"
             >
               Have an idea, a project, or just want to say hi? Drop me a message
               and I&apos;ll get back to you fast. Always open to interesting
@@ -89,7 +89,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75, delay: 0.18 }}
-            className="neu-surface-xl p-8 md:p-10 relative h-full flex flex-col"
+            className="neu-surface-xl p-6 md:p-10 relative h-full flex flex-col"
           >
             <div className="mb-10">
               <p className="text-xs font-medium tracking-wide text-ink-subtle mb-4 uppercase">

@@ -33,8 +33,8 @@ export default function Showcase() {
   const isInView = useInView(ref, { once: true, margin: "-120px" });
 
   return (
-    <section className="relative py-28 bg-surface overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10" ref={ref}>
+    <section className="relative py-16 md:py-24 lg:py-28 bg-surface overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -16 }}

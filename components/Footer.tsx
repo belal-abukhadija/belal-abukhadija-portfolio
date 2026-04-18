@@ -17,13 +17,13 @@ export default function Footer() {
 
   return (
     <footer id="footer" className="relative bg-surface text-ink overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div ref={ctaRef} className="py-24 md:py-32">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div ref={ctaRef} className="py-16 md:py-24 lg:py-32">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75 }}
-            className="max-w-4xl mx-auto neu-surface-xl p-10 md:p-14 text-center"
+            className="max-w-4xl mx-auto neu-surface-xl p-7 md:p-10 lg:p-14 text-center"
           >
             <p className="text-xs font-medium tracking-wide text-ink-subtle mb-6 uppercase">
               Got a project or an idea?

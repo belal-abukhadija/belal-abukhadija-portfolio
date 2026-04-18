@@ -32,14 +32,16 @@ export default function Header() {
         style={{ scaleX: scrollYProgress }}
       />
 
-      <header
-        className={`fixed top-4 left-4 right-4 md:left-6 md:right-6 z-50 transition-all duration-300 rounded-2xl ${
-          scrolled
-            ? "bg-surface/85 backdrop-blur-md shadow-[var(--shadow-neu)]"
-            : "bg-transparent"
-        }`}
-      >
-        <nav className="px-6 py-4">
+      <header className="fixed top-4 inset-x-0 z-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div
+            className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 ${
+              scrolled
+                ? "bg-surface/85 backdrop-blur-md shadow-[var(--shadow-neu)]"
+                : "bg-transparent"
+            }`}
+          >
+            <nav className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div
               className="font-semibold text-sm md:text-base tracking-[0.14em] cursor-pointer select-none text-ink uppercase"
@@ -150,8 +152,10 @@ export default function Header() {
                 </a>
               </div>
             </div>
-          </motion.div>
-        </nav>
+            </motion.div>
+            </nav>
+          </div>
+        </div>
       </header>
     </>
   );

@@ -19,7 +19,7 @@ export default function Marquee() {
 
   return (
     <section className="relative bg-surface overflow-hidden select-none w-full py-16">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto space-y-6">
           <div
             className="neu-inset py-5 overflow-hidden flex items-center"

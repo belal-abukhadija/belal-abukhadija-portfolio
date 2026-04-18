@@ -12,13 +12,13 @@ export default function Tools() {
   return (
     <section
       id="tools"
-      className="relative py-28 bg-surface overflow-hidden"
+      className="relative py-16 md:py-24 lg:py-28 bg-surface overflow-hidden"
     >
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div
             ref={headerRef}
-            className="mb-16 neu-surface-xl p-8 md:p-12"
+            className="mb-12 md:mb-16 neu-surface-xl p-6 md:p-10 lg:p-12"
           >
             <motion.div
               initial={{ opacity: 0, x: -16 }}

@@ -33,8 +33,8 @@ export default function Process() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-28 bg-surface overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10" ref={ref}>
+    <section className="relative py-16 md:py-24 lg:py-28 bg-surface overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -16 }}
@@ -68,7 +68,7 @@ export default function Process() {
                 transition={{ duration: 0.55, delay: 0.15 + i * 0.1 }}
                 className="neu-surface p-8 relative hover:shadow-[var(--shadow-neu-lg)] hover:-translate-y-1 transition-all flex flex-col"
               >
-                <div className="absolute top-6 right-6 text-4xl font-semibold text-stroke-sm opacity-20 select-none pointer-events-none leading-none">
+                <div className="absolute top-5 right-5 md:top-6 md:right-6 text-2xl sm:text-3xl md:text-4xl font-semibold text-stroke-sm opacity-20 select-none pointer-events-none leading-none max-w-[55%] text-right">
                   {step.number}
                 </div>
 
