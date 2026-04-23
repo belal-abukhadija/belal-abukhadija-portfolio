@@ -53,7 +53,7 @@ export default function Footer() {
               <span className="text-accent"> Abukhadija</span>
             </h3>
             <p className="text-ink-soft text-base leading-relaxed max-w-xs">
-              Developer, builder, and creative - based in Palestine.
+              Developer, builder, and creative - based in Jordan.
             </p>
           </div>
 

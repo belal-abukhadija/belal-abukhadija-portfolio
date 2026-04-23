@@ -122,7 +122,7 @@ export const personalInfo = {
   name: "Belal Abukhadija",
   title: "Full-Stack Developer",
   role: "Developer. Designer. Builder.",
-  location: "Palestine 🇵🇸",
+  location: "Jordan",
   description: "I'm a full-stack developer who loves turning ideas into fast, clean, and useful products. Whether it's a design system, a browser tool, or a side project - I build things I'd actually use.",
   email: "belalabukhadija97@gmail.com",
   github: "https://github.com/belal-abukhadija",

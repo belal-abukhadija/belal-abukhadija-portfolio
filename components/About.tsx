@@ -117,8 +117,8 @@ export default function About() {
           >
             {[
               { value: personalInfo.yearsOfExperience, suffix: "+", label: "Years coding" },
-              { value: 10, suffix: "+", label: "Projects shipped" },
-              { value: 5, suffix: "+", label: "Technologies" },
+              { value: 25, suffix: "+", label: "Projects shipped" },
+              { value: 15, suffix: "+", label: "Technologies" },
               { value: 0, suffix: "", label: "Curiosity limit", custom: "∞" },
             ].map((item) => (
               <div
