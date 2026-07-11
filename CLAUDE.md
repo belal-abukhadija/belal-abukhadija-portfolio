@@ -28,23 +28,23 @@ Changing `personalInfo.domain`, adding/removing a tool, or editing a tool descri
 
 `ToolCard.tsx` resolves `tool.icon` by string-indexing `lucide-react`'s exports (`(Icons as Record<…>)[tool.icon] || Icons.Box`). Icon names in `tools-data.ts` must match lucide-react export names exactly.
 
-### Styling system (Tailwind v4 + neo-brutalism)
+### Styling system (Tailwind v4 + editorial-dark)
 
-Tailwind v4 is configured via `@import "tailwindcss"` + an `@theme` block in `app/globals.css` — that is where custom colors (`--color-cream`, `--color-hot-red`, `--color-vivid-yellow`, `--color-slate-blue`) and brutal shadow tokens live. The legacy `tailwind.config.ts` uses v3-style `theme.extend` syntax and is mostly inert under v4; prefer editing `globals.css` for theme tokens.
+Tailwind v4 is configured via `@import "tailwindcss"` + an `@theme` block in `app/globals.css` — the single source of truth for theme tokens. The legacy `tailwind.config.ts` uses v3-style `theme.extend` syntax and is mostly inert under v4; edit `globals.css` for theme tokens.
 
-The visual language is neo-brutalist: `border-4 border-black`, cream background, and hardcoded offset shadows like `shadow-[8px_8px_0px_0px_#000]` / `shadow-[12px_12px_0px_0px_#000]`. Match this pattern when adding components.
+The visual language is editorial-dark: a warm near-black canvas with a single amber accent. Color tokens: `--color-bg`, `--color-panel`(`-2`), `--color-line`(`-strong`), `--color-ink`(`-soft`/`-faint`), `--color-amber`(`-bright`/`-deep`). Build UI from the component classes defined in `globals.css` — `.card` (+`.card-hover`), `.btn-primary` / `.btn-ghost` (rounded 14px, not pills), `.eyebrow`, `.chip`, `.icon-tile`, `.accent-word` (serif-italic amber highlight), `.grain` — rather than ad-hoc utilities. Match this system when adding components.
 
-Font is Space Grotesk loaded via `next/font/google` in `app/layout.tsx`, exposed as `--font-space-grotesk` and consumed via `font-sans`.
+Fonts (all `next/font/google` in `app/layout.tsx`): Inter (`font-sans`, body) · Space Grotesk (`font-display`, headings) · Instrument Serif (`font-serif`, italic amber accent words) · Space Mono (`font-mono`, eyebrows/labels/numbers).
 
-### 3D / interactive components
+### Interactive / animated components
 
-Client-only visual components are marked `"use client"` and rely on heavy libs:
+Client-only visual components are marked `"use client"`:
 
-- `HeroScene.tsx`, `RubiksCube.tsx` — `three` + `@react-three/fiber` / `@react-three/drei` / `@react-three/postprocessing`
-- `Globe.tsx` — `cobe` (WebGL globe)
-- Scroll/entry animations — `framer-motion` (`useInView` pattern used in `ToolCard`, `Tools`)
+- `Hero.tsx` — full-bleed background `<video>` (`public/hero.mp4`). The video is rendered **client-only** (behind a `mounted` flag) so a browser extension mutating the `<video>` can't cause a hydration mismatch, and the hero's entrance uses **CSS** (`.rise` classes in `globals.css`), NOT framer-motion — above-the-fold content must never depend on JS to become visible.
+- `Globe.tsx` — `cobe` (WebGL globe), restyled dark/amber.
+- Scroll/entry animations elsewhere — `framer-motion` `useInView` (fade + rise), e.g. `ToolCard` and the section components.
 
-When adding new 3D or interactive work, keep it inside `"use client"` components so the rest of the page stays server-rendered for SEO.
+three.js / `@react-three/*` and the old Rubik's-cube / hero-scene components were removed. Keep new interactive work inside `"use client"` components so the rest of the page stays server-rendered for SEO.
 
 ### Path alias
 

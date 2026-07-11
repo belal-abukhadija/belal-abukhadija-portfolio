@@ -40,9 +40,9 @@ export default function BackToTop() {
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="neu-pressable-accent fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[55] w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full"
+          className="icon-tile hover:border-amber hover:text-amber fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[55] w-12 h-12 md:w-14 md:h-14 rounded-full bg-panel"
         >
-          <ArrowUp className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.25} />
+          <ArrowUp className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
         </motion.button>
       )}
     </AnimatePresence>

@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "PowerShell(cd \"C:\\\\Users\\\\PC\\\\Desktop\\\\belal-projects\\\\belal-abukhadija-portfolio\"; Start-Process -FilePath \"npm\" -ArgumentList \"run\",\"dev\" -WindowStyle Hidden; Start-Sleep -Seconds 14; try { \\(Invoke-WebRequest http://localhost:3000 -UseBasicParsing -TimeoutSec 10\\).StatusCode } catch { $_.Exception.Message })",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__resize_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__close_page",
+      "WebSearch",
+      "Skill(claude-md-management:revise-claude-md)",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__new_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__navigate_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__evaluate_script"
     ]
   }
 }

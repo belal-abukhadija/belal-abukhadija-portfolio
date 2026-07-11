@@ -7,56 +7,47 @@ import ToolCard from "./ToolCard";
 
 export default function Tools() {
   const headerRef = useRef(null);
-  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
 
   return (
-    <section
-      id="tools"
-      className="relative py-16 md:py-24 lg:py-28 bg-surface overflow-hidden"
-    >
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div
-            ref={headerRef}
-            className="mb-12 md:mb-16 neu-surface-xl p-6 md:p-10 lg:p-12"
-          >
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              animate={isHeaderInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.55 }}
-              className="flex items-center gap-4 mb-8"
-            >
-              <div className="neu-divider w-16" />
-              <span className="text-sm font-medium tracking-wide text-ink-soft">
-                Tool Ecosystem
-              </span>
-            </motion.div>
-
-            <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-end">
+    <section id="tools" className="relative py-20 md:py-28">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <div ref={headerRef} className="mb-14 grid lg:grid-cols-[1fr_auto] gap-8 items-end">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, x: -12 }}
+                animate={isHeaderInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5 }}
+                className="eyebrow mb-6"
+              >
+                The toolkit
+              </motion.div>
               <motion.h2
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.08 }}
-                className="text-4xl md:text-6xl lg:text-[4.5rem] leading-[0.95] font-semibold tracking-tight text-ink"
+                transition={{ duration: 0.65, delay: 0.06 }}
+                className="font-display text-4xl md:text-6xl font-semibold tracking-tight text-ink leading-[0.98]"
               >
-                One place for
+                Everything I&apos;ve
                 <br />
-                <span className="text-accent">every tool I ship.</span>
+                shipped, <span className="accent-word">in one place</span>.
               </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.18 }}
-                className="text-ink-soft text-lg leading-relaxed max-w-md neu-inset p-5"
-              >
-                Designed like a living toolkit, not a portfolio gallery.
-                Browse, use, and share tools that solve real tasks quickly.
-              </motion.p>
             </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.65, delay: 0.14 }}
+              className="text-ink-soft leading-relaxed max-w-sm lg:text-right"
+            >
+              A living suite of free, privacy-first browser tools on{" "}
+              <span className="font-mono text-amber">belal.work</span>, used by
+              developers and creators worldwide.
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {tools.map((tool, index) => (
               <ToolCard key={tool.name} tool={tool} index={index} />
             ))}
@@ -66,13 +57,13 @@ export default function Tools() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="mt-20 flex justify-center"
+            transition={{ delay: 0.2 }}
+            className="mt-12 flex justify-center"
           >
-            <div className="neu-chip px-6 py-3 text-sm font-semibold tracking-wide text-ink">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse mr-3" />
+            <span className="chip">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber animate-pulse" />
               More tools in production
-            </div>
+            </span>
           </motion.div>
         </div>
       </div>

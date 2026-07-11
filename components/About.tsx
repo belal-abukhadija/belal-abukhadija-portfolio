@@ -31,25 +31,25 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 const traits = [
   {
     icon: Target,
-    title: "Problem Solver",
+    title: "Problem solver",
     description:
-      "Love turning complex, messy problems into clean and simple user experiences.",
+      "I turn complex, messy problems into clean and simple user experiences.",
   },
   {
     icon: Globe2,
-    title: "Remote-Ready",
+    title: "Remote-ready",
     description:
       "Collaborated with teams and clients across timezones, fully async or sync.",
   },
   {
     icon: Compass,
-    title: "Design-Aware",
+    title: "Design-aware",
     description:
-      "I care about the look just as much as the function - UI is part of the product.",
+      "I care about the look as much as the function. UI is part of the product.",
   },
   {
     icon: Rocket,
-    title: "Shipping Mindset",
+    title: "Shipping mindset",
     description:
       "Done and live beats perfect and stuck. I push code that matters.",
   },
@@ -60,46 +60,40 @@ export default function About() {
   const isInView = useInView(ref, { once: true, margin: "-120px" });
 
   return (
-    <section
-      id="about"
-      className="relative py-16 md:py-24 lg:py-28 bg-surface overflow-hidden"
-    >
-      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
-        <div className="max-w-7xl mx-auto">
+    <section id="about" className="relative py-20 md:py-28">
+      <div className="container mx-auto px-4 sm:px-6" ref={ref}>
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -16 }}
+            initial={{ opacity: 0, x: -12 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.55 }}
-            className="flex items-center gap-4 mb-10"
+            transition={{ duration: 0.5 }}
+            className="eyebrow mb-6"
           >
-            <div className="neu-divider w-14" />
-            <span className="text-sm font-medium tracking-wide text-ink-soft">
-              About Me
-            </span>
+            About me
           </motion.div>
 
-          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 mb-20 items-end">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 mb-16 items-end">
             <motion.h2
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className="text-4xl md:text-5xl lg:text-[4.25rem] leading-[0.95] font-semibold tracking-tight text-ink"
+              className="font-display text-4xl md:text-5xl lg:text-6xl leading-[0.98] font-semibold tracking-tight text-ink"
             >
               Who&apos;s behind
               <br />
-              <span className="text-accent">the keyboard</span>
+              <span className="accent-word">the keyboard</span>
             </motion.h2>
 
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="text-ink-soft leading-relaxed space-y-4 text-lg neu-inset p-7"
+              className="text-ink-soft leading-relaxed space-y-4"
             >
               <p>
                 Hey! I&apos;m {personalInfo.name}, a full-stack developer from{" "}
                 {personalInfo.location}. I started coding out of curiosity and
-                never stopped - there&apos;s always something new to build.
+                never stopped. There&apos;s always something new to build.
               </p>
               <p>
                 I focus on fast, clean, useful software. I ship tools people
@@ -113,7 +107,7 @@ export default function About() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
           >
             {[
               { value: personalInfo.yearsOfExperience, suffix: "+", label: "Years coding" },
@@ -123,36 +117,36 @@ export default function About() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="neu-surface p-6 flex flex-col items-center justify-center text-center"
+                className="card p-6 flex flex-col items-center justify-center text-center"
               >
-                <p className="text-4xl md:text-5xl font-semibold text-accent mb-2">
+                <p className="font-display text-4xl md:text-5xl font-semibold text-amber mb-2">
                   {item.custom ?? (
                     <AnimatedCounter target={item.value} suffix={item.suffix} />
                   )}
                 </p>
-                <p className="text-xs font-medium tracking-wide text-ink-soft">
+                <p className="font-mono text-[0.68rem] uppercase tracking-widest text-ink-faint">
                   {item.label}
                 </p>
               </div>
             ))}
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {traits.map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 22 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: 0.28 + i * 0.08 }}
-                className="neu-surface p-7 hover:shadow-[var(--shadow-neu-lg)] hover:-translate-y-1 transition-all"
+                className="card card-hover p-6"
               >
-                <span className="neu-icon w-14 h-14 mb-6 text-accent">
-                  <item.icon className="w-7 h-7" strokeWidth={2} />
+                <span className="icon-tile w-12 h-12 mb-5">
+                  <item.icon className="w-[22px] h-[22px]" strokeWidth={1.75} />
                 </span>
-                <h3 className="text-lg font-semibold text-ink mb-3 leading-tight">
+                <h3 className="font-display text-base font-semibold text-ink mb-2">
                   {item.title}
                 </h3>
-                <p className="text-ink-soft text-sm leading-relaxed">
+                <p className="text-sm text-ink-soft leading-relaxed">
                   {item.description}
                 </p>
               </motion.div>

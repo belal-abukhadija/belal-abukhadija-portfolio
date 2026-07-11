@@ -13,7 +13,7 @@ interface ToolCardProps {
 
 export default function ToolCard({ tool, index }: ToolCardProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
   const IconComponent =
     (Icons as unknown as Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>>)[tool.icon] ||
     Icons.Box;
@@ -24,45 +24,47 @@ export default function ToolCard({ tool, index }: ToolCardProps) {
       href={tool.url}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 34 }}
+      initial={{ opacity: 0, y: 26 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: (index % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.55, delay: (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className="group block h-full"
     >
-      <div className="h-full neu-surface p-7 transition-all duration-300 hover:shadow-[var(--shadow-neu-lg)] hover:-translate-y-1 relative flex flex-col">
-        {tool.category && (
-          <div className="absolute -top-3 right-5 neu-chip px-3 py-1 text-[10px] font-semibold tracking-wide uppercase text-ink-soft">
-            {tool.category}
-          </div>
-        )}
-
-        <div className="mb-7 flex items-start justify-between gap-3">
-          <span className="neu-inset px-3 py-1 text-[11px] font-semibold tracking-widest text-ink-soft rounded-full">
-            No.0{index + 1}
+      <article className="card card-hover h-full p-6 flex flex-col relative">
+        {/* index + arrow */}
+        <div className="flex items-start justify-between mb-6">
+          <span className="font-mono text-xs tracking-widest text-ink-faint">
+            {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="neu-icon-round w-11 h-11 text-accent group-hover:shadow-[var(--shadow-neu-inset)] transition-shadow">
+          <span className="font-mono text-[0.6rem] uppercase tracking-widest text-ink-faint group-hover:text-amber transition-colors">
+            {tool.category}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-4 mb-4">
+          <span className="icon-tile w-12 h-12 shrink-0 group-hover:border-amber">
+            <IconComponent className="w-[22px] h-[22px]" strokeWidth={1.75} />
+          </span>
+          <h3 className="font-display text-lg font-semibold tracking-tight text-ink leading-tight group-hover:text-amber transition-colors">
+            {tool.name}
+          </h3>
+        </div>
+
+        <p className="text-sm text-ink-soft leading-relaxed flex-grow">
+          {tool.description}
+        </p>
+
+        <div className="mt-6 pt-4 border-t border-line flex items-center justify-between">
+          <span className="font-mono text-[0.68rem] text-ink-faint truncate">
+            {tool.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+          </span>
+          <span className="icon-tile w-9 h-9 rounded-full shrink-0 group-hover:border-amber group-hover:bg-amber group-hover:!text-[#100C05] transition-colors">
             <ArrowUpRight
-              className="w-5 h-5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
+              className="w-[18px] h-[18px] group-hover:rotate-45 transition-transform"
               strokeWidth={2}
             />
           </span>
         </div>
-
-        <div className="mb-6 flex items-center gap-5">
-          <span className="neu-icon w-14 h-14 text-accent group-hover:shadow-[var(--shadow-neu-lg)] transition-shadow">
-            <IconComponent className="w-6 h-6" strokeWidth={2} />
-          </span>
-          <div>
-            <h3 className="text-xl font-semibold tracking-tight text-ink leading-tight group-hover:text-accent transition-colors">
-              {tool.name}
-            </h3>
-          </div>
-        </div>
-
-        <p className="text-base text-ink-soft leading-relaxed mt-auto">
-          {tool.description}
-        </p>
-      </div>
+      </article>
     </motion.a>
   );
 }

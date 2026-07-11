@@ -68,15 +68,15 @@ export default function Globe() {
       height: width * 2,
       phi: 0,
       theta: 0.25,
-      dark: 0,
-      diffuse: 1.2,
+      dark: 1,
+      diffuse: 1.4,
       mapSamples: 22000,
-      mapBaseBrightness: 0.08,
-      markerElevation: 0.00,
-      mapBrightness: 2.2,
-      baseColor: [0.87, 0.89, 0.91],
-      markerColor: [0.88, 0.42, 0.44],
-      glowColor: [0.87, 0.89, 0.91],
+      mapBaseBrightness: 0.03,
+      markerElevation: 0.0,
+      mapBrightness: 3.2,
+      baseColor: [0.28, 0.24, 0.18],
+      markerColor: [0.96, 0.7, 0.24],
+      glowColor: [0.55, 0.4, 0.16],
       markers: [],
     });
 
@@ -202,15 +202,16 @@ export default function Globe() {
         >
           <div className="flex items-center gap-1.5">
             <span
-              className="block w-[7px] h-[7px] rounded-full"
-              style={{ backgroundColor: "#E06B70" }}
+              className="block w-[6px] h-[6px] rounded-full"
+              style={{ backgroundColor: "#F5B23D", boxShadow: "0 0 8px #F5B23D" }}
             />
             <span
-              className="font-semibold tracking-wide px-2 py-0.5 text-[10px] leading-none rounded-full text-ink"
+              className="font-mono tracking-wide px-2 py-0.5 text-[10px] leading-none rounded-full"
               style={{
-                backgroundColor: "#DEE4E7",
-                boxShadow:
-                  "-2px -2px 4px rgba(255,255,255,0.8), 2px 2px 4px rgba(0,0,0,0.1)",
+                color: "#F4EFE6",
+                backgroundColor: "rgba(20,18,16,0.85)",
+                border: "1px solid #2A2621",
+                backdropFilter: "blur(4px)",
               }}
             >
               {label.name}

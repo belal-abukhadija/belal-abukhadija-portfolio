@@ -1,100 +1,97 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowDownRight, Lightbulb } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight, Mail } from "lucide-react";
 import { personalInfo } from "@/lib/tools-data";
+import LoopBackgroundVideo from "./LoopBackgroundVideo";
+
+const stats = [
+  { value: "11", label: "tools shipped" },
+  { value: `${personalInfo.yearsOfExperience}+`, label: "years coding" },
+  { value: "∞", label: "remote-ready" },
+];
 
 export default function Hero() {
-  const scrollToAbout = () => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-  };
+  // Render the background video only on the client, after mount. This keeps it
+  // out of the server HTML so a browser extension mutating the <video> can never
+  // cause a hydration mismatch, and improves LCP. Entrance animations are pure
+  // CSS (see .rise in globals.css) so hero content is never hidden behind JS.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen pt-32 pb-20 flex items-center overflow-x-clip bg-surface"
+      className="relative min-h-screen flex flex-col overflow-hidden bg-bg"
     >
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-center">
-          <div className="relative">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="relative z-10"
-            >
-              <h1 className="font-semibold tracking-tight leading-[0.95] mb-8 md:mb-10 text-ink break-words">
-                <span className="block text-[clamp(3rem,11vw,8rem)]">
-                  {personalInfo.name.split(" ")[0]}
-                </span>
-                <span className="block text-[clamp(2.25rem,9vw,6.5rem)] text-accent">
-                  {personalInfo.name.split(" ")[1]}
-                </span>
-              </h1>
+      {/* Background video (client-only, seamless crossfade loop) */}
+      {mounted && (
+        <div className="absolute inset-0 motion-safe:animate-[fadeIn_1.4s_ease]">
+          <LoopBackgroundVideo src="/for.mp4" fade={1.2} />
+        </div>
+      )}
 
-              <p className="max-w-xl text-base md:text-lg lg:text-xl font-normal text-ink-soft leading-relaxed neu-inset p-5 md:p-6 mb-10 md:mb-12">
-                {personalInfo.description}
-              </p>
+      {/* Legibility scrims: even darken + soft radial behind the centered type */}
+      <div className="absolute inset-0 bg-bg/45" />
+      <div className="absolute inset-0 [background:radial-gradient(ellipse_58%_50%_at_50%_46%,rgba(11,10,8,0.62),transparent_72%)]" />
+      <div className="absolute inset-x-0 top-0 h-28 [background:linear-gradient(to_bottom,var(--color-bg),transparent)]" />
+      <div className="absolute inset-x-0 bottom-0 h-40 [background:linear-gradient(to_top,var(--color-bg),transparent)]" />
 
-              <div className="flex flex-wrap items-center gap-4">
-                <button
-                  onClick={scrollToAbout}
-                  className="neu-pressable-accent group px-7 py-4 text-base font-semibold tracking-wide flex items-center gap-3"
-                >
-                  About Me
-                  <ArrowDownRight
-                    className="w-5 h-5 group-hover:rotate-[-45deg] transition-transform"
-                    strokeWidth={2.25}
-                  />
-                </button>
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="px-7 py-4 rounded-2xl text-base font-semibold tracking-wide text-white bg-accent hover:bg-[var(--color-accent-deep)] shadow-[var(--shadow-neu)] hover:shadow-[var(--shadow-neu-lg)] active:shadow-[var(--shadow-neu-inset)] transition-all"
-                >
-                  Hire Me
-                </a>
-              </div>
-            </motion.div>
-          </div>
+      {/* Viewfinder corner brackets (precision-instrument framing) */}
+      <div className="pointer-events-none absolute inset-5 sm:inset-8 z-10 hidden sm:block">
+        <span className="absolute top-16 left-0 h-7 w-7 border-l border-t border-amber/35" />
+        <span className="absolute top-16 right-0 h-7 w-7 border-r border-t border-amber/35" />
+        <span className="absolute bottom-0 left-0 h-7 w-7 border-l border-b border-amber/35" />
+        <span className="absolute bottom-0 right-0 h-7 w-7 border-r border-b border-amber/35" />
+      </div>
 
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="hidden lg:flex flex-col relative items-center justify-center gap-6"
-          >
-            <div className="w-full neu-inset-deep p-5 md:p-6 relative aspect-square lg:aspect-auto lg:h-[520px] xl:h-[620px]">
-              <div className="relative w-full h-full overflow-hidden rounded-[20px]">
-                <Image
-                  src="/ds.png"
-                  alt={`${personalInfo.name} - ${personalInfo.role}`}
-                  fill
-                  priority
-                  sizes="(min-width: 1280px) 620px, (min-width: 1024px) 520px, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
+      {/* Centered content */}
+      <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 pt-28 pb-10">
+        <div className="text-center max-w-5xl mx-auto">
+          <h1 className="rise rise-1 font-display font-semibold tracking-tight text-ink leading-[0.98] text-[clamp(1.65rem,6.6vw,5rem)]">
+            <span className="whitespace-nowrap">Full-stack developer</span>
+            <br />
+            who ships <span className="accent-word">real projects</span>.
+          </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="neu-chip px-5 py-3 text-base font-medium tracking-tight text-ink inline-flex items-center gap-2.5"
-            >
-              <Lightbulb
-                className="w-5 h-5 text-accent"
-                strokeWidth={2.25}
-                fill="currentColor"
-                fillOpacity={0.15}
+          <p className="rise rise-2 mx-auto mt-8 max-w-xl text-base md:text-lg text-ink-soft leading-relaxed">
+            {personalInfo.description}
+          </p>
+
+          <div className="rise rise-3 mt-10 flex flex-wrap items-center justify-center gap-4">
+            <button onClick={() => scrollTo("tools")} className="btn-primary group">
+              View the tools
+              <ArrowRight
+                className="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform"
+                strokeWidth={2}
               />
-              <span>
-                Bring your ideas
-                <span className="text-accent"> to life</span>
-              </span>
-            </motion.div>
-          </motion.div>
+            </button>
+            <a href={`mailto:${personalInfo.email}`} className="btn-ghost">
+              <Mail className="w-[18px] h-[18px]" strokeWidth={1.75} />
+              Hire me
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Full-width instrument bar: centered stats */}
+      <div className="rise rise-4 relative z-10 border-t border-line/70">
+        <div className="container mx-auto px-4 sm:px-6">
+          <dl className="max-w-6xl mx-auto py-5 flex flex-wrap items-baseline justify-center gap-x-10 gap-y-2">
+            {stats.map((s) => (
+              <div key={s.label} className="flex items-baseline gap-2">
+                <dt className="font-display text-xl md:text-2xl font-semibold text-amber">
+                  {s.value}
+                </dt>
+                <dd className="font-mono text-[0.64rem] uppercase tracking-widest text-ink-faint">
+                  {s.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
