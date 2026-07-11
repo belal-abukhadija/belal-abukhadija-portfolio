@@ -30,7 +30,7 @@ export default function Hero() {
       {/* Background video (client-only, seamless crossfade loop) */}
       {mounted && (
         <div className="absolute inset-0 motion-safe:animate-[fadeIn_1.4s_ease]">
-          <LoopBackgroundVideo src="/for.mp4" fade={1.2} />
+          <LoopBackgroundVideo src="/fif.mp4" fade={1.2} />
         </div>
       )}
 

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import {
-  animate,
   AnimatePresence,
   motion,
   useMotionValueEvent,
@@ -18,15 +17,14 @@ export default function BackToTop() {
     setVisible(latest > 500);
   });
 
+  // A single native smooth-scroll call. Driving window.scrollTo manually on
+  // every animation frame (as this used to) inherits the global CSS
+  // `scroll-behavior: smooth`, so each frame started its own competing native
+  // scroll animation — dozens stacking per tap. Mobile browsers show that as
+  // stutter/stall far more visibly than desktop. One explicit call has only
+  // one animation to retarget, so nothing fights.
   const scrollToTop = () => {
-    const start = window.scrollY || window.pageYOffset;
-    if (start <= 0) return;
-    const duration = Math.min(1.1, 0.35 + start / 3000);
-    animate(start, 0, {
-      duration,
-      ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => window.scrollTo(0, v),
-    });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   return (
