@@ -20,6 +20,11 @@ export interface Tool {
   icon: string;
   color: string;
   category?: string;
+  /** Featured on the homepage "Work" section with a live screenshot */
+  featured?: boolean;
+  screenshot?: string;
+  year?: string;
+  facts?: string[];
 }
 
 export const tools: Tool[] = [
@@ -30,7 +35,11 @@ export const tools: Tool[] = [
     url: "https://sign.belal.work/",
     icon: "FileSignature",
     color: "from-red-500 to-orange-500",
-    category: "Productivity"
+    category: "Productivity",
+    featured: true,
+    screenshot: "/work/pdf-signature-tool.jpg",
+    year: "2024",
+    facts: ["No account", "100% in-browser", "Free"],
   },
   {
     name: "Theme Converter",
@@ -50,7 +59,7 @@ export const tools: Tool[] = [
   },
   {
     name: "Media Downloader",
-    description: "Download videos and audio from popular online platforms instantly. Choose different formats and save media files directly from your browser.",
+    description: "Download videos and audio from YouTube, TikTok, Instagram, and more — multiple formats, fast processing, all in the browser.",
     url: "https://download.belal.work/",
     icon: "Download",
     color: "from-blue-500 to-indigo-500",
@@ -78,23 +87,35 @@ export const tools: Tool[] = [
     url: "https://counter.belal.work/",
     icon: "LetterText",
     color: "from-teal-500 to-cyan-500",
-    category: "Productivity"
+    category: "Productivity",
+    featured: true,
+    screenshot: "/work/wordcount-pro.jpg",
+    year: "2024",
+    facts: ["SEO keyword density", "Platform limits", "Free"],
   },
   {
-    name: "Markdown Editor",
-    description: "Write and preview Markdown with a clean split-view editor and real-time rendering. Perfect for creating README files, documentation, and formatted content directly in your browser.",
+    name: "MarkFlow",
+    description: "Convert Markdown and MDX files into fully formatted Word documents, entirely client-side. Full GFM support, math equations, diagrams, and custom styles — no server, no uploads.",
     url: "https://md.belal.work/",
     icon: "FileCode",
     color: "from-gray-600 to-gray-900",
-    category: "Developer"
+    category: "Developer",
+    featured: true,
+    screenshot: "/work/markdown-editor.jpg",
+    year: "2025",
+    facts: ["Zero data collection", "Works offline", "Free"],
   },
   {
     name: "Color Palette Generator",
-    description: "Generate beautiful color palettes and gradients for design projects. Quickly explore harmonious color combinations for UI, branding, and creative work.",
+    description: "Generate beautiful color palettes and gradients for design projects. Extract palettes from images, check contrast, and explore harmonious color combinations for UI and branding.",
     url: "https://color.belal.work/",
     icon: "SwatchBook",
     color: "from-rose-500 to-fuchsia-500",
-    category: "Design"
+    category: "Design",
+    featured: true,
+    screenshot: "/work/color-palette-generator.jpg",
+    year: "2025",
+    facts: ["Image extraction", "Contrast checker", "Free"],
   },
   {
     name: "Break Timer",
@@ -121,8 +142,10 @@ export const tools: Tool[] = [
 export const personalInfo = {
   name: "Belal Abukhadija",
   title: "Full-Stack Developer",
+  headline: "AI Engineer",
   role: "Developer. Designer. Builder.",
-  location: "Jordan",
+  location: "Amman, Jordan",
+  timezone: "Asia/Amman",
   description: "I'm a full-stack developer who loves turning ideas into fast, clean, and useful products. Whether it's a design system, a browser tool, or a side project - I build things I'd actually use.",
   email: "belalabukhadija97@gmail.com",
   github: "https://github.com/belal-abukhadija",
@@ -133,3 +156,63 @@ export const personalInfo = {
   domain: "belal.work",
   yearsOfExperience: 3,
 };
+
+/**
+ * Work Experience
+ * Reverse-chronological — newest first.
+ */
+export interface ExperienceEntry {
+  company: string;
+  role: string;
+  period: string;
+  url: string;
+}
+
+export const experience: ExperienceEntry[] = [
+  {
+    company: "Kawkab AI",
+    role: "AI Engineer",
+    period: "[09/2025—]",
+    url: "https://kawkab.ai/",
+  },
+  {
+    company: "CirrusGo",
+    role: "DevOps Trainee",
+    period: "[07/2025–09/2025]",
+    url: "https://cirrusgo.com/",
+  },
+];
+
+/**
+ * Companies worked with — shown in the logo rail below the hero.
+ */
+export interface WorkedWithEntry {
+  name: string;
+  url: string;
+}
+
+export const workedWith: WorkedWithEntry[] = [
+  { name: "Kawkab", url: "https://kawkab.ai/" },
+  { name: "CirrusGo", url: "https://cirrusgo.com/" },
+];
+
+/**
+ * Toolkit — the software this developer actually reaches for, day to day.
+ */
+export interface ToolkitEntry {
+  name: string;
+  category: string;
+  /** slugs into components/ToolkitIcon.tsx — one or two (shown side by side) */
+  icons: string[];
+}
+
+export const toolkit: ToolkitEntry[] = [
+  { name: "VS Code", category: "Coding", icons: ["vscode"] },
+  { name: "Claude Code", category: "AI-Assisted Development", icons: ["claudecode"] },
+  { name: "Figma", category: "Design", icons: ["figma"] },
+  { name: "Next.js", category: "Framework", icons: ["nextdotjs"] },
+  { name: "Git & GitHub", category: "Version Control", icons: ["git", "github"] },
+  { name: "Docker", category: "Infrastructure", icons: ["docker"] },
+  { name: "Supabase", category: "Backend / Data", icons: ["supabase"] },
+  { name: "Postman", category: "API Testing", icons: ["postman"] },
+];

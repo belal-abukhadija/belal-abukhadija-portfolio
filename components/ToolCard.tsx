@@ -1,22 +1,21 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import * as Icons from "lucide-react";
 import { Tool } from "@/lib/tools-data";
 
 interface ToolCardProps {
   tool: Tool;
   index: number;
+  hovered: boolean;
+  onHoverStart: () => void;
+  onHoverEnd: () => void;
 }
 
-export default function ToolCard({ tool, index }: ToolCardProps) {
+export default function ToolCard({ tool, index, hovered, onHoverStart, onHoverEnd }: ToolCardProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
-  const IconComponent =
-    (Icons as unknown as Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>>)[tool.icon] ||
-    Icons.Box;
 
   return (
     <motion.a
@@ -24,46 +23,48 @@ export default function ToolCard({ tool, index }: ToolCardProps) {
       href={tool.url}
       target="_blank"
       rel="noopener noreferrer"
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
       initial={{ opacity: 0, y: 26 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay: (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="group block h-full"
+      className="group relative block h-full p-6 md:p-7"
     >
-      <article className="card card-hover h-full p-6 flex flex-col relative">
-        {/* index + arrow */}
-        <div className="flex items-start justify-between mb-6">
-          <span className="font-mono text-xs tracking-widest text-ink-faint">
+      <AnimatePresence>
+        {hovered && (
+          <motion.span
+            layoutId="tool-hover-highlight"
+            className="absolute inset-0 border border-mint bg-mint/[0.07]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          />
+        )}
+      </AnimatePresence>
+
+      <article className="relative h-full flex flex-col">
+        <div className="flex items-baseline justify-between mb-8">
+          <span className="font-display text-xs font-bold text-mint tracking-widest">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="font-mono text-[0.6rem] uppercase tracking-widest text-ink-faint group-hover:text-amber transition-colors">
+          <span className="font-display text-[0.6rem] font-semibold uppercase tracking-widest text-ink-faint">
             {tool.category}
           </span>
         </div>
 
-        <div className="flex items-center gap-4 mb-4">
-          <span className="icon-tile w-12 h-12 shrink-0 group-hover:border-amber">
-            <IconComponent className="w-[22px] h-[22px]" strokeWidth={1.75} />
-          </span>
-          <h3 className="font-display text-lg font-semibold tracking-tight text-ink leading-tight group-hover:text-amber transition-colors">
-            {tool.name}
-          </h3>
-        </div>
+        <h3 className="font-display text-xl font-black tracking-tight text-ink leading-tight mb-3">
+          {tool.name}
+        </h3>
 
-        <p className="text-sm text-ink-soft leading-relaxed flex-grow">
+        <p className="text-sm text-ink-soft leading-relaxed flex-grow mb-6">
           {tool.description}
         </p>
 
-        <div className="mt-6 pt-4 border-t border-line flex items-center justify-between">
-          <span className="font-mono text-[0.68rem] text-ink-faint truncate">
-            {tool.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-          </span>
-          <span className="icon-tile w-9 h-9 rounded-full shrink-0 group-hover:border-amber group-hover:bg-amber group-hover:!text-[#100C05] transition-colors">
-            <ArrowUpRight
-              className="w-[18px] h-[18px] group-hover:rotate-45 transition-transform"
-              strokeWidth={2}
-            />
-          </span>
-        </div>
+        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink-soft group-hover:text-mint transition-colors">
+          {tool.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+          <ArrowUpRight className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform" strokeWidth={2} />
+        </span>
       </article>
     </motion.a>
   );

@@ -1,97 +1,75 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import Image from "next/image";
 import { personalInfo } from "@/lib/tools-data";
-import LoopBackgroundVideo from "./LoopBackgroundVideo";
-
-const stats = [
-  { value: "11", label: "tools shipped" },
-  { value: `${personalInfo.yearsOfExperience}+`, label: "years coding" },
-  { value: "∞", label: "remote-ready" },
-];
 
 export default function Hero() {
-  // Render the background video only on the client, after mount. This keeps it
-  // out of the server HTML so a browser extension mutating the <video> can never
-  // cause a hydration mismatch, and improves LCP. Entrance animations are pure
-  // CSS (see .rise in globals.css) so hero content is never hidden behind JS.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const [first, ...rest] = personalInfo.name.split(" ");
+  const lastName = rest.join(" ");
 
   return (
     <section
       id="hero"
       className="relative min-h-screen flex flex-col overflow-hidden bg-bg"
     >
-      {/* Background video (client-only, seamless crossfade loop) */}
-      {mounted && (
-        <div className="absolute inset-0 motion-safe:animate-[fadeIn_1.4s_ease]">
-          <LoopBackgroundVideo src="/fif.mp4" fade={1.2} />
-        </div>
-      )}
+      {/* Full-bleed halftone texture plate (supplied asset, not generated) */}
+      <div className="absolute inset-0 hero-static" aria-hidden="true" />
 
-      {/* Legibility scrims: even darken + soft radial behind the centered type */}
-      <div className="absolute inset-0 bg-bg/45" />
-      <div className="absolute inset-0 [background:radial-gradient(ellipse_58%_50%_at_50%_46%,rgba(11,10,8,0.62),transparent_72%)]" />
+      {/* Portrait, right-anchored — not centered — fading into the texture on its left edge */}
+      <div
+        className="absolute inset-y-0 right-0 w-[78%] sm:w-[65%] md:w-[54%] lg:w-[46%] [mask-image:linear-gradient(to_left,black_55%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_left,black_55%,transparent_100%)]"
+        aria-hidden="true"
+      >
+        <Image
+          src="/mee.png"
+          alt=""
+          fill
+          priority
+          className="object-cover object-[62%_18%] blur-[2px] scale-[1.02]"
+        />
+      </div>
+
+      <div className="absolute inset-0 [background:linear-gradient(100deg,var(--color-bg)_0%,rgba(14,14,14,0.8)_32%,rgba(14,14,14,0.35)_58%,rgba(14,14,14,0.15)_78%,transparent_100%)]" />
       <div className="absolute inset-x-0 top-0 h-28 [background:linear-gradient(to_bottom,var(--color-bg),transparent)]" />
       <div className="absolute inset-x-0 bottom-0 h-40 [background:linear-gradient(to_top,var(--color-bg),transparent)]" />
 
-      {/* Viewfinder corner brackets (precision-instrument framing) */}
-      <div className="pointer-events-none absolute inset-5 sm:inset-8 z-10 hidden sm:block">
-        <span className="absolute top-16 left-0 h-7 w-7 border-l border-t border-amber/35" />
-        <span className="absolute top-16 right-0 h-7 w-7 border-r border-t border-amber/35" />
-        <span className="absolute bottom-0 left-0 h-7 w-7 border-l border-b border-amber/35" />
-        <span className="absolute bottom-0 right-0 h-7 w-7 border-r border-b border-amber/35" />
-      </div>
-
-      {/* Centered content */}
-      <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 pt-28 pb-10">
-        <div className="text-center max-w-5xl mx-auto">
-          <h1 className="rise rise-1 font-display font-semibold tracking-tight text-ink leading-[0.98] text-[clamp(1.65rem,6.6vw,5rem)]">
-            <span className="whitespace-nowrap">Full-stack developer</span>
-            <br />
-            who ships <span className="accent-word">real projects</span>.
-          </h1>
-
-          <p className="rise rise-2 mx-auto mt-8 max-w-xl text-base md:text-lg text-ink-soft leading-relaxed">
-            {personalInfo.description}
+      {/* Main content */}
+      <div className="relative z-10 flex-1 flex flex-col justify-end px-4 sm:px-6 lg:px-10 pt-32 pb-8">
+        <div className="max-w-7xl mx-auto w-full">
+          <p className="rise rise-1 eyebrow mb-3">{personalInfo.headline}</p>
+          <p className="rise rise-1 font-display text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-ink-soft mb-8">
+            Full-Stack Development · Browser Tools · Practical AI
           </p>
 
-          <div className="rise rise-3 mt-10 flex flex-wrap items-center justify-center gap-4">
-            <button onClick={() => scrollTo("tools")} className="btn-primary group">
-              View the tools
-              <ArrowRight
-                className="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform"
-                strokeWidth={2}
-              />
-            </button>
-            <a href={`mailto:${personalInfo.email}`} className="btn-ghost">
-              <Mail className="w-[18px] h-[18px]" strokeWidth={1.75} />
-              Hire me
-            </a>
+          <h1 className="rise rise-2 font-display font-black uppercase tracking-tight text-ink leading-[0.86] text-[clamp(3rem,13vw,8.5rem)]">
+            {first}
+            <br />
+            <span className="text-mint">{lastName || first}.</span>
+          </h1>
+
+          <div className="rise rise-3 mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+            {[
+              `${personalInfo.yearsOfExperience}+ years shipping code`,
+              `Based in ${personalInfo.location}`,
+              "Open to remote work, worldwide",
+            ].map((item) => (
+              <span key={item} className="flex items-center gap-2 font-display text-[0.7rem] sm:text-xs font-semibold uppercase tracking-widest text-ink-soft">
+                <span className="w-1.5 h-1.5 bg-mint shrink-0" />
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Full-width instrument bar: centered stats */}
       <div className="rise rise-4 relative z-10 border-t border-line/70">
         <div className="container mx-auto px-4 sm:px-6">
-          <dl className="max-w-6xl mx-auto py-5 flex flex-wrap items-baseline justify-center gap-x-10 gap-y-2">
-            {stats.map((s) => (
-              <div key={s.label} className="flex items-baseline gap-2">
-                <dt className="font-display text-xl md:text-2xl font-semibold text-amber">
-                  {s.value}
-                </dt>
-                <dd className="font-mono text-[0.64rem] uppercase tracking-widest text-ink-faint">
-                  {s.label}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <div className="max-w-7xl mx-auto py-4 flex items-center justify-between">
+            <p className="text-sm text-ink-soft max-w-md hidden sm:block">
+              {personalInfo.description}
+            </p>
+            <span className="font-display text-[0.68rem] font-semibold uppercase tracking-widest text-ink-faint ml-auto">
+              ▼ Scroll
+            </span>
+          </div>
         </div>
       </div>
     </section>

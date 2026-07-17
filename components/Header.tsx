@@ -2,8 +2,16 @@
 
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { personalInfo } from "@/lib/tools-data";
+
+const navItems = [
+  { label: "WORK", id: "work", index: "01" },
+  { label: "ARTICLES", id: "articles", index: "02" },
+  { label: "SKILLS", id: "skills", index: "03" },
+  { label: "ABOUT", id: "about", index: "04" },
+  { label: "CONTACT", id: "contact", index: "05" },
+];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,83 +27,56 @@ export default function Header() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const navItems = [
-    { label: "Tools", id: "tools" },
-    { label: "About", id: "about" },
-    { label: "Contact", id: "contact" },
-  ];
-
   const firstName = personalInfo.name.split(" ")[0];
 
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[3px] bg-amber z-[60] origin-left"
-        style={{ scaleX: scrollYProgress }}
-      />
-
       <header className="fixed top-0 inset-x-0 z-50">
         <div
           className={`transition-colors duration-300 ${
-            scrolled
-              ? "bg-bg/80 backdrop-blur-md border-b border-line"
-              : "bg-transparent border-b border-transparent"
+            scrolled ? "bg-bg border-b border-line" : "bg-transparent border-b border-transparent"
           }`}
         >
           <div className="container mx-auto px-4 sm:px-6">
-            <nav className="max-w-6xl mx-auto py-4">
+            <nav className="max-w-7xl mx-auto py-4">
               <div className="flex items-center justify-between">
                 <button
                   onClick={() => scrollToSection("hero")}
-                  className="font-mono text-sm tracking-[0.14em] uppercase text-ink hover:text-amber transition-colors"
+                  className="flex items-center gap-2.5 group"
                 >
-                  {firstName}
-                  <span className="text-amber">.work</span>
+                  <span className="icon-tile w-8 h-8 !rounded-md font-display font-black text-sm text-mint group-hover:border-mint">
+                    {firstName[0]}
+                  </span>
+                  <span className="font-display text-sm tracking-[0.1em] uppercase text-ink">
+                    {firstName}
+                    <span className="text-ink-faint font-medium">.work/2026</span>
+                  </span>
                 </button>
 
-                <div className="hidden md:flex items-center gap-1">
-                  {navItems.map((item, i) => (
+                <div className="hidden lg:flex items-center gap-1">
+                  {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className="group px-4 py-2 text-ink-soft text-sm font-medium hover:text-ink transition-colors"
+                      className="group px-3 py-2 text-ink-soft text-xs font-semibold tracking-widest hover:text-ink transition-colors"
                     >
-                      <span className="font-mono text-amber/60 text-xs mr-1.5">
-                        0{i + 1}
+                      <span className="text-ink-faint group-hover:text-mint mr-1.5">
+                        {item.index}/
                       </span>
                       {item.label}
                     </button>
                   ))}
                 </div>
 
-                <div className="hidden md:flex items-center gap-2">
-                  {[
-                    { href: personalInfo.github, icon: Github, label: "GitHub" },
-                    { href: personalInfo.linkedin, icon: Linkedin, label: "LinkedIn" },
-                  ].map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="icon-tile w-10 h-10 rounded-full hover:border-amber hover:text-amber"
-                      aria-label={social.label}
-                    >
-                      <social.icon className="w-[18px] h-[18px]" strokeWidth={1.75} />
-                    </a>
-                  ))}
-                  <a
-                    href={`mailto:${personalInfo.email}`}
-                    className="btn-primary text-sm ml-1 !py-2.5 !px-5"
-                  >
-                    <Mail className="w-4 h-4" strokeWidth={2} />
-                    Hire me
+                <div className="hidden lg:flex items-center">
+                  <a href={`mailto:${personalInfo.email}`} className="btn-primary text-sm !py-2.5 !px-5">
+                    Get in touch
                   </a>
                 </div>
 
                 <button
                   onClick={() => setMobileOpen(!mobileOpen)}
-                  className="md:hidden icon-tile w-10 h-10 rounded-full"
+                  className="lg:hidden icon-tile w-10 h-10"
                   aria-label="Toggle menu"
                 >
                   {mobileOpen ? (
@@ -113,48 +94,27 @@ export default function Header() {
                     ? { height: "auto", opacity: 1, marginTop: "1rem" }
                     : { height: 0, opacity: 0, marginTop: 0 }
                 }
-                className="md:hidden overflow-hidden"
+                className="lg:hidden overflow-hidden"
               >
                 <div className="card p-5">
                   <div className="flex flex-col">
-                    {navItems.map((item, i) => (
+                    {navItems.map((item) => (
                       <button
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className="text-left font-medium text-lg text-ink hover:text-amber transition-colors py-2.5 flex items-center gap-3"
+                        className="text-left font-semibold text-base text-ink hover:text-mint transition-colors py-2.5 flex items-center gap-3"
                       >
-                        <span className="font-mono text-amber/50 text-xs">0{i + 1}</span>
+                        <span className="text-ink-faint text-xs">{item.index}/</span>
                         {item.label}
                       </button>
                     ))}
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-3 pt-4 border-t border-line">
-                    <a
-                      href={personalInfo.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="icon-tile w-11 h-11 rounded-full"
-                      aria-label="GitHub"
-                    >
-                      <Github className="w-5 h-5" strokeWidth={1.75} />
-                    </a>
-                    <a
-                      href={personalInfo.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="icon-tile w-11 h-11 rounded-full"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin className="w-5 h-5" strokeWidth={1.75} />
-                    </a>
-                    <a
-                      href={`mailto:${personalInfo.email}`}
-                      className="btn-primary flex-1 justify-center text-sm"
-                    >
-                      <Mail className="w-4 h-4" strokeWidth={2} />
-                      Hire me
-                    </a>
-                  </div>
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="btn-primary w-full justify-center text-sm mt-4"
+                  >
+                    Get in touch
+                  </a>
                 </div>
               </motion.div>
             </nav>

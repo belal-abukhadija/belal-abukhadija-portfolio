@@ -1,0 +1,21 @@
+---
+title: "Turning Markdown Into a Real Word Document, Client-Side"
+date: "2025-08-14"
+excerpt: "MarkFlow started as a weekend itch — I needed a .md file as a .docx for a client who doesn't read Markdown. Here's what actually made that hard."
+---
+
+The brief was simple: I write documentation in Markdown, a client wants it as a Word document. There's no shortage of Markdown-to-HTML converters. There is a real shortage of ones that produce a `.docx` file — with real Word styles, not just HTML pasted into a document — without sending your file to a server first.
+
+## The parts that looked easy and weren't
+
+Headings, bold, italics, lists — trivial. The parts that actually took time:
+
+- **Tables.** GitHub-flavored Markdown tables need to become real Word tables with borders and column widths, not a wall of tab-separated text.
+- **Code blocks.** Preserving monospace formatting and background shading inside a `.docx` isn't something the underlying document format gives you for free.
+- **Math and diagrams.** Once I supported one, people reasonably expected the other.
+
+## Why it's still 100% client-side
+
+The `.docx` format is just a zip file full of XML. That's buildable in the browser with the right library, entirely in memory, with nothing ever leaving the tab. So `md.belal.work` keeps the same rule as everything else on the domain: paste or upload your Markdown, get back a Word file, and the only network request the whole time is the one that loaded the page.
+
+It's slower to build this way than to pipe a file through a server-side converter. It's also the only way I'd trust a tool to do it with my own documents — so it's the only way I'll ship one.

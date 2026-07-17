@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, Space_Mono, Instrument_Serif } from "next/font/google";
+import { Rubik } from "next/font/google";
 import "./globals.css";
 import { personalInfo } from "@/lib/tools-data";
 import {
@@ -10,33 +10,11 @@ import {
   softwareApplicationStructuredData,
 } from "@/lib/structured-data";
 
-const inter = Inter({
+const rubik = Rubik({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-space-grotesk",
-  weight: ["500", "600", "700"],
-});
-
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-space-mono",
-  weight: ["400", "700"],
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-instrument-serif",
-  weight: ["400"],
-  style: ["normal", "italic"],
+  variable: "--font-rubik",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 /**
@@ -162,7 +140,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} ${spaceMono.variable} ${instrumentSerif.variable} font-sans antialiased`}
+        className={`${rubik.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
         {children}

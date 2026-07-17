@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { personalInfo, tools } from "@/lib/tools-data";
+import { getAllArticles } from "@/lib/articles";
 
 /**
  * Sitemap Configuration
@@ -28,5 +29,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...mainPages, ...toolPages];
+  const articlePages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/articles`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    ...getAllArticles().map((article) => ({
+      url: `${baseUrl}/articles/${article.slug}`,
+      lastModified: new Date(article.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+  ];
+
+  return [...mainPages, ...articlePages, ...toolPages];
 }

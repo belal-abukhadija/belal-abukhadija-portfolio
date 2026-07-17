@@ -38,7 +38,7 @@ export default function BackToTop() {
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="icon-tile hover:border-amber hover:text-amber fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[55] w-12 h-12 md:w-14 md:h-14 rounded-full bg-panel"
+          className="icon-tile hover:border-mint hover:text-mint fixed bottom-6 right-6 md:bottom-16 md:right-8 z-[55] w-12 h-12 md:w-14 md:h-14 bg-panel"
         >
           <ArrowUp className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
         </motion.button>

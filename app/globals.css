@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  /* ---- Editorial dark palette (warm near-black + amber) ---- */
-  --color-bg: #0B0A08;
-  --color-panel: #141210;
-  --color-panel-2: #1B1815;
-  --color-line: #2A2621;
-  --color-line-strong: #3A342C;
+  /* ---- Carbon / mint system (flat, technical, single-accent dark) ---- */
+  --color-bg: #0E0E0E;
+  --color-panel: #141414;
+  --color-panel-2: #1A1A1A;
+  --color-line: #464544;
+  --color-line-strong: #605F5C;
 
-  --color-ink: #F4EFE6;
-  --color-ink-soft: #A39B8C;
-  --color-ink-faint: #6E675B;
+  --color-ink: #ECE9E4;
+  --color-ink-soft: rgba(236, 233, 228, 0.72);
+  --color-ink-faint: rgba(236, 233, 228, 0.45);
 
-  --color-amber: #F5B23D;
-  --color-amber-bright: #FFC65A;
-  --color-amber-deep: #C8862A;
+  --color-mint: #C3FFFC;
+  --color-mint-bright: #D6FFFD;
+  --color-mint-deep: #6FBDB9;
 
-  /* ---- Type roles ---- */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
-  --font-serif: var(--font-instrument-serif), Georgia, serif;
-  --font-mono: var(--font-space-mono), ui-monospace, "SF Mono", monospace;
+  /* Light contrast band, used once for the "worked with" rail */
+  --color-paper: #ECE9E4;
+  --color-paper-ink: #14130F;
+
+  /* ---- Type: one family, hierarchy via scale/case/weight ---- */
+  --font-sans: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
 
   /* ---- Motion ---- */
   --animate-marquee: marquee 42s linear infinite;
@@ -42,17 +45,16 @@
   }
 
   ::selection {
-    background-color: var(--color-amber);
-    color: #0B0A08;
+    background-color: var(--color-mint);
+    color: #0E0E0E;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-amber);
+    outline: 2px solid var(--color-mint);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 2px;
   }
 
-  /* Warm amber scrollbar accent on dark */
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: var(--color-bg); }
   ::-webkit-scrollbar-thumb {
@@ -60,16 +62,17 @@
     border-radius: 999px;
     border: 2px solid var(--color-bg);
   }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-amber-deep); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-mint-deep); }
 }
 
 @layer components {
-  /* ---- Section eyebrow: mono, code-comment marker (toolmaker voice) ---- */
+  /* ---- Section eyebrow: uppercase technical label ---- */
   .eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
+    font-weight: 600;
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -79,45 +82,80 @@
     content: "";
     width: 1.6rem;
     height: 1px;
-    background: var(--color-amber);
+    background: var(--color-mint);
   }
 
-  /* ---- Surface cards ---- */
+  /* ---- Surface cards: flat, low radius, border-led ---- */
   .card {
+    position: relative;
     background-color: var(--color-panel);
     border: 1px solid var(--color-line);
-    border-radius: 18px;
-    transition: border-color 260ms ease, background-color 260ms ease,
-      transform 260ms ease, box-shadow 260ms ease;
+    border-radius: 14px;
+    transition: border-color 220ms ease, background-color 220ms ease;
+  }
+
+  /* Hover state: corner-bracket reveal instead of the generic lift+shadow —
+     ties into the site's telemetry/viewfinder motif (SectionBand, header nav
+     brackets) rather than a stock "hover:scale-105 shadow-lg" pattern. */
+  .card-hover::after {
+    content: "";
+    position: absolute;
+    inset: 9px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 260ms ease, inset 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    background:
+      linear-gradient(to right, var(--color-mint) 2px, transparent 2px) top left / 12px 2px no-repeat,
+      linear-gradient(to bottom, var(--color-mint) 2px, transparent 2px) top left / 2px 12px no-repeat,
+      linear-gradient(to left, var(--color-mint) 2px, transparent 2px) top right / 12px 2px no-repeat,
+      linear-gradient(to bottom, var(--color-mint) 2px, transparent 2px) top right / 2px 12px no-repeat,
+      linear-gradient(to right, var(--color-mint) 2px, transparent 2px) bottom left / 12px 2px no-repeat,
+      linear-gradient(to top, var(--color-mint) 2px, transparent 2px) bottom left / 2px 12px no-repeat,
+      linear-gradient(to left, var(--color-mint) 2px, transparent 2px) bottom right / 12px 2px no-repeat,
+      linear-gradient(to top, var(--color-mint) 2px, transparent 2px) bottom right / 2px 12px no-repeat;
   }
   .card-hover:hover {
     border-color: var(--color-line-strong);
     background-color: var(--color-panel-2);
-    transform: translateY(-4px);
-    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.9);
+  }
+  .card-hover:hover::after {
+    opacity: 1;
+    inset: 6px;
   }
 
-  /* ---- Buttons ---- */
+  /* ---- Buttons: flat fills, no shadow ---- */
   .btn-primary {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    background-color: var(--color-amber);
-    color: #100C05;
+    background-color: var(--color-mint);
+    color: #0E0E0E;
     font-weight: 600;
-    border-radius: 14px;
+    border-radius: 10px;
     padding: 0.9rem 1.6rem;
-    transition: background-color 200ms ease, transform 200ms ease,
-      box-shadow 200ms ease;
-    box-shadow: 0 0 0 0 rgba(245, 178, 61, 0);
+    overflow: hidden;
+    transition: background-color 180ms ease, transform 180ms ease;
   }
-  .btn-primary:hover {
-    background-color: var(--color-amber-bright);
-    box-shadow: 0 12px 30px -12px rgba(245, 178, 61, 0.55);
+  /* Diagonal shine sweep on hover, in place of a scale/shadow pop */
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -65%;
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(115deg, transparent, rgba(14, 14, 14, 0.3), transparent);
+    transform: skewX(-18deg);
+    transition: left 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
   }
+  .btn-primary:hover { background-color: var(--color-mint-bright); }
+  .btn-primary:hover::after { left: 130%; }
   .btn-primary:active { transform: translateY(1px); }
 
   .btn-ghost {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
@@ -125,15 +163,29 @@
     color: var(--color-ink);
     font-weight: 600;
     border: 1px solid var(--color-line-strong);
-    border-radius: 14px;
+    border-radius: 10px;
     padding: 0.9rem 1.6rem;
-    transition: border-color 200ms ease, color 200ms ease,
-      background-color 200ms ease;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+  /* Two opposing corner brackets — same family as .card-hover, scaled down */
+  .btn-ghost::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 220ms ease;
+    background:
+      linear-gradient(to right, var(--color-mint) 2px, transparent 2px) top left / 9px 2px no-repeat,
+      linear-gradient(to bottom, var(--color-mint) 2px, transparent 2px) top left / 2px 9px no-repeat,
+      linear-gradient(to left, var(--color-mint) 2px, transparent 2px) bottom right / 9px 2px no-repeat,
+      linear-gradient(to top, var(--color-mint) 2px, transparent 2px) bottom right / 2px 9px no-repeat;
   }
   .btn-ghost:hover {
-    border-color: var(--color-amber);
-    color: var(--color-amber);
+    border-color: var(--color-mint);
+    color: var(--color-mint);
   }
+  .btn-ghost:hover::after { opacity: 1; }
 
   /* ---- Icon tile ---- */
   .icon-tile {
@@ -142,10 +194,10 @@
     justify-content: center;
     background-color: var(--color-panel-2);
     border: 1px solid var(--color-line);
-    border-radius: 14px;
-    color: var(--color-amber);
-    transition: border-color 260ms ease, color 260ms ease,
-      background-color 260ms ease;
+    border-radius: 10px;
+    color: var(--color-mint);
+    transition: border-color 220ms ease, color 220ms ease,
+      background-color 220ms ease;
   }
 
   /* ---- Chip / tag ---- */
@@ -153,9 +205,10 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
+    font-weight: 500;
     font-size: 0.7rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     color: var(--color-ink-soft);
     background-color: var(--color-panel-2);
     border: 1px solid var(--color-line);
@@ -166,35 +219,49 @@
 
 @layer utilities {
   .font-mono   { font-family: var(--font-mono); }
-  .font-serif  { font-family: var(--font-serif); }
+  .font-serif  { font-family: var(--font-sans); }
   .font-display { font-family: var(--font-display); }
 
   .text-ink       { color: var(--color-ink); }
   .text-ink-soft  { color: var(--color-ink-soft); }
   .text-ink-faint { color: var(--color-ink-faint); }
-  .text-amber     { color: var(--color-amber); }
+  .text-amber     { color: var(--color-mint); }
+  .text-mint      { color: var(--color-mint); }
   .bg-bg          { background-color: var(--color-bg); }
   .bg-panel       { background-color: var(--color-panel); }
   .bg-panel-2     { background-color: var(--color-panel-2); }
   .border-line    { border-color: var(--color-line); }
 
-  /* Serif italic amber emphasis for headline accent words */
+  /* Mint emphasis for headline accent words (no second typeface) */
   .accent-word {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--color-amber);
-    letter-spacing: 0;
+    font-family: var(--font-sans);
+    font-weight: inherit;
+    color: var(--color-mint);
   }
 
-  /* Ambient amber glow used behind the hero */
+  /* Ambient mint glow, used sparingly */
   .amber-glow {
     background: radial-gradient(
       60% 55% at 50% 30%,
-      rgba(245, 178, 61, 0.16) 0%,
-      rgba(245, 178, 61, 0.05) 40%,
+      rgba(195, 255, 252, 0.14) 0%,
+      rgba(195, 255, 252, 0.04) 40%,
       transparent 72%
     );
+  }
+
+  /* Full-bleed halftone texture plate behind the hero portrait */
+  .hero-static {
+    background-image: url("/hero-static.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Giant outline-stroke section-title text (repeated-band motif) */
+  .stroke-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-mint);
+    text-stroke: 1.5px var(--color-mint);
   }
 
   /* Subtle film grain over the whole page */
@@ -210,6 +277,52 @@
 
   .animate-marquee { animation: marquee 42s linear infinite; }
   .animate-marquee-reverse { animation: marquee-reverse 42s linear infinite; }
+
+  /* ---- Article body typography (MDX content) ---- */
+  .article-body {
+    color: var(--color-ink-soft);
+    line-height: 1.75;
+  }
+  .article-body h2 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-ink);
+    margin-top: 2.4rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .article-body p { margin-bottom: 1.25rem; }
+  .article-body ul {
+    margin: 0 0 1.25rem 0;
+    padding-left: 1.25rem;
+    list-style: none;
+  }
+  .article-body li {
+    position: relative;
+    padding-left: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .article-body li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    background: var(--color-mint);
+  }
+  .article-body strong { color: var(--color-ink); font-weight: 600; }
+  .article-body a { color: var(--color-mint); text-underline-offset: 3px; }
+  .article-body code {
+    font-family: var(--font-mono);
+    background: var(--color-panel-2);
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.88em;
+    color: var(--color-mint);
+  }
 }
 
 @keyframes fadeIn {
