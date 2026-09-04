@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
-import { personalInfo } from "@/lib/tools-data";
+import { personalInfo } from "@/lib/projects-data";
 import {
   personStructuredData,
   websiteStructuredData,
@@ -32,7 +32,8 @@ export const metadata: Metadata = {
   description: personalInfo.description,
   keywords: [
     "web developer",
-    "web tools",
+    "web developer portfolio",
+    "problem solving developer",
     "free online tools",
     "logo converter",
     "binary converter",
@@ -86,7 +87,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: `${personalInfo.name} - Web Developer & Tool Creator`,
+        alt: `${personalInfo.name} - Full-Stack Developer & Project Builder`,
       },
     ],
   },

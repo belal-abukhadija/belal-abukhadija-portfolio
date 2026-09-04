@@ -1,19 +1,15 @@
 interface SectionBandProps {
-  index: string;
   meta: string;
   word: string;
   title: string;
 }
 
-export default function SectionBand({ index, meta, word, title }: SectionBandProps) {
+export default function SectionBand({ meta, word, title }: SectionBandProps) {
   const repeated = Array.from({ length: 6 }, () => word);
 
   return (
     <div className="mb-10 md:mb-14">
-      <div className="flex items-center justify-between border-t border-line pt-3">
-        <span className="font-display text-sm font-bold text-mint tracking-widest">
-          {index}
-        </span>
+      <div className="border-t border-line pt-3">
         <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-ink-faint">
           {meta}
         </span>

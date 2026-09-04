@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { personalInfo } from "@/lib/tools-data";
+import { personalInfo } from "@/lib/projects-data";
 
 /**
  * Robots.txt Configuration

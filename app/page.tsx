@@ -1,14 +1,13 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import WorkedWith from "@/components/WorkedWith";
-import FeaturedWork from "@/components/FeaturedWork";
+import Projects from "@/components/Projects";
 import ArticlesPreview from "@/components/ArticlesPreview";
 import Capabilities from "@/components/Capabilities";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
-import TelemetryBar from "@/components/TelemetryBar";
 import AvailableBadge from "@/components/AvailableBadge";
 import { getAllArticles } from "@/lib/articles";
 
@@ -21,7 +20,7 @@ export default function Home() {
       <main className="grain">
         <Hero />
         <WorkedWith />
-        <FeaturedWork />
+        <Projects />
         <ArticlesPreview articles={articles} />
         <Capabilities />
         <About />
@@ -30,7 +29,6 @@ export default function Home() {
       <Footer />
       <BackToTop />
       <AvailableBadge />
-      <TelemetryBar />
     </>
   );
 }

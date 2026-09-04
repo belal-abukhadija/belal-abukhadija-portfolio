@@ -5,11 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import { getAllArticles } from "@/lib/articles";
-import { personalInfo } from "@/lib/tools-data";
+import { personalInfo } from "@/lib/projects-data";
 
 export const metadata: Metadata = {
   title: "Articles",
-  description: `Notes on shipping browser tools, build logs, and things I've learned — from ${personalInfo.name}.`,
+  description: `Notes on the projects I ship, build logs, and things I've learned, from ${personalInfo.name}.`,
 };
 
 function formatDate(iso: string) {
@@ -43,7 +43,7 @@ export default function ArticlesIndexPage() {
             </h1>
 
             <div className="space-y-5">
-              {articles.map((article, i) => (
+              {articles.map((article) => (
                 <Link
                   key={article.slug}
                   href={`/articles/${article.slug}`}
@@ -56,7 +56,6 @@ export default function ArticlesIndexPage() {
 
                   <div className="relative flex items-start justify-between gap-4 mb-5">
                     <div className="flex flex-col gap-0.5 font-display text-[0.68rem] font-bold uppercase tracking-widest text-mint group-hover:text-bg transition-colors duration-200">
-                      <span>{String(i + 1).padStart(3, "0")}</span>
                       <span className="text-ink-faint group-hover:text-bg/70 font-semibold transition-colors duration-200">
                         {formatDate(article.date)}
                       </span>
@@ -86,7 +85,7 @@ export default function ArticlesIndexPage() {
               ))}
               {articles.length === 0 && (
                 <p className="py-10 text-ink-soft text-sm">
-                  Nothing published yet — check back soon.
+                  Nothing published yet. Check back soon.
                 </p>
               )}
             </div>

@@ -1,12 +1,12 @@
 ---
 title: "Why Every Tool I Ship Runs Entirely in the Browser"
 date: "2025-11-02"
-excerpt: "No server, no account, no upload — the constraint that shapes everything on belal.work, and why I keep choosing it even when it's the harder path."
+excerpt: "No server, no account, no upload: the constraint that shapes everything on belal.work, and why I keep choosing it even when it's the harder path."
 ---
 
-Every tool on belal.work shares one rule: your file never leaves your device. No upload endpoint, no server-side processing, no account to create. The PDF signer, the image converter, the word counter — all of it runs client-side, in JavaScript, in the tab you already have open.
+Every tool on belal.work shares one rule: your file never leaves your device. No upload endpoint, no server-side processing, no account to create. The PDF signer, the image converter, the word counter: all of it runs client-side, in JavaScript, in the tab you already have open.
 
-That's a harder constraint than it sounds. It means no easy server-side PDF library, no cloud OCR, no background job queue to lean on when the browser's single thread gets busy. Every feature has to fit inside what a browser can actually do — and do fast enough that it doesn't feel like a compromise.
+That's a harder constraint than it sounds. It means no easy server-side PDF library, no cloud OCR, no background job queue to lean on when the browser's single thread gets busy. Every feature has to fit inside what a browser can actually do, and do it fast enough that it doesn't feel like a compromise.
 
 ## Why bother
 
@@ -17,6 +17,6 @@ Two reasons, honestly:
 
 ## What it costs
 
-Some things are genuinely harder this way — large file handling, anything that needs a real filesystem, anything CPU-heavy enough that a background worker would help. I've shipped around those limits more than once by simplifying scope rather than reaching for a server. A tool that does one thing well, entirely in your browser, beats a tool that does five things through an API I now have to maintain, monitor, and pay for.
+Some things are genuinely harder this way: large file handling, anything that needs a real filesystem, anything CPU-heavy enough that a background worker would help. I've shipped around those limits more than once by simplifying scope rather than reaching for a server. A tool that does one thing well, entirely in your browser, beats a tool that does five things through an API I now have to maintain, monitor, and pay for.
 
 That trade-off is the whole shape of belal.work. Eleven tools, one constraint, no exceptions.

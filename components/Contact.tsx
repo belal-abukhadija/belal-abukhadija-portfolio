@@ -3,7 +3,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, Clock3, Globe2, Mail, Github, Linkedin, Instagram } from "lucide-react";
-import { personalInfo } from "@/lib/tools-data";
+import { personalInfo } from "@/lib/projects-data";
 import WhatsAppIcon from "./icons/WhatsAppIcon";
 import SectionBand from "./SectionBand";
 
@@ -37,7 +37,7 @@ export default function Contact() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const subject = encodeURIComponent(`Project inquiry from ${name || "your website"}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
+    const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
     window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
   };
 
@@ -45,7 +45,7 @@ export default function Contact() {
     <section id="contact" className="relative py-20 md:py-28">
       <div className="container mx-auto px-4 sm:px-6" ref={ref}>
         <div className="max-w-6xl mx-auto">
-          <SectionBand index="05" meta="OPEN TO ROLES" word="LET'S TALK" title="Let's talk" />
+          <SectionBand meta="OPEN TO ROLES" word="LET'S TALK" title="Let's talk" />
 
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
             <div>
@@ -105,7 +105,7 @@ export default function Contact() {
               <div className="pt-8">
                 <p className="eyebrow mb-4">What I can help with</p>
                 <div className="flex flex-wrap gap-2">
-                  {["Frontend Dev", "Full-Stack Projects", "AI-assisted workflows", "Tool Building"].map(
+                  {["Frontend Dev", "Full-Stack Projects", "AI-assisted workflows", "Internal Tooling"].map(
                     (item) => (
                       <span key={item} className="chip">
                         {item}
@@ -171,7 +171,7 @@ export default function Contact() {
                   <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" strokeWidth={2} />
                 </button>
                 <p className="text-xs text-ink-faint">
-                  Opens your mail client — or write direct to{" "}
+                  Opens your mail client, or write direct to{" "}
                   <a href={`mailto:${personalInfo.email}`} className="text-mint">
                     {personalInfo.email}
                   </a>

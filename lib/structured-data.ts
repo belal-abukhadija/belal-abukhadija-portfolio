@@ -1,4 +1,4 @@
-import { personalInfo, tools } from "./tools-data";
+import { personalInfo, projects } from "./projects-data";
 
 /**
  * Structured Data (JSON-LD) Configuration
@@ -28,6 +28,7 @@ export const personStructuredData = {
     "Frontend Development",
     "UI/UX Design",
     "Web Tools",
+    "Product Engineering",
   ],
 };
 
@@ -71,15 +72,15 @@ export const profilePageStructuredData = {
   dateModified: new Date().toISOString().split("T")[0],
 };
 
-export const softwareApplicationStructuredData = tools.map((tool, index) => ({
+export const softwareApplicationStructuredData = projects.map((project, index) => ({
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "@id": `https://${personalInfo.domain}/#tool-${index}`,
-  name: tool.name,
+  "@id": `https://${personalInfo.domain}/#project-${index}`,
+  name: project.name,
   applicationCategory: "WebApplication",
   operatingSystem: "Any",
-  description: tool.description,
-  url: tool.url,
+  description: project.description,
+  url: project.url,
   offers: {
     "@type": "Offer",
     price: "0",

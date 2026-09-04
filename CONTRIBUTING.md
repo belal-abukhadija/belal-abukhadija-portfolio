@@ -9,7 +9,7 @@ Thank you for your interest in contributing! This document provides guidelines f
 The project follows a component-based architecture with clear separation of concerns:
 
 - **Components**: Reusable UI components in `/components`
-- **Data**: Configuration in `/lib/tools-data.ts`
+- **Data**: Configuration in `/lib/projects-data.ts`
 - **Styles**: Tailwind classes and global CSS in `/app/globals.css`
 - **App**: Pages and layouts in `/app` directory
 
@@ -23,27 +23,27 @@ The project follows a component-based architecture with clear separation of conc
 
 ## 📋 Making Changes
 
-### Adding a New Tool
+### Adding a New Project
 
-1. Open `lib/tools-data.ts`
-2. Add a new object to the `tools` array:
+1. Open `lib/projects-data.ts`
+2. Add a new object to the `projects` array:
 
 ```typescript
 {
-  name: "Tool Name",
-  description: "Clear description of what the tool does",
-  url: "https://tool.belal.work/",
-  icon: "IconName", // From lucide-react
-  color: "from-color-500 to-color-500", // Tailwind gradient
-  category: "Category" // Optional
+  name: "Project Name",
+  problem: "The one-sentence problem at work that made this exist.",
+  description: "What the project does.",
+  url: "https://project.belal.work/",
+  category: "Category",
+  kind: "work" // or "side" for something built for fun (omit `problem`)
 }
 ```
 
-3. Save the file - the new tool will automatically appear!
+3. Save the file - the new project will automatically appear!
 
 ### Modifying Personal Information
 
-Edit the `personalInfo` object in `lib/tools-data.ts`:
+Edit the `personalInfo` object in `lib/projects-data.ts`:
 
 ```typescript
 export const personalInfo = {
@@ -184,7 +184,7 @@ export default function ComponentName({ prop }: Props) {
 ### File Naming
 
 - Components: PascalCase (e.g., `ToolCard.tsx`)
-- Utilities: kebab-case (e.g., `tools-data.ts`)
+- Utilities: kebab-case (e.g., `projects-data.ts`)
 - Use `.tsx` for components with JSX
 - Use `.ts` for utility files
 

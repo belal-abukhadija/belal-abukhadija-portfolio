@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { personalInfo, tools } from "@/lib/tools-data";
+import { personalInfo } from "@/lib/projects-data";
 import { getAllArticles } from "@/lib/articles";
 
 /**
@@ -21,14 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Tool pages (external links - for reference)
-  const toolPages: MetadataRoute.Sitemap = tools.map((tool) => ({
-    url: tool.url,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
-
   const articlePages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/articles`,
@@ -44,5 +36,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  return [...mainPages, ...articlePages, ...toolPages];
+  return [...mainPages, ...articlePages];
 }

@@ -48,25 +48,25 @@ You'll see:
 ### Optional Customizations
 
 1. **Change Colors**: Edit `tailwind.config.ts`
-2. **Modify Text**: Edit `lib/tools-data.ts`
+2. **Modify Text**: Edit `lib/projects-data.ts`
 3. **Add More Sections**: Create new components in `components/`
 
-## ➕ Adding New Tools
+## ➕ Adding New Projects
 
-This is super easy! Open `lib/tools-data.ts` and add:
+Open `lib/projects-data.ts` and add:
 
 ```typescript
 {
-  name: "My New Tool",
-  description: "What this tool does...",
-  url: "https://newtool.belal.work/",
-  icon: "Zap", // Any lucide-react icon
-  color: "from-blue-500 to-purple-500",
-  category: "Utility"
+  name: "Project Name",
+  problem: "The one-sentence problem at work that made this exist.",
+  description: "What the project does.",
+  url: "https://project.belal.work/",
+  category: "Category",
+  kind: "work" // or "side" for something built for fun (omit `problem`)
 }
 ```
 
-Save the file - done! Your new tool will appear automatically.
+Save the file - done! The new project appears automatically.
 
 ## 🚀 Deploy to Production
 
@@ -144,7 +144,7 @@ npm run dev
 
 - **Performance**: The site is already optimized for speed
 - **SEO**: All metadata is configured, just deploy and submit to search engines
-- **Updates**: Simply edit `tools-data.ts` to add/remove/modify tools
+- **Updates**: Simply edit `projects-data.ts` to add/remove/modify projects
 - **Backup**: Keep your code in GitHub for version control
 
 ## 🆘 Need Help?

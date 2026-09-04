@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { personalInfo } from "@/lib/tools-data";
+import { personalInfo } from "@/lib/projects-data";
 
 export default function Hero() {
   const [first, ...rest] = personalInfo.name.split(" ");
@@ -13,7 +13,7 @@ export default function Hero() {
       {/* Full-bleed halftone texture plate (supplied asset, not generated) */}
       <div className="absolute inset-0 hero-static" aria-hidden="true" />
 
-      {/* Portrait, right-anchored — not centered — fading into the texture on its left edge */}
+      {/* Portrait, right-anchored (not centered), fading into the texture on its left edge */}
       <div
         className="absolute inset-y-0 right-0 w-[78%] sm:w-[65%] md:w-[54%] lg:w-[46%] [mask-image:linear-gradient(to_left,black_55%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_left,black_55%,transparent_100%)]"
         aria-hidden="true"
@@ -34,20 +34,16 @@ export default function Hero() {
       {/* Main content */}
       <div className="relative z-10 flex-1 flex flex-col justify-end px-4 sm:px-6 lg:px-10 pt-32 pb-8">
         <div className="max-w-7xl mx-auto w-full">
-          <p className="rise rise-1 eyebrow mb-3">{personalInfo.headline}</p>
-          <p className="rise rise-1 font-display text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-ink-soft mb-8">
-            Full-Stack Development · Browser Tools · Practical AI
-          </p>
+          <p className="rise rise-1 eyebrow mb-6">{personalInfo.headline}</p>
 
           <h1 className="rise rise-2 font-display font-black uppercase tracking-tight text-ink leading-[0.86] text-[clamp(3rem,13vw,8.5rem)]">
             {first}
             <br />
-            <span className="text-mint">{lastName || first}.</span>
+            <span className="text-mint">{lastName || first}</span>
           </h1>
 
           <div className="rise rise-3 mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
             {[
-              `${personalInfo.yearsOfExperience}+ years shipping code`,
               `Based in ${personalInfo.location}`,
               "Open to remote work, worldwide",
             ].map((item) => (
@@ -64,7 +60,7 @@ export default function Hero() {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-7xl mx-auto py-4 flex items-center justify-between">
             <p className="text-sm text-ink-soft max-w-md hidden sm:block">
-              {personalInfo.description}
+              {personalInfo.heroLine}
             </p>
             <span className="font-display text-[0.68rem] font-semibold uppercase tracking-widest text-ink-faint ml-auto">
               ▼ Scroll

@@ -47,17 +47,18 @@ npm run build
 npm start
 ```
 
-## 📝 Adding New Tools
+## 📝 Adding New Projects
 
-Adding new tools is incredibly simple! Just edit the `lib/tools-data.ts` file:
+Every project on the site is framed as a problem that was worth solving. Edit `lib/projects-data.ts`:
 
 ```typescript
-export const tools: Tool[] = [
-  // ... existing tools
+export const projects: Project[] = [
+  // ... existing projects
   {
-    name: "Your New Tool",
-    description: "A brief description of what your tool does",
-    url: "https://yourtool.belal.work/",
+    name: "Your New Project",
+    problem: "The problem at work that made you build it",
+    description: "A brief description of what it does",
+    url: "https://yourproject.belal.work/",
     icon: "IconName", // Any lucide-react icon name
     color: "from-blue-500 to-purple-500", // Tailwind gradient classes
     category: "Category" // Optional
@@ -77,7 +78,7 @@ Visit [lucide.dev](https://lucide.dev/icons/) to browse all available icons. Som
 
 ### Personal Information
 
-Edit `lib/tools-data.ts` to update your personal information:
+Edit `lib/projects-data.ts` to update your personal information:
 
 ```typescript
 export const personalInfo = {
@@ -134,7 +135,7 @@ portfolio-belal/
 │   ├── About.tsx         # About section
 │   └── Footer.tsx        # Footer with contact info
 ├── lib/                   # Utility files
-│   ├── tools-data.ts     # Tools and personal info configuration
+│   ├── projects-data.ts  # Projects and personal info configuration
 │   └── structured-data.ts # JSON-LD structured data
 ├── public/                # Static assets
 ├── tailwind.config.ts    # Tailwind configuration

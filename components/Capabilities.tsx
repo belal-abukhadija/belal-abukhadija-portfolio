@@ -7,7 +7,6 @@ import SectionBand from "./SectionBand";
 
 const skills = [
   {
-    number: "001",
     title: "Frontend",
     tags: ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
     description:
@@ -15,7 +14,6 @@ const skills = [
     icon: Monitor,
   },
   {
-    number: "002",
     title: "Backend",
     tags: ["Node.js", "REST APIs", "Supabase", "SQL", "Auth"],
     description:
@@ -23,7 +21,6 @@ const skills = [
     icon: Server,
   },
   {
-    number: "003",
     title: "Tools & Workflow",
     tags: ["Git", "Figma", "Docker", "VS Code", "CI/CD"],
     description:
@@ -40,7 +37,7 @@ export default function Capabilities() {
     <section id="skills" className="relative py-20 md:py-28">
       <div className="container mx-auto px-4 sm:px-6" ref={ref}>
         <div className="max-w-6xl mx-auto">
-          <SectionBand index="03" meta="CORE STACK" word="CAPABILITIES" title="Capabilities" />
+          <SectionBand meta="CORE STACK" word="CAPABILITIES" title="Capabilities" />
 
           <div className="space-y-5">
             {skills.map((skill, i) => (
@@ -61,9 +58,6 @@ export default function Capabilities() {
                     <skill.icon className="w-[22px] h-[22px]" strokeWidth={1.75} />
                   </span>
                   <div>
-                    <p className="font-display text-[0.68rem] font-semibold text-mint group-hover:text-bg tracking-widest mb-1 transition-colors duration-200">
-                      {skill.number}
-                    </p>
                     <h3 className="font-display text-xl md:text-2xl font-black tracking-tight text-ink group-hover:text-bg transition-colors duration-200">
                       {skill.title}
                     </h3>

@@ -20,7 +20,7 @@ export default function BackToTop() {
   // A single native smooth-scroll call. Driving window.scrollTo manually on
   // every animation frame (as this used to) inherits the global CSS
   // `scroll-behavior: smooth`, so each frame started its own competing native
-  // scroll animation — dozens stacking per tap. Mobile browsers show that as
+  // scroll animation, dozens stacking per tap. Mobile browsers show that as
   // stutter/stall far more visibly than desktop. One explicit call has only
   // one animation to retarget, so nothing fights.
   const scrollToTop = () => {

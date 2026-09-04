@@ -24,7 +24,6 @@ export default function ArticlesPreview({ articles }: { articles: ArticleSummary
       <div className="container mx-auto px-4 sm:px-6" ref={ref}>
         <div className="max-w-6xl mx-auto">
           <SectionBand
-            index="02"
             meta={`${articles.length} LIVE`}
             word="RECENT ARTICLES"
             title="Recent articles"
@@ -49,7 +48,6 @@ export default function ArticlesPreview({ articles }: { articles: ArticleSummary
 
                   <div className="relative flex items-start justify-between gap-4 mb-5">
                     <div className="flex flex-col gap-0.5 font-display text-[0.68rem] font-bold uppercase tracking-widest text-mint group-hover:text-bg transition-colors duration-200">
-                      <span>{String(i + 1).padStart(3, "0")}</span>
                       <span className="text-ink-faint group-hover:text-bg/70 font-semibold transition-colors duration-200">
                         {formatDate(article.date)}
                       </span>

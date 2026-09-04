@@ -1,6 +1,6 @@
 "use client";
 
-import { workedWith } from "@/lib/tools-data";
+import { workedWith } from "@/lib/projects-data";
 
 export default function WorkedWith() {
   return (

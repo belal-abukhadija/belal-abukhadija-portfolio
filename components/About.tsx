@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, animate } from "framer-motion";
 import { Globe2, Lightbulb, TrendingUp } from "lucide-react";
-import { personalInfo, experience, toolkit } from "@/lib/tools-data";
+import { personalInfo, experience, toolkit } from "@/lib/projects-data";
 import SectionBand from "./SectionBand";
 import ToolkitIcon from "./ToolkitIcon";
 
@@ -53,23 +53,23 @@ const journey = [
   {
     icon: Lightbulb,
     title: "The beginning",
-    period: "[2021]",
+    period: "2021",
     description:
-      "Wrote my first lines of code, fell in love with the craft, and started building small tools to solve everyday problems.",
+      "Wrote my first lines of code, fell in love with the craft, and started building small things to fix problems I kept running into.",
   },
   {
     icon: TrendingUp,
     title: "Leveling up",
-    period: "[2022–2023]",
+    period: "2022–2023",
     description:
       "Went deep on React, TypeScript, and full-stack patterns. Shipped multiple live projects and started freelancing.",
   },
   {
     icon: Globe2,
     title: "Building in public",
-    period: "[2024—]",
+    period: "2024 onwards",
     description:
-      "Launched belal.work, a growing suite of free, independent web tools used by developers and creators worldwide.",
+      "Launched belal.work, where the projects I build to solve my own problems at work go live for everyone else who has them.",
   },
 ];
 
@@ -77,7 +77,6 @@ const stats = [
   { value: personalInfo.yearsOfExperience, suffix: "+", label: "Years coding" },
   { value: 25, suffix: "+", label: "Projects shipped" },
   { value: 15, suffix: "+", label: "Technologies" },
-  { value: 0, suffix: "", label: "Curiosity limit", custom: "∞" },
 ];
 
 export default function About() {
@@ -88,7 +87,7 @@ export default function About() {
     <section id="about" className="relative py-20 md:py-28">
       <div className="container mx-auto px-4 sm:px-6" ref={ref}>
         <div className="max-w-6xl mx-auto">
-          <SectionBand index="04" meta="CAREER" word="ABOUT ME" title="About me" />
+          <SectionBand meta="CAREER" word="ABOUT ME" title="About me" />
 
           <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 mb-16">
             <motion.div
@@ -100,19 +99,20 @@ export default function About() {
                 {personalInfo.location.toUpperCase()}
               </p>
               <p className="text-ink-soft leading-relaxed space-y-4 text-base md:text-lg">
-                Hey, I&apos;m {personalInfo.name} — a full-stack developer from{" "}
+                Hey, I&apos;m {personalInfo.name}, a full-stack developer from{" "}
                 {personalInfo.location}. I started coding out of curiosity and never
-                stopped. I focus on fast, clean, useful software: tools people
-                actually come back to, built with an obsessive eye for the small
-                details that make an interface feel right.
+                stopped. Most of what I ship began as friction in my own workday:
+                a step that was slow, manual, or missing, that turned into a
+                product which removed it, built with an obsessive eye for the
+                small details that make an interface feel right.
               </p>
 
               <div className="mt-8 space-y-2 font-display text-xs font-semibold uppercase tracking-widest text-ink-faint">
                 <p>
-                  Location — <span className="text-ink">{personalInfo.location}</span>
+                  Location: <span className="text-ink">{personalInfo.location}</span>
                 </p>
                 <p>
-                  Relocation — <span className="text-ink">Open, remote-first</span>
+                  Relocation: <span className="text-ink">Open, remote-first</span>
                 </p>
               </div>
             </motion.div>
@@ -121,20 +121,15 @@ export default function About() {
               initial={{ opacity: 0, y: 22 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="grid grid-cols-2 gap-x-8 gap-y-6"
+              className="grid grid-cols-3 gap-x-6"
             >
               {stats.map((item, i) => (
                 <div
                   key={item.label}
-                  className={[
-                    i % 2 === 1 ? "border-l border-line pl-8" : "",
-                    i >= 2 ? "border-t border-line pt-6" : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
+                  className={i > 0 ? "border-l border-line pl-6" : ""}
                 >
                   <p className="font-display text-4xl md:text-5xl font-black text-mint mb-1">
-                    {item.custom ?? <AnimatedCounter target={item.value} suffix={item.suffix} />}
+                    <AnimatedCounter target={item.value} suffix={item.suffix} />
                   </p>
                   <p className="font-display text-[0.65rem] font-semibold uppercase tracking-widest text-ink-faint">
                     {item.label}
@@ -217,9 +212,6 @@ export default function About() {
                   transition={{ duration: 0.5, delay: i * 0.08 }}
                   className="card card-hover p-6"
                 >
-                  <p className="font-display text-[0.68rem] font-semibold text-mint tracking-widest mb-5">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
                   <h3 className="font-display text-base font-bold text-ink mb-2">{item.title}</h3>
                   <p className="text-sm text-ink-soft leading-relaxed">{item.description}</p>
                 </motion.div>

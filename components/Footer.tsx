@@ -1,7 +1,7 @@
 "use client";
 
 import { Github, Linkedin, Mail, Instagram, ArrowUp } from "lucide-react";
-import { personalInfo } from "@/lib/tools-data";
+import { personalInfo } from "@/lib/projects-data";
 import WhatsAppIcon from "./icons/WhatsAppIcon";
 
 export default function Footer() {
@@ -19,7 +19,7 @@ export default function Footer() {
   ];
 
   const navItems = [
-    { label: "Work", id: "work" },
+    { label: "Projects", id: "work" },
     { label: "Articles", id: "articles" },
     { label: "Skills", id: "skills" },
     { label: "About", id: "about" },
@@ -31,10 +31,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-6xl mx-auto py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <span className="icon-tile w-8 h-8 !rounded-md font-display font-black text-sm text-mint">
-                {personalInfo.name[0]}
-              </span>
+            <div className="mb-4">
               <span className="font-display text-sm tracking-[0.1em] uppercase text-ink">
                 {personalInfo.name.split(" ")[0]}
                 <span className="text-ink-faint font-medium">.work</span>

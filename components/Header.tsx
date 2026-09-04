@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { personalInfo } from "@/lib/tools-data";
+import { personalInfo } from "@/lib/projects-data";
 
 const navItems = [
-  { label: "WORK", id: "work", index: "01" },
-  { label: "ARTICLES", id: "articles", index: "02" },
-  { label: "SKILLS", id: "skills", index: "03" },
-  { label: "ABOUT", id: "about", index: "04" },
-  { label: "CONTACT", id: "contact", index: "05" },
+  { label: "PROJECTS", id: "work" },
+  { label: "ARTICLES", id: "articles" },
+  { label: "SKILLS", id: "skills" },
+  { label: "ABOUT", id: "about" },
+  { label: "CONTACT", id: "contact" },
 ];
 
 export default function Header() {
@@ -42,12 +42,9 @@ export default function Header() {
               <div className="flex items-center justify-between">
                 <button
                   onClick={() => scrollToSection("hero")}
-                  className="flex items-center gap-2.5 group"
+                  className="group"
                 >
-                  <span className="icon-tile w-8 h-8 !rounded-md font-display font-black text-sm text-mint group-hover:border-mint">
-                    {firstName[0]}
-                  </span>
-                  <span className="font-display text-sm tracking-[0.1em] uppercase text-ink">
+                  <span className="font-display text-sm tracking-[0.1em] uppercase text-ink group-hover:text-mint transition-colors">
                     {firstName}
                     <span className="text-ink-faint font-medium">.work/2026</span>
                   </span>
@@ -60,9 +57,6 @@ export default function Header() {
                       onClick={() => scrollToSection(item.id)}
                       className="group px-3 py-2 text-ink-soft text-xs font-semibold tracking-widest hover:text-ink transition-colors"
                     >
-                      <span className="text-ink-faint group-hover:text-mint mr-1.5">
-                        {item.index}/
-                      </span>
                       {item.label}
                     </button>
                   ))}
@@ -104,7 +98,6 @@ export default function Header() {
                         onClick={() => scrollToSection(item.id)}
                         className="text-left font-semibold text-base text-ink hover:text-mint transition-colors py-2.5 flex items-center gap-3"
                       >
-                        <span className="text-ink-faint text-xs">{item.index}/</span>
                         {item.label}
                       </button>
                     ))}
