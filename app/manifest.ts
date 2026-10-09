@@ -14,8 +14,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: personalInfo.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#111116",
-    theme_color: "#2dd4bf",
+    background_color: "#EFF0EC",
+    theme_color: "#1B2CC1",
     orientation: "portrait-primary",
     categories: ["portfolio", "developer", "tools"],
     icons: [

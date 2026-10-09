@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { personalInfo } from "@/lib/projects-data";
+import SmoothScroll from "@/components/SmoothScroll";
 import {
   personStructuredData,
   websiteStructuredData,
@@ -10,11 +11,11 @@ import {
   softwareApplicationStructuredData,
 } from "@/lib/structured-data";
 
-const rubik = Rubik({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-rubik",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-bricolage",
+  axes: ["opsz", "wdth"],
 });
 
 /**
@@ -123,7 +124,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" id="top" className={bricolage.variable}>
       <head>
         <script
           type="application/ld+json"
@@ -137,13 +138,19 @@ export default function RootLayout({
             ]),
           }}
         />
+        {/* The page line is what crosses phrases out, and it needs JS. Without
+            JS, fall back to an ordinary strikethrough. */}
+        <noscript>
+          <style>{`.strike { text-decoration: line-through; text-decoration-color: #FF4C65; }`}</style>
+        </noscript>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body
-        className={`${rubik.variable} font-sans antialiased`}
+        className="font-sans antialiased"
         suppressHydrationWarning
       >
+        <SmoothScroll />
         {children}
       </body>
     </html>

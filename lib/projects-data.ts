@@ -9,6 +9,8 @@
  *
  * Project fields:
  * - name: display name
+ * - chore: the task this project deleted, as short phrases. Each phrase is
+ *   struck through on its own and never wraps, so keep them under ~15 characters
  * - problem: the real-world problem that made this exist (one sentence)
  * - description: what the project actually does
  * - url: full URL to the live project
@@ -19,6 +21,8 @@
 
 export interface Project {
   name: string;
+  /** The chore this project deleted, in short non-wrapping phrases. Omitted for side projects. */
+  chore?: string[];
   /** The problem that made this exist. Omitted for side projects. */
   problem?: string;
   description: string;
@@ -35,6 +39,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     name: "PDF Signature Tool",
+    chore: ["Print it.", "Sign it.", "Scan it.", "Email it."],
     problem:
       "Signing one line of a contract meant printing the whole document, signing it, scanning it back, and emailing a worse copy than the one I started with.",
     description:
@@ -49,6 +54,7 @@ export const projects: Project[] = [
   },
   {
     name: "MarkFlow",
+    chore: ["Rebuilding", "Word tables", "by hand."],
     problem:
       "Our docs lived in Markdown but every stakeholder wanted a Word file, and converting by hand broke the tables, math, and diagrams every single time.",
     description:
@@ -63,6 +69,7 @@ export const projects: Project[] = [
   },
   {
     name: "WordCount Pro",
+    chore: ["Ad-covered", "counter sites."],
     problem:
       "Writing copy against platform character limits meant pasting drafts into whichever ad-covered counter site loaded first, then guessing at keyword density.",
     description:
@@ -77,6 +84,7 @@ export const projects: Project[] = [
   },
   {
     name: "Color Palette Generator",
+    chore: ["Three sites", "for one", "palette."],
     problem:
       "Pulling a palette out of a brand image and then proving it passed contrast took three different sites and a lot of copy-paste between them.",
     description:
@@ -91,6 +99,7 @@ export const projects: Project[] = [
   },
   {
     name: "Exam Prep Quizzes",
+    chore: ["Revising from", "scattered PDFs."],
     problem:
       "Government IT jobs here are won on a competitive exam, and the people sitting it were revising from scattered PDFs with no way to practise under exam conditions or see what they kept getting wrong.",
     description:
@@ -117,6 +126,7 @@ export const projects: Project[] = [
   },
   {
     name: "Theme Converter",
+    chore: ["White logos", "on white", "pages."],
     problem:
       "Logos kept arriving as white PNGs that disappeared on light backgrounds, and every one meant another manual round trip through an image editor.",
     description:
@@ -127,6 +137,7 @@ export const projects: Project[] = [
   },
   {
     name: "Image Converter",
+    chore: ["Uploading", "client assets."],
     problem:
       "Page-weight budgets kept getting blown by oversized PNGs, and every online converter wanted me to upload client assets to someone else's server.",
     description:
@@ -137,6 +148,7 @@ export const projects: Project[] = [
   },
   {
     name: "Arabic Lorem Ipsum",
+    chore: ["Latin filler", "in Arabic", "layouts."],
     problem:
       "Arabic layouts mocked up with Latin lorem ipsum fell apart the moment real right-to-left text landed in them.",
     description:
@@ -147,6 +159,7 @@ export const projects: Project[] = [
   },
   {
     name: "Binary Converter",
+    chore: ["Mangled", "UTF-8."],
     problem:
       "Chasing an encoding bug meant hunting for a converter that handled UTF-8 honestly instead of mangling every non-Latin character it touched.",
     description:
@@ -157,6 +170,7 @@ export const projects: Project[] = [
   },
   {
     name: "Media Downloader",
+    chore: ["Fake download", "buttons."],
     problem:
       "Pulling a reference clip for a build meant wading through download sites buried in pop-ups and fake buttons.",
     description:
@@ -167,6 +181,7 @@ export const projects: Project[] = [
   },
   {
     name: "Break Timer",
+    chore: ["Sessions", "with no end."],
     problem:
       "Long build sessions ran away from me. I wanted a break clock I could leave open on a second screen and read from across the desk.",
     description:
@@ -177,6 +192,7 @@ export const projects: Project[] = [
   },
   {
     name: "Tools Plus",
+    chore: ["A dozen", "forgotten", "bookmarks."],
     problem:
       "A dozen one-off helpers (formatters, generators, small converters) were scattered across bookmarks and half-forgotten tabs.",
     description:

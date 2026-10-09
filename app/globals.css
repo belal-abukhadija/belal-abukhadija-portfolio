@@ -1,364 +1,225 @@
 @import "tailwindcss";
 
 @theme {
-  /* ---- Carbon / mint system (flat, technical, single-accent dark) ---- */
-  --color-bg: #0E0E0E;
-  --color-panel: #141414;
-  --color-panel-2: #1A1A1A;
-  --color-line: #464544;
-  --color-line-strong: #605F5C;
+  /* ---- Two-ink print: ultramarine ink and a red pen on cool paper.
+     There is no black on this site; "dark" is the ink at full strength. ---- */
+  --color-paper: #EFF0EC;
+  --color-ink: #1B2CC1;
+  --color-ink-soft: #4856CD;
+  --color-ink-faint: #B9BFE6;
+  --color-mark: #FF4C65;
 
-  --color-ink: #ECE9E4;
-  --color-ink-soft: rgba(236, 233, 228, 0.72);
-  --color-ink-faint: rgba(236, 233, 228, 0.45);
-
-  --color-mint: #C3FFFC;
-  --color-mint-bright: #D6FFFD;
-  --color-mint-deep: #6FBDB9;
-
-  /* Light contrast band, used once for the "worked with" rail */
-  --color-paper: #ECE9E4;
-  --color-paper-ink: #14130F;
-
-  /* ---- Type: one family, hierarchy via scale/case/weight ---- */
-  --font-sans: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
-
-  /* ---- Motion ---- */
-  --animate-marquee: marquee 42s linear infinite;
-  --animate-marquee-reverse: marquee-reverse 42s linear infinite;
+  /* ---- Type: one family, hierarchy via weight, width, and scale ---- */
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
+  /* No CSS scroll-behavior here: SmoothScroll.tsx (Lenis) owns scroll easing,
+     and the two fight each other if both are on. */
   html {
-    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    background-color: var(--color-bg);
+    background-color: var(--color-paper);
     color: var(--color-ink);
     overflow-x: hidden;
-    letter-spacing: -0.006em;
+    font-size: 1.0625rem;
+    line-height: 1.55;
   }
 
-  ::selection {
-    background-color: var(--color-mint);
-    color: #0E0E0E;
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-mint);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: var(--color-bg); }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-line-strong);
-    border-radius: 999px;
-    border: 2px solid var(--color-bg);
-  }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-mint-deep); }
-}
-
-@layer components {
-  /* ---- Section eyebrow: uppercase technical label ---- */
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-ink-soft);
-  }
-  .eyebrow::before {
-    content: "";
-    width: 1.6rem;
-    height: 1px;
-    background: var(--color-mint);
-  }
-
-  /* ---- Surface cards: flat, low radius, border-led ---- */
-  .card {
-    position: relative;
-    background-color: var(--color-panel);
-    border: 1px solid var(--color-line);
-    border-radius: 14px;
-    transition: border-color 220ms ease, background-color 220ms ease;
-  }
-
-  /* Hover state: corner-bracket reveal instead of the generic lift+shadow —
-     ties into the site's telemetry/viewfinder motif (SectionBand, header nav
-     brackets) rather than a stock "hover:scale-105 shadow-lg" pattern. */
-  .card-hover::after {
-    content: "";
-    position: absolute;
-    inset: 9px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 260ms ease, inset 260ms cubic-bezier(0.22, 1, 0.36, 1);
-    background:
-      linear-gradient(to right, var(--color-mint) 2px, transparent 2px) top left / 12px 2px no-repeat,
-      linear-gradient(to bottom, var(--color-mint) 2px, transparent 2px) top left / 2px 12px no-repeat,
-      linear-gradient(to left, var(--color-mint) 2px, transparent 2px) top right / 12px 2px no-repeat,
-      linear-gradient(to bottom, var(--color-mint) 2px, transparent 2px) top right / 2px 12px no-repeat,
-      linear-gradient(to right, var(--color-mint) 2px, transparent 2px) bottom left / 12px 2px no-repeat,
-      linear-gradient(to top, var(--color-mint) 2px, transparent 2px) bottom left / 2px 12px no-repeat,
-      linear-gradient(to left, var(--color-mint) 2px, transparent 2px) bottom right / 12px 2px no-repeat,
-      linear-gradient(to top, var(--color-mint) 2px, transparent 2px) bottom right / 2px 12px no-repeat;
-  }
-  .card-hover:hover {
-    border-color: var(--color-line-strong);
-    background-color: var(--color-panel-2);
-  }
-  .card-hover:hover::after {
-    opacity: 1;
-    inset: 6px;
-  }
-
-  /* ---- Buttons: flat fills, no shadow ---- */
-  .btn-primary {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background-color: var(--color-mint);
-    color: #0E0E0E;
-    font-weight: 600;
-    border-radius: 10px;
-    padding: 0.9rem 1.6rem;
-    overflow: hidden;
-    transition: background-color 180ms ease, transform 180ms ease;
-  }
-  /* Diagonal shine sweep on hover, in place of a scale/shadow pop */
-  .btn-primary::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -65%;
-    width: 35%;
-    height: 100%;
-    background: linear-gradient(115deg, transparent, rgba(14, 14, 14, 0.3), transparent);
-    transform: skewX(-18deg);
-    transition: left 520ms cubic-bezier(0.22, 1, 0.36, 1);
-    pointer-events: none;
-  }
-  .btn-primary:hover { background-color: var(--color-mint-bright); }
-  .btn-primary:hover::after { left: 130%; }
-  .btn-primary:active { transform: translateY(1px); }
-
-  .btn-ghost {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background-color: transparent;
-    color: var(--color-ink);
-    font-weight: 600;
-    border: 1px solid var(--color-line-strong);
-    border-radius: 10px;
-    padding: 0.9rem 1.6rem;
-    transition: border-color 180ms ease, color 180ms ease;
-  }
-  /* Two opposing corner brackets — same family as .card-hover, scaled down */
-  .btn-ghost::after {
-    content: "";
-    position: absolute;
-    inset: 3px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 220ms ease;
-    background:
-      linear-gradient(to right, var(--color-mint) 2px, transparent 2px) top left / 9px 2px no-repeat,
-      linear-gradient(to bottom, var(--color-mint) 2px, transparent 2px) top left / 2px 9px no-repeat,
-      linear-gradient(to left, var(--color-mint) 2px, transparent 2px) bottom right / 9px 2px no-repeat,
-      linear-gradient(to top, var(--color-mint) 2px, transparent 2px) bottom right / 2px 9px no-repeat;
-  }
-  .btn-ghost:hover {
-    border-color: var(--color-mint);
-    color: var(--color-mint);
-  }
-  .btn-ghost:hover::after { opacity: 1; }
-
-  /* ---- Icon tile ---- */
-  .icon-tile {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-panel-2);
-    border: 1px solid var(--color-line);
-    border-radius: 10px;
-    color: var(--color-mint);
-    transition: border-color 220ms ease, color 220ms ease,
-      background-color 220ms ease;
-  }
-
-  /* ---- Chip / tag ---- */
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 0.7rem;
-    letter-spacing: 0.04em;
-    color: var(--color-ink-soft);
-    background-color: var(--color-panel-2);
-    border: 1px solid var(--color-line);
-    border-radius: 999px;
-    padding: 0.34rem 0.8rem;
-  }
-}
-
-@layer utilities {
-  .font-mono   { font-family: var(--font-mono); }
-  .font-serif  { font-family: var(--font-sans); }
-  .font-display { font-family: var(--font-display); }
-
-  .text-ink       { color: var(--color-ink); }
-  .text-ink-soft  { color: var(--color-ink-soft); }
-  .text-ink-faint { color: var(--color-ink-faint); }
-  .text-amber     { color: var(--color-mint); }
-  .text-mint      { color: var(--color-mint); }
-  .bg-bg          { background-color: var(--color-bg); }
-  .bg-panel       { background-color: var(--color-panel); }
-  .bg-panel-2     { background-color: var(--color-panel-2); }
-  .border-line    { border-color: var(--color-line); }
-
-  /* Mint emphasis for headline accent words (no second typeface) */
-  .accent-word {
-    font-family: var(--font-sans);
-    font-weight: inherit;
-    color: var(--color-mint);
-  }
-
-  /* Ambient mint glow, used sparingly */
-  .amber-glow {
-    background: radial-gradient(
-      60% 55% at 50% 30%,
-      rgba(195, 255, 252, 0.14) 0%,
-      rgba(195, 255, 252, 0.04) 40%,
-      transparent 72%
-    );
-  }
-
-  /* Full-bleed halftone texture plate behind the hero portrait */
-  .hero-static {
-    background-image: url("/hero-static.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-
-  /* Giant outline-stroke section-title text (repeated-band motif) */
-  .stroke-text {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--color-mint);
-    text-stroke: 1.5px var(--color-mint);
-  }
-
-  /* Subtle film grain over the whole page */
-  .grain::before {
+  /* Paper tooth: a fixed noise layer over everything. Deliberately not
+     blended (no mix-blend-mode): a full-screen blended layer makes the
+     browser re-composite the whole page under it on every scrolled frame. */
+  body::after {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: 1;
+    z-index: 100;
     pointer-events: none;
-    opacity: 0.045;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.55  0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .animate-marquee { animation: marquee 42s linear infinite; }
-  .animate-marquee-reverse { animation: marquee-reverse 42s linear infinite; }
+  ::selection {
+    background-color: var(--color-mark);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  a {
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+}
+
+@layer components {
+  /* Page gutter shared by every section */
+  .gutter {
+    padding-left: clamp(1.25rem, 4vw, 4rem);
+    padding-right: clamp(1.25rem, 4vw, 4rem);
+  }
+
+  /* ---- Display type ---- */
+  .display {
+    font-stretch: 75%;
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+  .display-light {
+    font-stretch: 75%;
+    font-weight: 200;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .size-hero { font-size: clamp(3.4rem, 15vw, 14rem); }
+  .size-chore { font-size: clamp(2.9rem, 10vw, 9rem); }
+  .size-title { font-size: clamp(2.4rem, 6.5vw, 5.5rem); }
+  .size-row { font-size: clamp(1.6rem, 3vw, 2.5rem); }
+
+  /* ---- The hero name: two lines that fill the page width,
+     thin first name over heavy surname. ---- */
+  .name {
+    font-stretch: 75%;
+    /* Sized to the width, but capped by the height so both lines and the
+       statement below still fit in one screen on short laptops. */
+    font-size: clamp(4.6rem, min(25vw, (100svh - 22rem) / 1.75), 26rem);
+    line-height: 0.8;
+    padding-bottom: 0.14em;
+    letter-spacing: -0.025em;
+  }
+  .name span {
+    display: block;
+    width: fit-content;
+  }
+  .name-first { font-weight: 200; }
+  .name-last { font-weight: 800; }
+
+  .label {
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .link {
+    text-decoration-line: underline;
+  }
+  .link:hover {
+    text-decoration-color: var(--color-mark);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.4rem;
+    border: 2px solid currentColor;
+    border-radius: 999px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  /* Hover fill only where hover exists, so it does not stick after a tap. */
+  @media (hover: hover) {
+    .btn:hover { background-color: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
+    .on-ink .btn:hover { background-color: var(--color-paper); color: var(--color-ink); border-color: var(--color-paper); }
+  }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ---- A phrase to be crossed out. The stroke itself is the page line
+     (PageLine.tsx), which is routed through each of these; a phrase never
+     wraps, so the line can cross it in one pass. ---- */
+  .strike {
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  /* The contact field's own placeholder stays hidden until the pen has
+     written its example there and the example has cleared. Needs !important
+     to beat the placeholder colour utility on the input. */
+  .pen-writing input::placeholder { color: transparent !important; }
+
+  /* The hero name settling in on load. */
+  .after-strike {
+    animation: land 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: var(--strike-delay, 0s);
+  }
+
+  /* ---- Prints: images pulled through the blue ink ---- */
+  .print {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-ink);
+    mix-blend-mode: multiply;
+  }
+  /* Light screenshots would bleed into the paper without a printed edge. */
+  .print-reveal { border: 2px solid var(--color-ink); }
+  .print img {
+    filter: grayscale(1) contrast(1.15);
+    mix-blend-mode: screen;
+  }
+  .print-reveal:hover .print img,
+  .print-reveal:focus-visible .print img {
+    filter: none;
+    mix-blend-mode: normal;
+  }
 
   /* ---- Article body typography (MDX content) ---- */
   .article-body {
-    color: var(--color-ink-soft);
-    line-height: 1.75;
+    font-size: 1.1875rem;
+    line-height: 1.65;
   }
   .article-body h2 {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--color-ink);
-    margin-top: 2.4rem;
+    font-stretch: 75%;
+    font-weight: 800;
+    font-size: 2.1rem;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-top: 3rem;
     margin-bottom: 1rem;
-    letter-spacing: -0.01em;
   }
-  .article-body p { margin-bottom: 1.25rem; }
-  .article-body ul {
-    margin: 0 0 1.25rem 0;
-    padding-left: 1.25rem;
-    list-style: none;
-  }
+  .article-body p { margin-bottom: 1.4rem; }
+  .article-body ul { margin: 0 0 1.4rem 0; list-style: none; }
   .article-body li {
     position: relative;
-    padding-left: 1.1rem;
-    margin-bottom: 0.6rem;
+    padding-left: 1.6rem;
+    margin-bottom: 0.7rem;
   }
   .article-body li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.6em;
-    width: 6px;
-    height: 6px;
-    background: var(--color-mint);
+    top: 0.72em;
+    width: 0.9rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--color-mark);
   }
-  .article-body strong { color: var(--color-ink); font-weight: 600; }
-  .article-body a { color: var(--color-mint); text-underline-offset: 3px; }
+  .article-body strong { font-weight: 700; }
+  .article-body a { text-decoration-line: underline; }
+  .article-body a:hover { text-decoration-color: var(--color-mark); }
   .article-body code {
-    font-family: var(--font-mono);
-    background: var(--color-panel-2);
-    border: 1px solid var(--color-line);
-    border-radius: 4px;
-    padding: 0.1rem 0.4rem;
-    font-size: 0.88em;
-    color: var(--color-mint);
+    font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+    font-size: 0.85em;
+    padding: 0.1rem 0.35rem;
+    background: color-mix(in srgb, var(--color-ink) 10%, transparent);
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* CSS-driven entrance for above-the-fold hero content — runs without JS, so
-   content is always visible even if hydration/animation libraries fail. */
-@keyframes riseIn {
-  from { opacity: 0; transform: translateY(22px); }
+@keyframes land {
+  from { opacity: 0; transform: translateY(0.12em); }
   to   { opacity: 1; transform: none; }
 }
-.rise   { opacity: 1; animation: riseIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.rise-1 { animation-delay: 0.04s; }
-.rise-2 { animation-delay: 0.12s; }
-.rise-3 { animation-delay: 0.2s; }
-.rise-4 { animation-delay: 0.3s; }
-.rise-5 { animation-delay: 0.4s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise { animation: none; }
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-33.3333%); }
-}
-
-@keyframes marquee-reverse {
-  from { transform: translateX(-33.3333%); }
-  to   { transform: translateX(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .animate-marquee,
-  .animate-marquee-reverse { animation: none; }
+  .after-strike { animation: none; }
 }

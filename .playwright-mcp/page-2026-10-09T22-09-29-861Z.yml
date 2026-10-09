@@ -1,0 +1,342 @@
+- generic [active] [ref=f9e1]:
+  - banner [ref=f9e2]:
+    - navigation "Main" [ref=f9e3]:
+      - link "belal.work" [ref=f9e4] [cursor=pointer]:
+        - /url: /#hero
+      - list [ref=f9e5]:
+        - listitem [ref=f9e6]:
+          - link "Work" [ref=f9e7] [cursor=pointer]:
+            - /url: /#work
+        - listitem [ref=f9e8]:
+          - link "Writing" [ref=f9e9] [cursor=pointer]:
+            - /url: /#articles
+        - listitem [ref=f9e10]:
+          - link "About" [ref=f9e11] [cursor=pointer]:
+            - /url: /#about
+        - listitem [ref=f9e12]:
+          - link "Contact" [ref=f9e13] [cursor=pointer]:
+            - /url: /#contact
+  - main [ref=f9e14]:
+    - generic [ref=f9e15]:
+      - heading "Belal Abukhadija, AI Engineer in Amman." [level=1] [ref=f9e16]
+      - generic [ref=f9e17]:
+        - paragraph [ref=f9e18]:
+          - generic [ref=f9e19]: Print it.
+          - generic [ref=f9e20]: Sign it.
+          - generic [ref=f9e21]: Scan it.
+          - generic [ref=f9e22]: Email it.
+        - link "sign.belal.work" [ref=f9e23] [cursor=pointer]:
+          - /url: https://sign.belal.work/
+      - generic [ref=f9e24]:
+        - paragraph [ref=f9e25]: I build my way out of problems, then put the result online.
+        - button "Cross out another" [ref=f9e26] [cursor=pointer]
+    - generic [ref=f9e27]:
+      - generic [ref=f9e28]:
+        - heading "Things I no longer do" [level=2] [ref=f9e29]
+        - paragraph [ref=f9e30]: "Nearly every project here started the same way: something at work was slow, manual, or missing, so I built the thing that fixed it. One of them is just a chess board, because some problems are worth having."
+      - generic [ref=f9e31]:
+        - article [ref=f9e32]:
+          - paragraph [ref=f9e33]:
+            - generic [ref=f9e34]: Print it.
+            - generic [ref=f9e35]: Sign it.
+            - generic [ref=f9e36]: Scan it.
+            - generic [ref=f9e37]: Email it.
+          - generic [ref=f9e38]:
+            - generic [ref=f9e39]:
+              - heading "PDF Signature Tool" [level=3] [ref=f9e40]
+              - paragraph [ref=f9e41]: Documents, 2024
+              - paragraph [ref=f9e42]: The problem
+              - paragraph [ref=f9e43]: Signing one line of a contract meant printing the whole document, signing it, scanning it back, and emailing a worse copy than the one I started with.
+              - paragraph [ref=f9e44]: What I built
+              - paragraph [ref=f9e45]: Add signatures and text annotations to PDF documents directly in the browser, with no upload, no account, and the file never leaves the machine.
+              - paragraph [ref=f9e46]: No account, 100% in-browser, Free
+              - link "Open sign.belal.work" [ref=f9e47] [cursor=pointer]:
+                - /url: https://sign.belal.work/
+            - link [aria-hidden] [ref=f9e48] [cursor=pointer]:
+              - /url: https://sign.belal.work/
+        - article [ref=f9e50]:
+          - paragraph [ref=f9e51]:
+            - generic [ref=f9e52]: Rebuilding
+            - generic [ref=f9e53]: Word tables
+            - generic [ref=f9e54]: by hand.
+          - generic [ref=f9e55]:
+            - generic [ref=f9e56]:
+              - heading "MarkFlow" [level=3] [ref=f9e57]
+              - paragraph [ref=f9e58]: Developer, 2025
+              - paragraph [ref=f9e59]: The problem
+              - paragraph [ref=f9e60]: Our docs lived in Markdown but every stakeholder wanted a Word file, and converting by hand broke the tables, math, and diagrams every single time.
+              - paragraph [ref=f9e61]: What I built
+              - paragraph [ref=f9e62]: Converts Markdown and MDX into fully formatted Word documents entirely client-side, with full GFM support, math equations, diagrams, custom styles, no server, and no uploads.
+              - paragraph [ref=f9e63]: Zero data collection, Works offline, Free
+              - link "Open md.belal.work" [ref=f9e64] [cursor=pointer]:
+                - /url: https://md.belal.work/
+            - link [aria-hidden] [ref=f9e65] [cursor=pointer]:
+              - /url: https://md.belal.work/
+        - article [ref=f9e67]:
+          - paragraph [ref=f9e68]:
+            - generic [ref=f9e69]: Ad-covered
+            - generic [ref=f9e70]: counter sites.
+          - generic [ref=f9e71]:
+            - generic [ref=f9e72]:
+              - heading "WordCount Pro" [level=3] [ref=f9e73]
+              - paragraph [ref=f9e74]: Writing, 2024
+              - paragraph [ref=f9e75]: The problem
+              - paragraph [ref=f9e76]: Writing copy against platform character limits meant pasting drafts into whichever ad-covered counter site loaded first, then guessing at keyword density.
+              - paragraph [ref=f9e77]: What I built
+              - paragraph [ref=f9e78]: Accurate word and character counter with SEO keyword density analysis, per-platform character limits, and reading time estimates, running entirely in the browser.
+              - paragraph [ref=f9e79]: SEO keyword density, Platform limits, Free
+              - link "Open counter.belal.work" [ref=f9e80] [cursor=pointer]:
+                - /url: https://counter.belal.work/
+            - link [aria-hidden] [ref=f9e81] [cursor=pointer]:
+              - /url: https://counter.belal.work/
+        - article [ref=f9e83]:
+          - paragraph [ref=f9e84]:
+            - generic [ref=f9e85]: Three sites
+            - generic [ref=f9e86]: for one
+            - generic [ref=f9e87]: palette.
+          - generic [ref=f9e88]:
+            - generic [ref=f9e89]:
+              - heading "Color Palette Generator" [level=3] [ref=f9e90]
+              - paragraph [ref=f9e91]: Design, 2025
+              - paragraph [ref=f9e92]: The problem
+              - paragraph [ref=f9e93]: Pulling a palette out of a brand image and then proving it passed contrast took three different sites and a lot of copy-paste between them.
+              - paragraph [ref=f9e94]: What I built
+              - paragraph [ref=f9e95]: Generate palettes and gradients, extract them straight from an image, check contrast, and explore harmonious combinations for UI and branding, all in one place.
+              - paragraph [ref=f9e96]: Image extraction, Contrast checker, Free
+              - link "Open color.belal.work" [ref=f9e97] [cursor=pointer]:
+                - /url: https://color.belal.work/
+            - link [aria-hidden] [ref=f9e98] [cursor=pointer]:
+              - /url: https://color.belal.work/
+        - article [ref=f9e100]:
+          - paragraph [ref=f9e101]:
+            - generic [ref=f9e102]: Revising from
+            - generic [ref=f9e103]: scattered PDFs.
+          - generic [ref=f9e104]:
+            - generic [ref=f9e105]:
+              - heading "Exam Prep Quizzes" [level=3] [ref=f9e106]
+              - paragraph [ref=f9e107]: Education, 2026
+              - paragraph [ref=f9e108]: The problem
+              - paragraph [ref=f9e109]: Government IT jobs here are won on a competitive exam, and the people sitting it were revising from scattered PDFs with no way to practise under exam conditions or see what they kept getting wrong.
+              - paragraph [ref=f9e110]: What I built
+              - paragraph [ref=f9e111]: A quiz trainer for the government IT exam, covering SQL Server, Oracle Forms, .NET Core, C#, Entity Framework, testing, and English. Run a topic as practice or as a timed exam, review every mistake, and track your stats across attempts.
+              - paragraph [ref=f9e112]: 7 topics, Practice or exam mode, Mistake review
+              - link "Open q.belal.work" [ref=f9e113] [cursor=pointer]:
+                - /url: https://q.belal.work/
+            - link [aria-hidden] [ref=f9e114] [cursor=pointer]:
+              - /url: https://q.belal.work/
+        - article [ref=f9e116]:
+          - paragraph [ref=f9e117]: Nothing was broken.
+          - generic [ref=f9e118]:
+            - generic [ref=f9e119]:
+              - heading "Chess Puzzles" [level=3] [ref=f9e120]
+              - paragraph [ref=f9e121]: Side project, 2026
+              - paragraph [ref=f9e122]: Built for fun
+              - paragraph [ref=f9e123]: A rated chess puzzle trainer. Solve tactics against an adaptive rating, with hints, full solutions, five difficulty levels, and a move list you can step back through.
+              - paragraph [ref=f9e124]: Adaptive rating, 5 difficulty levels, Built for fun
+              - link "Open chess.belal.work" [ref=f9e125] [cursor=pointer]:
+                - /url: https://chess.belal.work/
+            - link [aria-hidden] [ref=f9e126] [cursor=pointer]:
+              - /url: https://chess.belal.work/
+      - heading "And the smaller ones" [level=3] [ref=f9e128]
+      - list [ref=f9e129]:
+        - listitem [ref=f9e130]:
+          - link "White logos on white pages. Theme Converter, design Turns white logos into black versions for contrast on light-themed sites. Supports PNG, JPG, and WebP with batch processing. theme.belal.work" [ref=f9e131] [cursor=pointer]:
+            - /url: https://theme.belal.work/
+            - paragraph [ref=f9e132]:
+              - generic [ref=f9e133]: White logos
+              - generic [ref=f9e134]: on white
+              - generic [ref=f9e135]: pages.
+            - generic [ref=f9e136]:
+              - paragraph [ref=f9e137]:
+                - text: Theme Converter
+                - generic [ref=f9e138]: ", design"
+              - paragraph [ref=f9e139]: Turns white logos into black versions for contrast on light-themed sites. Supports PNG, JPG, and WebP with batch processing.
+            - paragraph [ref=f9e140]: theme.belal.work
+        - listitem [ref=f9e141]:
+          - link "Uploading client assets. Image Converter, media Converts images to WebP and other modern formats for better compression. Processing happens in the browser, so nothing is uploaded. convert.belal.work" [ref=f9e142] [cursor=pointer]:
+            - /url: https://convert.belal.work/
+            - paragraph [ref=f9e143]:
+              - generic [ref=f9e144]: Uploading
+              - generic [ref=f9e145]: client assets.
+            - generic [ref=f9e146]:
+              - paragraph [ref=f9e147]:
+                - text: Image Converter
+                - generic [ref=f9e148]: ", media"
+              - paragraph [ref=f9e149]: Converts images to WebP and other modern formats for better compression. Processing happens in the browser, so nothing is uploaded.
+            - paragraph [ref=f9e150]: convert.belal.work
+        - listitem [ref=f9e151]:
+          - link "Latin filler in Arabic layouts. Arabic Lorem Ipsum, design Generates realistic Arabic placeholder text for mockups and templates, built specifically for Arabic-language projects. text.belal.work" [ref=f9e152] [cursor=pointer]:
+            - /url: https://text.belal.work/
+            - paragraph [ref=f9e153]:
+              - generic [ref=f9e154]: Latin filler
+              - generic [ref=f9e155]: in Arabic
+              - generic [ref=f9e156]: layouts.
+            - generic [ref=f9e157]:
+              - paragraph [ref=f9e158]:
+                - text: Arabic Lorem Ipsum
+                - generic [ref=f9e159]: ", design"
+              - paragraph [ref=f9e160]: Generates realistic Arabic placeholder text for mockups and templates, built specifically for Arabic-language projects.
+            - paragraph [ref=f9e161]: text.belal.work
+        - listitem [ref=f9e162]:
+          - link "Mangled UTF-8. Binary Converter, developer Converts between text and binary with real-time character metrics, proper UTF-8 handling, and file uploads. binary.belal.work" [ref=f9e163] [cursor=pointer]:
+            - /url: https://binary.belal.work/
+            - paragraph [ref=f9e164]:
+              - generic [ref=f9e165]: Mangled
+              - generic [ref=f9e166]: UTF-8.
+            - generic [ref=f9e167]:
+              - paragraph [ref=f9e168]:
+                - text: Binary Converter
+                - generic [ref=f9e169]: ", developer"
+              - paragraph [ref=f9e170]: Converts between text and binary with real-time character metrics, proper UTF-8 handling, and file uploads.
+            - paragraph [ref=f9e171]: binary.belal.work
+        - listitem [ref=f9e172]:
+          - link "Fake download buttons. Media Downloader, media Download video and audio from YouTube, TikTok, Instagram, and more, in multiple formats, without the ad maze. download.belal.work" [ref=f9e173] [cursor=pointer]:
+            - /url: https://download.belal.work/
+            - paragraph [ref=f9e174]:
+              - generic [ref=f9e175]: Fake download
+              - generic [ref=f9e176]: buttons.
+            - generic [ref=f9e177]:
+              - paragraph [ref=f9e178]:
+                - text: Media Downloader
+                - generic [ref=f9e179]: ", media"
+              - paragraph [ref=f9e180]: Download video and audio from YouTube, TikTok, Instagram, and more, in multiple formats, without the ad maze.
+            - paragraph [ref=f9e181]: download.belal.work
+        - listitem [ref=f9e182]:
+          - link "Sessions with no end. Break Timer, focus A simple countdown timer for work and rest intervals, with a large readable clock and customizable colors. break.belal.work" [ref=f9e183] [cursor=pointer]:
+            - /url: https://break.belal.work/
+            - paragraph [ref=f9e184]:
+              - generic [ref=f9e185]: Sessions
+              - generic [ref=f9e186]: with no end.
+            - generic [ref=f9e187]:
+              - paragraph [ref=f9e188]:
+                - text: Break Timer
+                - generic [ref=f9e189]: ", focus"
+              - paragraph [ref=f9e190]: A simple countdown timer for work and rest intervals, with a large readable clock and customizable colors.
+            - paragraph [ref=f9e191]: break.belal.work
+        - listitem [ref=f9e192]:
+          - link "A dozen forgotten bookmarks. Tools Plus, utilities A single utility suite collecting the small text, PDF, image, and development helpers that never warranted a site of their own. tools.belal.work" [ref=f9e193] [cursor=pointer]:
+            - /url: https://tools.belal.work/
+            - paragraph [ref=f9e194]:
+              - generic [ref=f9e195]: A dozen
+              - generic [ref=f9e196]: forgotten
+              - generic [ref=f9e197]: bookmarks.
+            - generic [ref=f9e198]:
+              - paragraph [ref=f9e199]:
+                - text: Tools Plus
+                - generic [ref=f9e200]: ", utilities"
+              - paragraph [ref=f9e201]: A single utility suite collecting the small text, PDF, image, and development helpers that never warranted a site of their own.
+            - paragraph [ref=f9e202]: tools.belal.work
+    - generic [ref=f9e203]:
+      - generic [ref=f9e204]:
+        - heading "Notes from the builds" [level=2] [ref=f9e205]
+        - link "Read all articles" [ref=f9e206] [cursor=pointer]:
+          - /url: /articles
+      - list [ref=f9e207]:
+        - listitem [ref=f9e208]:
+          - link [ref=f9e209] [cursor=pointer]:
+            - /url: /articles/why-browser-only-tools
+            - paragraph [ref=f9e210]: 2 November 20252 min read
+            - generic [ref=f9e211]:
+              - paragraph [ref=f9e212]: Why Every Tool I Ship Runs Entirely in the Browser
+              - paragraph [ref=f9e213]: "No server, no account, no upload: the constraint that shapes everything on belal.work, and why I keep choosing it even when it's the harder path."
+        - listitem [ref=f9e214]:
+          - link [ref=f9e215] [cursor=pointer]:
+            - /url: /articles/markflow-markdown-to-word
+            - paragraph [ref=f9e216]: 14 August 20252 min read
+            - generic [ref=f9e217]:
+              - paragraph [ref=f9e218]: Turning Markdown Into a Real Word Document, Client-Side
+              - paragraph [ref=f9e219]: MarkFlow started as a weekend itch. I needed a .md file as a .docx for a client who doesn't read Markdown. Here's what actually made that hard.
+        - listitem [ref=f9e220]:
+          - link [ref=f9e221] [cursor=pointer]:
+            - /url: /articles/eleven-tools-one-domain
+            - paragraph [ref=f9e222]: 20 May 20252 min read
+            - generic [ref=f9e223]:
+              - paragraph [ref=f9e224]: Eleven Tools, One Domain, No Roadmap
+              - paragraph [ref=f9e225]: belal.work isn't a product with a plan. It's what happens when you build the tool you needed, ship it under one subdomain, and repeat.
+    - generic [ref=f9e227]:
+      - img "Halftone portrait of Belal Abukhadija" [ref=f9e230]
+      - generic [ref=f9e231]:
+        - heading "Hi, I'm Belal" [level=2] [ref=f9e232]
+        - generic [ref=f9e233]:
+          - paragraph [ref=f9e234]: I'm a full-stack developer and AI engineer in Amman, Jordan. I started coding in 2021 out of curiosity and never stopped.
+          - paragraph [ref=f9e235]: "Most of what I ship began as friction in my own workday: a step that was slow, manual, or missing, turned into a product that removed it."
+          - paragraph [ref=f9e236]: In 2024 I launched belal.work, so the fixes I build for myself are live for everyone else who has the same problem.
+        - heading "Where I've worked" [level=3] [ref=f9e237]
+        - list [ref=f9e238]:
+          - listitem [ref=f9e239]:
+            - link "Kawkab AIAI Engineer 09/2025 onwards" [ref=f9e240] [cursor=pointer]:
+              - /url: https://kawkab.ai/
+              - generic [ref=f9e241]: Kawkab AIAI Engineer
+              - generic [ref=f9e242]: 09/2025 onwards
+          - listitem [ref=f9e243]:
+            - link "CirrusGoDevOps Trainee 07/2025–09/2025" [ref=f9e244] [cursor=pointer]:
+              - /url: https://cirrusgo.com/
+              - generic [ref=f9e245]: CirrusGoDevOps Trainee
+              - generic [ref=f9e246]: 07/2025–09/2025
+        - heading "What I build with" [level=3] [ref=f9e247]
+        - generic [ref=f9e248]:
+          - generic [ref=f9e249]:
+            - term [ref=f9e250]: Frontend
+            - definition [ref=f9e251]: React, Next.js, TypeScript, Tailwind
+          - generic [ref=f9e252]:
+            - term [ref=f9e253]: Backend
+            - definition [ref=f9e254]: Node.js, REST APIs, Supabase, SQL, auth
+          - generic [ref=f9e255]:
+            - term [ref=f9e256]: Shipping
+            - definition [ref=f9e257]: Git, Docker, CI/CD
+          - generic [ref=f9e258]:
+            - term [ref=f9e259]: Daily tools
+            - definition [ref=f9e260]: VS Code, Claude Code, Figma, Next.js, Git & GitHub, Docker, Supabase, Postman
+        - paragraph [ref=f9e261]: Based in Amman, Jordan. Open to relocation, and happy working remote across timezones.
+    - generic [ref=f9e262]:
+      - heading "What should I cross out next?" [level=2] [ref=f9e263]
+      - paragraph [ref=f9e264]: Tell me the task you'd happily never do again. I'm open to roles and freelance work, remote worldwide, and usually reply within an hour.
+      - generic [ref=f9e265]:
+        - generic [ref=f9e266]: The chore
+        - textbox "The chore" [ref=f9e270]:
+          - /placeholder: Type it here
+        - generic [ref=f9e271]:
+          - button "Email it to Belal" [disabled] [ref=f9e272]
+          - paragraph [ref=f9e273]: Opens a draft in your mail app.
+      - list [ref=f9e274]:
+        - listitem [ref=f9e275]:
+          - paragraph [ref=f9e276]: Email
+          - link "belalabukhadija97@gmail.com" [ref=f9e277] [cursor=pointer]:
+            - /url: mailto:belalabukhadija97@gmail.com
+        - listitem [ref=f9e278]:
+          - paragraph [ref=f9e279]: WhatsApp
+          - link "+962 78 975 2515" [ref=f9e280] [cursor=pointer]:
+            - /url: https://wa.me/962789752515
+        - listitem [ref=f9e281]:
+          - paragraph [ref=f9e282]: LinkedIn
+          - link "belal-abu-khadija" [ref=f9e283] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/belal-abu-khadija-9a591730b
+        - listitem [ref=f9e284]:
+          - paragraph [ref=f9e285]: GitHub
+          - link "belal-abukhadija" [ref=f9e286] [cursor=pointer]:
+            - /url: https://github.com/belal-abukhadija
+        - listitem [ref=f9e287]:
+          - paragraph [ref=f9e288]: Instagram
+          - link "belal_abukhadija" [ref=f9e289] [cursor=pointer]:
+            - /url: https://instagram.com/belal_abukhadija
+  - contentinfo [ref=f9e290]:
+    - generic [ref=f9e291]:
+      - paragraph [ref=f9e292]: © 2026 Belal Abukhadija
+      - list [ref=f9e293]:
+        - listitem [ref=f9e294]:
+          - link "Work" [ref=f9e295] [cursor=pointer]:
+            - /url: /#work
+        - listitem [ref=f9e296]:
+          - link "Writing" [ref=f9e297] [cursor=pointer]:
+            - /url: /#articles
+        - listitem [ref=f9e298]:
+          - link "About" [ref=f9e299] [cursor=pointer]:
+            - /url: /#about
+        - listitem [ref=f9e300]:
+          - link "Contact" [ref=f9e301] [cursor=pointer]:
+            - /url: /#contact
+        - listitem [ref=f9e302]:
+          - link "Back to top" [ref=f9e303] [cursor=pointer]:
+            - /url: "#top"
+  - button "Open Next.js Dev Tools" [ref=f9e309] [cursor=pointer]
+  - alert [ref=f9e313]

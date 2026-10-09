@@ -1,0 +1,5 @@
+[    1314ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3457/icon-512.png:0
+[    2473ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3457/favicon.ico:0
+[    2474ms] [WARNING] Error while trying to use the following icon from the Manifest: http://localhost:3457/icon-512.png (Download error or resource isn't a valid image) @ http://localhost:3457/:0
+[    2487ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3457/icon-192.png:0
+[    2507ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3457/icon-512.png:0

@@ -1,0 +1,59 @@
+- generic [active] [ref=f10e1]:
+  - banner [ref=f10e2]:
+    - navigation "Main" [ref=f10e3]:
+      - link "belal.work" [ref=f10e4] [cursor=pointer]:
+        - /url: /#hero
+      - list [ref=f10e5]:
+        - listitem [ref=f10e6]:
+          - link "Work" [ref=f10e7] [cursor=pointer]:
+            - /url: /#work
+        - listitem [ref=f10e8]:
+          - link "Writing" [ref=f10e9] [cursor=pointer]:
+            - /url: /#articles
+        - listitem [ref=f10e10]:
+          - link "About" [ref=f10e11] [cursor=pointer]:
+            - /url: /#about
+        - listitem [ref=f10e12]:
+          - link "Contact" [ref=f10e13] [cursor=pointer]:
+            - /url: /#contact
+  - main [ref=f10e14]:
+    - link "All articles" [ref=f10e15] [cursor=pointer]:
+      - /url: /articles
+    - heading "Why Every Tool I Ship Runs Entirely in the Browser" [level=1] [ref=f10e16]
+    - paragraph [ref=f10e17]: 2 November 2025, 2 min read
+    - generic [ref=f10e18]:
+      - paragraph [ref=f10e19]: "Every tool on belal.work shares one rule: your file never leaves your device. No upload endpoint, no server-side processing, no account to create. The PDF signer, the image converter, the word counter: all of it runs client-side, in JavaScript, in the tab you already have open."
+      - paragraph [ref=f10e20]: That's a harder constraint than it sounds. It means no easy server-side PDF library, no cloud OCR, no background job queue to lean on when the browser's single thread gets busy. Every feature has to fit inside what a browser can actually do, and do it fast enough that it doesn't feel like a compromise.
+      - heading "Why bother" [level=2] [ref=f10e21]
+      - paragraph [ref=f10e22]: "Two reasons, honestly:"
+      - list [ref=f10e23]:
+        - listitem [ref=f10e24]:
+          - strong [ref=f10e25]: Privacy is not a checkbox.
+          - text: If I built a "your files are private" tool that quietly uploaded them to a server, that claim would be marketing, not fact. Doing it client-side makes the privacy claim structurally true, not just promised.
+        - listitem [ref=f10e26]:
+          - strong [ref=f10e27]: It's the tool I'd actually want to use.
+          - text: I don't want to sign up for an account to convert an image. Most days, neither do you.
+      - heading "What it costs" [level=2] [ref=f10e28]
+      - paragraph [ref=f10e29]: "Some things are genuinely harder this way: large file handling, anything that needs a real filesystem, anything CPU-heavy enough that a background worker would help. I've shipped around those limits more than once by simplifying scope rather than reaching for a server. A tool that does one thing well, entirely in your browser, beats a tool that does five things through an API I now have to maintain, monitor, and pay for."
+      - paragraph [ref=f10e30]: That trade-off is the whole shape of belal.work. Eleven tools, one constraint, no exceptions.
+  - contentinfo [ref=f10e31]:
+    - generic [ref=f10e32]:
+      - paragraph [ref=f10e33]: © 2026 Belal Abukhadija
+      - list [ref=f10e34]:
+        - listitem [ref=f10e35]:
+          - link "Work" [ref=f10e36] [cursor=pointer]:
+            - /url: /#work
+        - listitem [ref=f10e37]:
+          - link "Writing" [ref=f10e38] [cursor=pointer]:
+            - /url: /#articles
+        - listitem [ref=f10e39]:
+          - link "About" [ref=f10e40] [cursor=pointer]:
+            - /url: /#about
+        - listitem [ref=f10e41]:
+          - link "Contact" [ref=f10e42] [cursor=pointer]:
+            - /url: /#contact
+        - listitem [ref=f10e43]:
+          - link "Back to top" [ref=f10e44] [cursor=pointer]:
+            - /url: "#top"
+  - button "Open Next.js Dev Tools" [ref=f10e50] [cursor=pointer]
+  - alert [ref=f10e54]
