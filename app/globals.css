@@ -132,7 +132,18 @@
     .btn:hover { background-color: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
     .on-ink .btn:hover { background-color: var(--color-paper); color: var(--color-ink); border-color: var(--color-paper); }
   }
-  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn:disabled { opacity: 0.7; cursor: progress; }
+
+  /* A small ring that turns while something is in progress. */
+  .spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
 
   /* ---- A phrase to be crossed out. The stroke itself is the page line
      (PageLine.tsx), which is routed through each of these; a phrase never
@@ -142,11 +153,6 @@
     white-space: nowrap;
     text-decoration: none;
   }
-
-  /* The contact field's own placeholder stays hidden until the pen has
-     written its example there and the example has cleared. Needs !important
-     to beat the placeholder colour utility on the input. */
-  .pen-writing input::placeholder { color: transparent !important; }
 
   /* The hero name settling in on load. */
   .after-strike {
@@ -215,6 +221,10 @@
   }
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @keyframes land {
   from { opacity: 0; transform: translateY(0.12em); }
   to   { opacity: 1; transform: none; }
@@ -222,4 +232,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .after-strike { animation: none; }
+  /* Still shown, so "Sending" keeps its marker, but as a steady ring. */
+  .spinner { animation: none; border-top-color: currentColor; opacity: 0.6; }
 }

@@ -26,10 +26,6 @@ interface Row {
 // so the canvas has to hold all of that in every direction.
 const PEN_LENGTH = 200;
 const PEN_REACH = 2.6;
-// How long the sentence the pen writes in the contact field stays, in ms.
-const WRITING_STAYS = 3500;
-// How many frames the pen takes to write it (about a second and a half).
-const WRITING_FRAMES = 90;
 // The pen's own pace on a sideways stroke, in px of line per frame at 60fps
 // (about 1000px a second). On vertical stretches it simply follows the scroll.
 const PEN_SPEED = 17;
@@ -60,7 +56,9 @@ const PIECES = 20;
  * Where a tangent would push a control point outside minX..maxX it is
  * shortened, on both sides of the point alike, so the curve cannot bulge off
  * the page at a turn (a Bezier stays inside the hull of its control points)
- * and still passes through the point without a kink.
+ * and still passes through the point without a kink. Points listed in
+ * `corners` are the exception: the curve stops dead there and sets off in a
+ * new direction, which is how the arrowhead gets its sharp tip and barbs.
  *
  * The curve is also walked here and returned as a measured polyline, so that
  * finding a point a given distance along the line is arithmetic. Asking the
@@ -68,8 +66,9 @@ const PIECES = 20;
  * millisecond per call on a path this long, and the route needs thousands of
  * them: that froze the page for over two seconds on every rebuild.
  */
-function route(points: Pt[], minX: number, maxX: number): Route {
+function route(points: Pt[], minX: number, maxX: number, corners: Set<number>): Route {
   const tangents = points.map((p, i): Pt => {
+    if (corners.has(i)) return [0, 0];
     const prev = points[Math.max(i - 1, 0)];
     const next = points[Math.min(i + 1, points.length - 1)];
     const t: Pt = [(next[0] - prev[0]) / 6, (next[1] - prev[1]) / 6];
@@ -136,8 +135,8 @@ const SIGNATURE_WIDTH = SIGNATURE.reduce((sum, letter) => sum + letter.advance, 
  * The line is what crosses out the text: it is routed through every
  * `[data-strike]` phrase (see Strike.tsx), row by row, so a chore reads as
  * struck only once the pen has passed over it. In the contact field it runs
- * under `[data-pen-write]` and uncovers that sentence as it goes, as if
- * writing it. It ends by signing "Belal" inside `[data-pen-signature]` in the
+ * stays out of the typing area and instead draws an arrow on the right,
+ * pointing at the chore field. It ends by signing "Belal" inside `[data-pen-signature]` in the
  * footer, after which the pen slides into its cap.
  *
  * Pacing: going down the page the pen follows the scroll, but on a sideways
@@ -198,13 +197,10 @@ export default function PageLine() {
     // The opening stretch starts as the hero name finishes settling.
     const introFrom = performance.now() + 450;
 
-    // The sentence in the contact field: the stretch of line that writes it,
-    // and whether it has been written and cleared already.
-    let writing: HTMLElement | null = null;
-    let writeFrom = 0;
-    let writeTo = 0;
-    let written = false;
-    let clearTimer = 0;
+    // Once a message has been sent, the chore the visitor typed is shown
+    // back to them to be crossed out. The first time it appears, the pen is
+    // sent back to the start of it so the visitor watches it happen.
+    let sentStruck = false;
 
     const box = (el: Element | null): Box | null => {
       if (!el) return null;
@@ -227,6 +223,12 @@ export default function PageLine() {
       if (!hero || !about || !contact) return;
 
       const pts: Pt[] = [];
+      // Indexes of points where the line turns sharply instead of curving.
+      const corners = new Set<number>();
+      const corner = (point: Pt) => {
+        corners.add(pts.length);
+        pts.push(point);
+      };
       const at = (b: Box, fx: number, fy: number): Pt => [W * fx, b.top + b.height * fy];
       // Down the nearer margin past a block, for narrow screens where the text
       // fills the width and there is no empty column to run through.
@@ -332,28 +334,50 @@ export default function PageLine() {
         }
       }
 
-      // Contact: under the sentence in the field, uncovering it left to right.
-      writing = host.querySelector<HTMLElement>("[data-pen-write]");
-      let writeStart: Pt | null = null;
-      let writeEnd: Pt | null = null;
-      if (writing?.parentElement) {
-        // Shrink the sentence until it fits the field on one line.
-        writing.style.fontSize = "";
-        const room = writing.parentElement.clientWidth;
-        if (writing.scrollWidth > room) writing.style.fontSize = `${(room / writing.scrollWidth) * 0.98}em`;
-        const w = box(writing);
-        if (w && w.width) {
-          // Just below the letters, so it rules a line under them.
-          const y = w.bottom + 6;
-          writeStart = [w.left, y];
-          writeEnd = [w.right, y];
-          // Swing out into the empty right side, then back in above the field.
-          if (wide) pts.push(at(contact, 0.72, 0.1), [W * 0.56, w.top - 30], [w.left + w.width * 0.12, w.top - 46]);
-          // The extra point past the end keeps the stroke level as it leaves,
-          // instead of curling back up through the last word.
-          else pts.push([R, contact.top + 30], [R - sway, w.top - 70], [W * 0.5, w.top - 34]);
-          pts.push([w.left - 20, y - w.height * 0.5], writeStart, [w.left + w.width * 0.33, y + 2], [w.left + w.width * 0.66, y - 2], writeEnd, [w.right + 40, y + 10]);
+      // Contact: the typing area is the visitor's, so the pen keeps to the
+      // right of it and draws an arrow pointing at the chore field. As one
+      // stroke: along the shaft from tail to tip, out and back for each barb
+      // of the head, then back along the shaft, so the line leaves from the
+      // tail and the head stays a clean arrowhead.
+      const chore = box(host.querySelector("#chore"));
+      if (chore) {
+        // In the space the field leaves free on its right, level with the
+        // text being typed, with the tip just clear of the field's edge.
+        const y = chore.top + chore.height * 0.5;
+        const tipX = chore.right + (wide ? 34 : 12);
+        const tailX = wide ? Math.min(tipX + W * 0.16, W * 0.9) : R - 2;
+        const barb = wide ? 30 : 14;
+        // Slightly off level, so it looks drawn rather than ruled.
+        const tail: Pt = [tailX, y - 3];
+        const tip: Pt = [tipX, y + 2];
+        if (wide) pts.push(at(contact, 0.82, 0.08));
+        else pts.push([R, contact.top + 30]);
+        pts.push([tailX + (wide ? 36 : 0), y - (wide ? 90 : 60)]);
+        corner(tail);
+        corner(tip);
+        corner([tipX + barb * 0.82, tip[1] - barb * 0.62]);
+        corner(tip);
+        corner([tipX + barb * 0.82, tip[1] + barb * 0.62]);
+        corner(tip);
+        corner(tail);
+      }
+
+      // Contact, after a message is sent: cross out the visitor's own chore.
+      let sentStart: Pt | null = null;
+      const sentChore = host.querySelector("#contact [data-strike]");
+      if (sentChore) {
+        const rows = rowsIn(host.querySelector("#contact")!);
+        if (rows.length) {
+          if (wide) pts.push(at(contact, 0.72, 0.08));
+          // Arrive above the near end of the first row, so it is struck left
+          // to right and the pen leaves to the right, away from the text below.
+          pts.push([rows[0].x1 + rows[0].h * 0.2, rows[0].y - rows[0].h * 0.8]);
+          const mark = pts.length;
+          strike(rows);
+          sentStart = pts[mark];
         }
+      } else {
+        sentStruck = false;
       }
 
       // The end: sign "Belal".
@@ -375,10 +399,14 @@ export default function PageLine() {
         });
       }
 
-      const H = host.scrollHeight;
+      // The height of the content itself. Not scrollHeight: that includes this
+      // SVG, so once the page got shorter (the contact form collapsing after
+      // a message is sent) the old, taller SVG would hold the page open and
+      // leave blank paper under the footer.
+      const H = host.clientHeight;
       svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
       svg.style.height = `${H}px`;
-      line = route(pts, 5, W - 5);
+      line = route(pts, 5, W - 5, corners);
       path.setAttribute("d", line.d);
       // Dash lengths are measured in our own units, so the ink stops exactly
       // where pointAt says the nib is.
@@ -388,19 +416,21 @@ export default function PageLine() {
       length = line.total;
       reach = [];
       let lowest = 0;
-      // Find how far along the line the writing starts and ends while sampling.
-      let [nearStart, nearEnd] = [Infinity, Infinity];
-      [writeFrom, writeTo] = [0, 0];
+      // Find how far along the line the sent chore starts while sampling.
+      let nearSent = Infinity;
+      let sentFrom = 0;
       for (let l = 0; l <= length; l += STEP) {
         const p = pointAt(l);
         lowest = Math.max(lowest, p.y);
         reach.push(lowest);
-        if (writeStart && writeEnd) {
-          const dStart = Math.hypot(p.x - writeStart[0], p.y - writeStart[1]);
-          const dEnd = Math.hypot(p.x - writeEnd[0], p.y - writeEnd[1]);
-          if (dStart < nearStart) [nearStart, writeFrom] = [dStart, l];
-          if (dEnd < nearEnd) [nearEnd, writeTo] = [dEnd, l];
+        if (sentStart) {
+          const dSent = Math.hypot(p.x - sentStart[0], p.y - sentStart[1]);
+          if (dSent < nearSent) [nearSent, sentFrom] = [dSent, l];
         }
+      }
+      if (sentStart && !sentStruck) {
+        sentStruck = true;
+        shown = Math.min(shown, sentFrom);
       }
       path.style.strokeDasharray = `${length}`;
       path.style.strokeDashoffset = `${length - Math.min(shown, length)}`;
@@ -455,8 +485,6 @@ export default function PageLine() {
         const ahead = pointAt(Math.min(length, shown + 14));
         const flat = 1 - Math.abs(ahead.y - here.y) / (Math.hypot(ahead.x - here.x, ahead.y - here.y) || 1);
         let pace = (PEN_SPEED * frames) / Math.max(0.07, flat);
-        const onSentence = !written && writeTo > writeFrom && shown >= writeFrom - 1 && shown < writeTo;
-        if (onSentence) pace = Math.min(pace, ((writeTo - writeFrom) / WRITING_FRAMES) * frames);
         // Ease into the stop instead of hitting it at full speed.
         shown += Math.min(pace, behind * 0.25 + 0.5, behind);
       }
@@ -485,24 +513,6 @@ export default function PageLine() {
       if (Math.abs((finished ? 1 : 0) - capped) < 0.002) capped = finished ? 1 : 0;
       pen?.render({ lean, roll: shown / 70, capped });
 
-      // Uncover the sentence in the contact field as far as the pen has got.
-      // Once it is fully written it stays a few seconds, then clears for good.
-      if (writing && writeTo > writeFrom && !written) {
-        const done = Math.max(0, Math.min(1, (shown - writeFrom) / (writeTo - writeFrom)));
-        writing.style.clipPath = `inset(-20% ${(1 - done) * 100}% -20% 0)`;
-        if (done === 1 && !clearTimer) {
-          clearTimer = window.setTimeout(() => {
-            written = true;
-            if (!writing) return;
-            writing.style.opacity = "0";
-            writing.parentElement?.classList.remove("pen-writing");
-          }, WRITING_STAYS);
-        } else if (done < 1 && clearTimer) {
-          window.clearTimeout(clearTimer);
-          clearTimer = 0;
-        }
-      }
-
       const settled =
         shown === wanted && Math.abs(leanWanted - lean) < 0.003 && now >= introFrom && capped === (finished ? 1 : 0);
       if (!settled) frame = requestAnimationFrame(tick);
@@ -530,7 +540,6 @@ export default function PageLine() {
       observer.disconnect();
       window.removeEventListener("scroll", measure);
       cancelAnimationFrame(frame);
-      window.clearTimeout(clearTimer);
       scrollPace.factor = 1;
       disposed = true;
       pen?.dispose();
