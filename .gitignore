@@ -49,3 +49,6 @@ NUL
 CON
 PRN
 AUX
+
+# Browser-test screenshots and page snapshots (local review output)
+.playwright-mcp/

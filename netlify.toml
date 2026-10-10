@@ -1,0 +1,9 @@
+# Netlify fails a build if the value of any environment variable marked as a
+# secret shows up in the repo or the built site.
+#
+# The two contact addresses are not secrets: CONTACT_TO_EMAIL is the public
+# contact address printed on the site itself, and CONTACT_FROM_EMAIL is only a
+# sender label. Tell the scanner to skip them. RESEND_API_KEY is a real secret
+# and is still scanned for.
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_TO_EMAIL,CONTACT_FROM_EMAIL"
